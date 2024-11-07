@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
     img.src = '/assets/cap.jpg';
 
     img.onload = function() {
-        console.log('Image loaded succesxxsfully!');
+        console.log('Image loaded successfully!');
     };
 
     img.onerror = function() {
