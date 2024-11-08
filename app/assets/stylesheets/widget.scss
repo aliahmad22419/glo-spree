@@ -1,0 +1,204 @@
+@import url(//db.onlinewebfonts.com/c/15e10e275ea9924d0350e569a211d6a8?family=Mongoose-Regular);
+@import url(//fast.fonts.net/cssapi/b9d4347d-73b7-4f96-a7a4-5b39716ad561.css);
+ 
+@font-face {font-family: "Mongoose-Regular";
+  src: url("//db.onlinewebfonts.com/t/15e10e275ea9924d0350e569a211d6a8.eot");
+  src: url("//db.onlinewebfonts.com/t/15e10e275ea9924d0350e569a211d6a8.eot?#iefix") format("embedded-opentype"),
+  url("//db.onlinewebfonts.com/t/15e10e275ea9924d0350e569a211d6a8.woff2") format("woff2"),
+  url("//db.onlinewebfonts.com/t/15e10e275ea9924d0350e569a211d6a8.woff") format("woff"),
+  url("//db.onlinewebfonts.com/t/15e10e275ea9924d0350e569a211d6a8.ttf") format("truetype"),
+  url("//db.onlinewebfonts.com/t/15e10e275ea9924d0350e569a211d6a8.svg#Mongoose-Regular") format("svg"); }
+.carousel-container {
+  position: relative;
+  @media (min-width: 1200px) {
+    //max-width: 1180px;
+    max-width: 90%;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .widget-shop-btn {
+    display: none;
+    position: absolute;
+    top:26.5%;
+    right: -58px;
+    transform: rotate(90deg);
+    line-height: 4.5rem;
+    overflow: visible;
+    a {
+      color: #000;
+      font-family: "Mongoose-Regular";
+      font-size: 5rem;
+      &:hover,
+      &:focus {
+        text-decoration: none;
+      }
+    }
+    @media (max-width: 1199.98px) {
+      display: none;
+    }
+  }
+  .widget-shop-btn-mob {
+    display: none;
+    position: absolute;
+    top: 1.5rem;
+    z-index: 9999;
+    a {
+      color: #000;
+      font-family: "Mongoose-Regular";
+      font-size: 5rem;
+      text-transform: uppercase;
+      line-height: 38px;
+      &:hover,
+      &:focus {
+        text-decoration: none;
+      }
+    }
+  }
+}
+.widget-carousel {
+  .owl-stage {
+    display: flex;
+  }
+  .owl-nav {
+    display: block;
+    margin-top: 0;
+    .owl-prev {
+      position: absolute;
+      top: 45%;
+      @media (min-width: 1200px) {
+        left: -4.25rem;
+      }
+      @media (max-width: 1199.98px) {
+        left: -2.5rem;
+      }
+      ::before {
+          vertical-align: middle;
+          margin-top: -1px;
+          display: inline-block;
+          border-color: rgba(0,0,0,0.5);
+          position: relative;
+          border-style: solid;
+          border-width: 1px 1px 0 0;
+          content: '';
+          height: 20px;
+          width: 20px;
+          margin-left: 12px;
+          -webkit-transform: rotate(-135deg);
+          -o-transform: rotate(-135deg);
+          transform: rotate(-135deg);
+      }
+    }
+    .owl-next {
+      position: absolute;
+      top: 45%;
+      @media (min-width: 1200px) {
+        right: -4.25rem;
+      }
+      @media (max-width: 1199.98px) {
+        right: -2.5rem;
+      }
+      ::before {
+        vertical-align: middle;
+        margin-top: -1px;
+        display: inline-block;
+        border-color: rgba(0,0,0,0.5);
+        position: relative;
+        border-style: solid;
+        border-width: 1px 1px 0 0;
+        content: '';
+        height: 20px;
+        width: 20px;
+        -webkit-transform: rotate(45deg);
+        -o-transform: rotate(45deg);
+        transform: rotate(45deg);
+        margin-left: -12px;
+      }
+    }
+    [class*='owl-'] {
+      background-color: transparent;
+      border: 1px solid #000 !important;
+      border-radius: 50% !important;
+      width: 90px;
+      height: 90px;
+      &:hover,
+      &:focus {
+        background: #000;
+        color: #fff;
+        text-decoration: none;
+        i {
+          &::before {
+            border-color: #fff;
+          }
+        }
+      }
+      &:focus {
+        outline: none;
+      }
+      @media (max-width: 1199.98px) {
+        width: 60px;
+        height: 60px;
+      }
+    }
+    &.disabled {
+      + .owl-dots {
+        margin-top: 18px;
+      }
+    }
+  }
+  .owl-dots {
+    margin-top: 18px;
+    .owl-dot {
+      span {
+        width: 6px;
+        height: 6px;
+        margin-left: 8px;
+        margin-right: 8px;
+      }
+      &:focus {
+        outline: none;
+      }
+      &.active,
+      &:hover {
+        span {
+          background: #000;
+        }
+      }
+    }
+  }
+  .widget-tile {
+    color: #000;
+    .item-info {
+      text-transform: uppercase;
+      @media (max-width: 575.98px) {
+        padding-left: 0.1875rem;
+      }
+    }
+    .widget-link {
+      color: #000;
+      font-family: "Mongoose-Regular";
+      font-size: 3rem;
+      line-height: 38px;
+      &:hover,
+      &:focus {
+        text-decoration: none;
+      }
+    }
+    .image-cont {
+      img {
+        max-height: 345px;
+        width: auto;
+        max-width: 100%;
+        margin: auto;
+        @media (max-width: 575.98px) {
+          max-height: 458px;
+        }
+      }
+    }
+    .item-price {
+      font-family:"Avenir LT W01 95 Black";
+      font-size: 0.75rem;
+      line-height: 1rem;
+      letter-spacing: 1px;
+    }
+  }
+}

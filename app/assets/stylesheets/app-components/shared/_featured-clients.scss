@@ -1,0 +1,40 @@
+.featured-client {
+  text-align: center;
+  padding-top: 1.6875rem;
+  @include media-breakpoint-down(sm) {
+    //display: none;
+  }
+  h2 {
+    margin: 1.25rem 0 0.875rem;
+    @include media-breakpoint-down(md) {
+      margin: 1.25rem 0 0;
+    }
+    @include media-breakpoint-down(xs) {
+      margin-top: 0.75rem;
+    }
+  }
+   .clients-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+    li {
+      @include media-breakpoint-between(sm, md) {
+        flex: 1 0 26%;
+      }
+      a {
+        display: inline-block;
+        vertical-align: top;
+        img {
+          max-width: 125px;
+          @include media-breakpoint-down(xs) {
+            max-width: 100px;
+          }
+        }
+      }
+    }
+  }
+}

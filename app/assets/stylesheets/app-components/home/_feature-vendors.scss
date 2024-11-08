@@ -1,0 +1,72 @@
+.promo-holder {
+  display: flex;
+  width: 100%;
+  .promo-box {
+    position: relative;
+    overflow: hidden;
+    @include media-breakpoint-down(md) {
+      height: 20.938rem;
+    }
+    @include media-breakpoint-down(sm) {
+      height: 13.25rem;
+    }
+      img {
+        display: block;
+        width: 100%;
+        height: 25.9375rem;
+        @include media-breakpoint-down(md) {
+          height: auto;
+        }
+        @include media-breakpoint-down(sm) {
+          height: auto;
+        }
+      }
+      .promo-content {
+        line-height: 2.375rem;
+        text-align: center;
+        position: absolute;
+        top: 45%;
+        left: 25%;
+        text-shadow: 0 0.0625rem 0.125rem rgba(0,0,0,0.2);
+        font-family: var(--primary-font-light);
+        font-size: 2rem;
+        font-weight: 300;
+        color: #fff;
+
+        @include media-breakpoint-down(md) {
+          top: 35%;
+          left: 0;
+          right: 0;
+        }
+        @include media-breakpoint-down(sm) {
+          top: 35%;
+          left: 0;
+          right: 0;
+        }
+        @include media-breakpoint-down(xs) {
+          top: 40%;
+        }
+        .promo-desc {
+          font-weight: 300;
+          padding-top: 1.0625rem;
+          font-weight: 300;
+          @include media-breakpoint-down(xs) {
+            padding-top: 0.75rem;
+            padding-left: 4rem;
+            padding-right: 4rem;
+            line-height: 2rem;
+          }
+        }
+      }
+      &:first-child {
+        margin-right: 3.125rem;
+        @include media-breakpoint-down(md) {
+          margin: 0 0 1.75rem;
+        }
+      }
+    }
+  @include media-breakpoint-down(md) {
+    flex-direction: column;
+    margin: 0 0 1.75rem;
+  }
+}

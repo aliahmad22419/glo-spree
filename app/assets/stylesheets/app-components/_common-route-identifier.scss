@@ -1,0 +1,24 @@
+.custom-container {
+  &.footer-page-container {
+    @include laptop {
+      padding: 0 8.5%;
+    }
+    @include media-breakpoint-down(lg) {
+      padding: 0 3.25%;
+    }
+    @include tablet-portrait {
+      padding: 0 0.15rem;
+    }
+    .join-heading {
+      margin-top: 1.5rem;
+    }
+    .join-features {
+      padding-left: 1rem;
+    }
+    .apply-btn {
+      width: auto;
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+  }
+}

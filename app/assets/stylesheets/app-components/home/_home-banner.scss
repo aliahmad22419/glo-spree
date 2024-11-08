@@ -1,0 +1,53 @@
+.home-banner {
+  position: relative;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+   .hero-banner-heading{
+    line-height: 2.375rem;
+    text-align: center;
+    position: absolute;
+    left: 45%;
+    top: 45%;
+    color: #fff;
+    font-family: var(--primary-font-light);
+    font-size: 2rem;
+   }
+   .banner-heading {
+    font-weight: 300;
+    line-height: 2.375rem;
+    text-align: center;
+    position: absolute;
+    right: 6.875rem;
+    top: 45%;
+    color: #fff;
+    font-family: var(--primary-font-light);
+    font-size: 2rem;
+
+      span {
+        @include media-breakpoint-down(sm) {
+          display: block;
+        }
+      }
+    @include media-breakpoint-down(md) {
+      font-size: 1.5rem;
+      right: 30px;
+      top: 31%;
+      width: 38%;
+    }
+    @include media-breakpoint-down(sm) {
+      line-height: 1.75rem;
+      right: 0;
+      left: 0;
+      width: 80%;
+      margin: 0 auto;
+      top: 25%;
+    }
+    @include media-breakpoint-down(xs) {
+      top: 44%;
+      line-height: 1.5rem;
+    }
+  }
+}

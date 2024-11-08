@@ -1,0 +1,16 @@
+.select-form {
+  .form-group {
+    select {
+      &.form-control {
+        background-image: asset_url('dropdown.svg');
+      }
+    }
+  }
+  &.form-group {
+    select{
+      &.form-control {
+        background-image: asset_url('dropdown.svg');
+      }
+    }
+  }
+}

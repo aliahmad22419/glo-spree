@@ -1,0 +1,61 @@
+.sign-up-section {
+  background-color: $gallery;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  .sign-up-container {
+    text-align: center;
+    .signup-text {
+      width: 77%;
+      margin: 0 auto;
+    }
+    .sign-up-form {
+      margin-bottom: 1.25rem;
+      input[type='email'] {
+        width: 17.4375rem;
+        margin-right: 1.75rem;
+        height: 2.625rem;
+        border: 0 none;
+        line-height: 1.25rem;
+        border-radius: 0;
+        box-shadow: none;
+        text-align: center;
+        &::placeholder,
+        &::-webkit-input-placeholder {
+          text-align: center;
+          font-style: italic;
+          @include media-breakpoint-down(lg) {
+
+          }
+          @include media-breakpoint-down(xs) {
+
+          }
+        }
+        &:focus {
+          box-shadow: none;
+        }
+        @include media-breakpoint-down(sm) {
+          width: 100%;
+          float: none;
+        }
+      }
+        .btn.btn-primary {
+          margin-bottom: 0.3125rem;
+          @include media-breakpoint-down(sm) {
+            margin: 1.25rem auto 1.9rem auto;
+          }
+        }
+        @include media-breakpoint-down(sm) {
+        flex-direction: column;
+        width: 17.4375rem;
+        margin: 0 auto;
+      }
+    }
+  }
+  h2 {
+    margin: 1.25rem 0 0;
+    @include media-breakpoint-down(xs) {
+      margin-top: 1.75rem;
+    }
+  }
+}

@@ -1,0 +1,112 @@
+.section-title {
+    margin: 2.1875rem 0 0;
+    line-height: 1.75rem;
+    @include media-breakpoint-down(sm) {
+      line-height: 1.1875rem;
+      margin: 1.25rem 0 0.625rem;
+    }
+}
+.home-slider {
+  .post-tile {
+    display: flex;
+    flex-direction: column;
+    word-wrap: break-word;
+    .post-tile-link{
+      &:hover{
+        text-decoration: none;
+        .post-link {
+          color: var(--secondary-bg-color);
+        }
+
+      }
+    }
+    .post-link {
+      font-weight: 300;
+      line-height: 1.5rem;
+      width: 70%;
+      word-wrap: break-word;
+      margin: 0.9375rem auto 0;
+      display: block;
+      @include media-breakpoint-up(lg) {
+        padding-bottom: 0.25rem;
+      }
+      @include media-breakpoint-down(sm) {
+        line-height: 1.25rem;
+        margin-top: 0.45rem;
+        width: 100%;
+      }
+      &:hover {
+        text-decoration: none;
+      }
+    }
+    @include media-breakpoint-down(sm) {
+      max-width: 9rem;
+      margin-bottom: 2.375rem;
+    }
+  }
+.carousel-container {
+  padding: 1.875rem 2.1875rem 3.75rem;
+  @include media-breakpoint-down(md) {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  @include media-breakpoint-down(sm) {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    flex-direction: row;
+    padding-top: 0.625rem;
+    padding-bottom: 0.125rem;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+  @include media-breakpoint-down(xs) {
+    padding-top: 0.85rem;
+  }
+
+
+  // @include mobile {
+  //   flex-wrap: wrap;
+  //   padding-top: 0.625rem;
+  //   padding-bottom: 0.125rem;
+  //   padding-left: 0 !important;
+  //   padding-right: 0 !important;
+  // }
+  // @include Smalltablet {
+  //   padding-top: 1rem;
+  //   padding-bottom: 1.875rem;
+  // }
+  // .owl-stage-outer {
+  //   max-height: 340px;
+  // }
+
+  // .owl-dots {
+  //   max-width: 20.9375rem;
+  //   float: none;
+  //   margin: auto;
+  //   height: 1.875rem;
+  //   border-bottom: 0.1875rem solid $alto-dark;
+  //   display: flex;
+  //   justify-content: space-between;
+  //   .owl-dot {
+  //     span {
+  //       background-color: transparent;
+  //       border-radius: 50%;
+  //       width: 2.8125rem;
+  //       height: 2.8125rem;
+  //     }
+  //     &.active {
+  //       span {
+  //         border: 0.0625rem solid $color-text;
+  //         background-color: $color-white;
+  //         background-size: cover;
+  //         box-shadow: 0px 0.0625rem 0.125rem rgba(26,26,26,1);
+  //       }
+  //     }
+  //   }
+  //   // @include Smalltablet {
+  //   //   display: none;
+  //   // }
+  //   }
+  }
+}

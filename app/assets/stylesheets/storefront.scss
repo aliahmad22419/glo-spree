@@ -1,0 +1,19 @@
+// Place all the styles related to the storefront controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+// @import "/Users/hashamsabir/.rvm/gems/ruby-2.7.8@glo_spree/gems/bootstrap-4.6.2/assets/stylesheets/_bootstrap.scss";
+@import "/System/Volumes/Data/Users/aliahmad/.rvm/gems/ruby-3.2.3/gems/bootstrap-4.6.2/assets/stylesheets/_bootstrap.scss";
+
+@import "../../javascript/storefront/styles/_mixins";
+@import "../../javascript/storefront/styles/_variables";
+@import "../../javascript/storefront/styles/_base";
+@import "../../javascript/storefront/styles/_fonts";
+@import "../../javascript/storefront/styles/_layout";
+@import "../../javascript/storefront/styles/_modal";
+@import "../../javascript/storefront/styles/_utilities";
+@import "app-components/_header";
+@import "app-components/_footer";
+@import "app-components/_layout-ext";
+// @import 'ngx-owl-carousel-o/lib/styles/scss/owl.carousel';
+// @import 'ngx-owl-carousel-o/lib/styles/scss/owl.theme.default';
+// @import "../../javascript/storefront/fonts/iframe-fonts/iframe.scss";

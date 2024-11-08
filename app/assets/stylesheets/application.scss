@@ -1,0 +1,89 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ */
+ @import "/System/Volumes/Data/Users/aliahmad/.rvm/gems/ruby-3.3.2/gems/bootstrap-4.6.2.1/assets/stylesheets/_bootstrap.scss";
+
+@import "../../javascript/storefront/styles/_mixins";
+@import "../../javascript/storefront/styles/_variables";
+@import "../../javascript/storefront/styles/_base";
+@import "../../javascript/storefront/styles/_fonts";
+@import "../../javascript/storefront/styles/_layout";
+@import "../../javascript/storefront/styles/_modal";
+@import "../../javascript/storefront/styles/_utilities";
+@import "../../javascript/storefront/styles/angular-material/indigo-pink";
+@import "app-components/_header";
+@import "app-components/home/_home";
+@import "app-components/home/_home-banner";
+@import "app-components/home/_feature-vendors";
+@import "app-components/home/_feature-banner";
+@import "app-components/shared/_featured-clients";
+@import "app-components/shared/_home-carousel";
+@import "app-components/shared/_newsletter";
+@import "app-components/shared/_alert-popup";
+@import "app-components/_footer";
+@import "app-components/_layout-ext";
+// @import "ngx-owl-carousel-o/lib/styles/scss/owl.carousel";
+// @import 'ngx-owl-carousel-o/lib/styles/scss/owl.theme.default';
+
+body {
+  background-color: #f0f0f0;
+}
+
+img {
+  max-width: 50%;
+  height: auto;
+  border: 9px solid #000;
+}
+
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 998;
+  opacity: 0;
+  transition: all 0.5s ease-in-out;
+}
+
+.overlay.active {
+  display: block;
+  opacity: 1;
+}
+#content {
+  width: 100%;
+  min-height: 100vh;
+  transition: all 0.3s;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.scroll-to-top {
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+  opacity: 0;
+  font-size: 2rem;
+  transition: all .2s ease-in-out;
+  span {
+    cursor: pointer;
+  }
+}
+
+.show-scroll {
+  @include media-breakpoint-down(sm) {
+    opacity: 1;
+  }
+}
+
