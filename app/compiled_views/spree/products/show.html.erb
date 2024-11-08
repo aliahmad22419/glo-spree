@@ -1,0 +1,72 @@
+<% @body_id = 'product-details' %>
+
+<% cache cache_key_for_product do %>
+  <div data-hook="product_show" class="row" itemscope itemtype="https://schema.org/Product">
+    <div class="col-md-4 col-sm-5" data-hook="product_left_part">
+      <div data-hook="product_left_part_wrap">
+        <div id="product-images" data-hook="product_images">
+          <div id="main-image" class="panel panel-default" data-hook>
+            <div class="panel-body text-center">
+              <%= product_image(@product, itemprop: "image") %>
+            </div>
+          </div>
+          <div id="thumbnails" data-hook>
+            <%= render partial: 'thumbnails' %>
+          </div>
+        </div>
+
+        <div data-hook="product_properties">
+          <%= render partial: 'properties' %>
+        </div>
+<div id="reviews">
+  <h3 class="product-section-title"><%= Spree.t(:reviews) %></h3>
+  <% if Spree::Reviews::Config[:include_unapproved_reviews] == false and @product.reviews.approved.count == 0 %>
+    <p class="reviews-none"><%= Spree.t(:no_reviews_available) %></p>
+  <% else %>
+    <%= render 'spree/shared/rating', product: @product, review: 0 %>
+    <% for review in (Spree::Reviews::Config[:track_locale] ? @product.reviews.localized(I18n.locale) : @product.reviews).default_approval_filter.preview %>
+      <%= render 'spree/shared/review', review: review %>
+    <% end %>
+  <% end %>
+  <%= link_to Spree.t(:write_your_own_review), new_product_review_path(@product), class: 'btn btn-default', rel: 'nofollow' %>
+</div>
+
+
+        <div data-hook="promotions">
+          <%= render partial: 'promotions' %>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-8 col-sm-7" data-hook="product_right_part">
+      <div data-hook="product_right_part_wrap">
+        <div id="product-description" data-hook="product_description">
+          <h1 class="product-title" itemprop="name"><%= @product.name %></h1>
+
+          <div class="well" itemprop="description" data-hook="description">
+            <%= product_description(@product) %>
+          </div>
+
+          <div id="cart-form" data-hook="cart_form">
+            <%= render partial: 'cart_form' %>
+          <% if spree_current_user %>
+  <div id="wishlist-form">
+    <%= form_for Spree::WishedProduct.new do |f| %>
+      <%= f.hidden_field :variant_id, value: @product.master.id %>
+      <%= f.hidden_field :quantity %>
+      <button type="submit" class="btn btn-info">
+        <%= Spree.t(:add_to_wishlist) %>
+      </button>
+    <% end %>
+  </div>
+<% end %>
+</div>
+        </div>
+
+        <div id="taxon-crumbs" class=" five " data-hook="product_taxons">
+          <%= render partial: 'taxons' %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

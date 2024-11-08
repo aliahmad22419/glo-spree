@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="<%= I18n.locale %>">
+  <head data-hook="admin_inside_head">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <%= render partial: 'spree/admin/shared/head' %>
+  </head>
+
+  <body class="admin">
+
+    <%#-------------------------------------------------%>
+    <%# Loading progress bars                           %>
+    <%#-------------------------------------------------%>
+    <div id="progress">
+      <div class="alert alert-info alert-progress">
+        <div class="spinner">
+<%= Spree.t(:loading) %>...</div>
+        <div class="progress-message">
+<%= Spree.t(:loading) %>...</div>
+      </div>
+    </div>
+
+    <%#-------------------------------------------------%>
+    <%# Header navbar                                   %>
+    <%#-------------------------------------------------%>
+    <%= render partial: 'spree/admin/shared/header' %>
+
+    <%#-------------------------------------------------%>
+    <%# Main content                                    %>
+    <%#-------------------------------------------------%>
+    <div id="wrapper" class="container-fluid <%= wrapper_classes %>">
+      <div class="row">
+
+        <%#-------------------------------------------------%>
+        <%# Sidebar                                         %>
+        <%#-------------------------------------------------%>
+        <div class="<%= main_sidebar_classes %>" id="main-sidebar" data-hook="admin_tabs">
+          <%= render partial: 'spree/admin/shared/main_menu' %>
+
+          <%= render partial: 'spree/admin/shared/version' %>
+                        <% if current_spree_user.respond_to?(:has_spree_role?) && (current_spree_user.has_spree_role?(:admin) || current_spree_user.has_spree_role?(:client)) %>
+                  <ul class="nav nav-sidebar">
+                    <%= tab plural_resource_name(Spree::Vendor), url: admin_vendors_path, icon: 'money' %>
+                  </ul>
+                <% end %>
+                <% if defined?(current_spree_vendor) && current_spree_vendor %>
+                  <ul class="nav nav-sidebar">
+                    <%= tab Spree::Vendor.model_name.human, url: admin_vendor_settings_path, icon: 'money' %>
+                  </ul>
+                <% end %>
+
+
+<ul class="nav nav-sidebar">
+  <li class="sidebar-menu-item">
+    <%= tab(:gift_cards, spree.admin_gift_cards_path, icon: 'gift') %>
+  </li>
+</ul>
+<ul class="nav nav-sidebar">
+  <%= main_menu_tree t(:documents, scope: [:spree, :print_invoice]), url: '#sidebar-documents', icon: 'file', sub_menu: 'documents_sub_menu' %>
+</ul>
+</div>
+
+        <%#-------------------------------------------------%>
+        <%# Content                                         %>
+        <%#-------------------------------------------------%>
+        <div class="<%= main_part_classes %> main" id="main-part">
+
+          <%#-------------------------------------------------%>
+          <%# Content header (page title/actions)             %>
+          <%#-------------------------------------------------%>
+          <%= render partial: 'spree/admin/shared/content_header' %>
+
+          <div class="row">
+            <%#-------------------------------------------------%>
+            <%# Alerts                                          %>
+            <%#-------------------------------------------------%>
+            <%= flash_alert(flash) %>
+
+            <%#-------------------------------------------------%>
+            <%# Main content                                    %>
+            <%#-------------------------------------------------%>
+            <div class="<%= content_for?(:sidebar) ? 'with-sidebar col-xs-8 col-md-9' : 'col-xs-12'  %>" id="content" data-hook>
+              <%= render partial: 'spree/admin/shared/table_filter' if content_for?(:table_filter)%>
+              <%= yield %>
+            </div>
+
+            <%#-------------------------------------------------%>
+            <%# Inner aside                                     %>
+            <%#-------------------------------------------------%>
+            <% if content_for?(:sidebar) %>
+              <div class="col-xs-4 col-md-3">
+                <%= render partial: 'spree/admin/shared/sidebar' %>
+              </div>
+            <% end %>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+
+    <%#-------------------------------------------------%>
+    <%# Insert footer scripts here                      %>
+    <%#-------------------------------------------------%>
+    <div data-hook="admin_footer_scripts"></div>
+  </body>
+</html>

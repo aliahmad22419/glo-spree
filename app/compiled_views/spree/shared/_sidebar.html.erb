@@ -1,0 +1,9 @@
+<aside id="sidebar" class="col-sm-4 col-md-3" data-hook>
+  <%= yield :sidebar %>
+
+
+<div class="list-group">
+  <%= link_to Spree.t("buy_gift_card"), new_gift_card_path, class: 'list-group-item' %>
+</div>
+
+</aside>

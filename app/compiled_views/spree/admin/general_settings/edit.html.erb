@@ -1,0 +1,150 @@
+<% content_for :page_title do %>
+  <%= Spree.t(:general_settings) %>
+<% end %>
+
+<%= form_tag admin_general_settings_path, method: :put do %>
+  <div id="preferences" data-hook>
+
+    <fieldset class="general no-border-top">
+
+      <div class="row">
+        <div class="col-xs-12 col-md-6">
+          <%#-------------------------------------------------%>
+          <%# Security settings                               %>
+          <%#-------------------------------------------------%>
+          <% if @preferences_security.any? %>
+            <div class="panel panel-default security">
+              <div class="panel-heading">
+                <h1 class="panel-title">
+                  <%= Spree.t(:security_settings) %>
+                </h1>
+              </div>
+
+              <div class="panel-body">
+                <% @preferences_security.each do |key|
+                    type = Spree::Config.preference_type(key) %>
+                    <div class="checkbox">
+                      <%= label_tag key do %>
+                        <%= preference_field_tag(key, Spree::Config[key], type: type) %>
+                        <%= Spree.t(key) %>
+                      <% end %>
+                    </div>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+
+          <%#-------------------------------------------------%>
+          <%# Clear cache                                     %>
+          <%#-------------------------------------------------%>
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h1 class="panel-title"><%= Spree.t(:clear_cache)%></h1>
+            </div>
+
+            <div class="panel-body">
+              <div class="clear-cache-warning alert alert-warning">
+                <%= Spree.t(:clear_cache_warning) %>
+              </div>
+              <div data-hook="general_settings_clear_cache">
+                <%= button Spree.t(:clear_cache), 'ok', 'button', id: "clear_cache" %>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="col-xs-12 col-md-6">
+
+          <%#-------------------------------------------------%>
+          <%# Currency Settings                               %>
+          <%#-------------------------------------------------%>
+          <div class="panel panel-default currency">
+            <div class="panel-heading">
+              <h1 class="panel-title">
+                <%= Spree.t(:currency_settings)%>
+              </h1>
+            </div>
+
+            <div class="panel-body">
+              <div class="form-group">
+                <%= label_tag :currency, Spree.t(:choose_currency) %>
+                <%= select_tag :currency, currency_options %>
+              </div>
+            </div>
+          </div>
+<div class="panel panel-default currencies">
+  <div class="panel-heading">
+    <h1 class="panel-title"><%= Spree.t(:currencies) %></h1>
+  </div>
+
+  <div class="panel-body">
+    <div class="form-group">
+      <label><%= Spree.t('supported_currencies.short') %></label>
+      <input type="text" class="form-control" value="<%= Spree::Config.supported_currencies %>" name="supported_currencies">
+      <p class="help-block"><%= Spree.t('supported_currencies.long') %></p>
+    </div>
+
+    <div class="form-group">
+      <div class="checkbox">
+        <label>
+          <%= check_box_tag(:allow_currency_change, 1, Spree::Config.allow_currency_change) %>
+          <%= Spree.t('allow_currency_change.short') %>
+        </label>
+        <p class="help-block"><%= Spree.t('allow_currency_change.long') %></p>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="checkbox">
+        <label>
+          <%= check_box_tag(:show_currency_selector, 1, Spree::Config.show_currency_selector) %>
+          <%= Spree.t('show_currency_selector.short') %>
+        </label>
+        <p class="help-block"><%= Spree.t('show_currency_selector.long_html') %></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+        </div>
+      </div>
+
+      
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h1 class="panel-title">
+            <%= Spree.t(:gift_card_settings)%>
+          </h1>
+        </div>
+
+        <div class="panel-body">
+          <div class="form-group">
+            <%= label_tag :allow_gift_card_redeem do %>
+              <%= hidden_field_tag :allow_gift_card_redeem, 0 %>
+              <%= check_box_tag :allow_gift_card_redeem, 1, Spree::Config.allow_gift_card_redeem %>
+              <%= Spree.t(:allow_gift_card_redeem) %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<div class="form-actions" data-hook="buttons">
+        <%= button Spree.t('actions.update'), 'save' %>
+        <span class="or"><%= Spree.t(:or) %></span>
+        <%= button_link_to Spree.t('actions.cancel'), edit_admin_general_settings_url, icon: 'delete' %>
+      </div>
+
+    </fieldset>
+
+  </div>
+
+<% end %>
+
+<script>
+  $('#store_default_currency').select2();
+  $('#currency').select2();
+</script>
