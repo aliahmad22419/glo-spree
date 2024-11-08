@@ -1,0 +1,17 @@
+//@import "./_variables.scss";
+.displayNone {
+  display: none;
+}
+.flex-column {
+  flex-direction: column;
+}
+.w-70 {
+  width: 70%;
+}
+.border-grey {
+  border-color: $gallery;
+}
+.font14 {
+  font-size: 0.875rem;
+  line-height: 1.125rem;
+}

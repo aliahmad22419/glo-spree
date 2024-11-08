@@ -1,0 +1,41 @@
+//
+// Main LESS file
+// --------------------------------------------------------
+
+// Paths
+$bower: "../../../bower_components";
+//@import "../../../../node_modules/bootstrap/scss/bootstrap-grid.scss";
+@import '~bootstrap/dist/css/bootstrap.min.css';
+@import "~bootstrap/scss/bootstrap-grid.scss";
+// @import '~bootstrap/scss/bootstrap-grid';
+
+// A copy oh the Bootstrap main file to personalize the framework easily.
+// Default: all selected except glyphicons (replaced with Font-Awesome)
+
+
+
+// Font-Awesome <http://fontawesome.io/>
+// @import "../../../bower_components/font-awesome/web-fonts-with-css/scss/fontawesome";
+
+
+
+// Your custom CSS or SCSS files
+@import "_fonts";
+@import "_variables";
+@import "_mixins";
+@import "_layout";
+@import "_modal";
+@import "_base";
+@import "_utilities";
+@import "common-styles";
+
+
+
+// CSS for Components
+
+
+//CSS for Pages
+@import "views/_home";
+@import "components/newsletter";
+@import "components/clients";
+@import "views/category-listing";
