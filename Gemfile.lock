@@ -257,6 +257,7 @@ GEM
     faraday-net_http (3.3.0)
       net-http
     ffi (1.17.0-arm64-darwin)
+    ffi (1.17.0-x86_64-linux-gnu)
     fog-aws (3.29.0)
       base64 (~> 0.2.0)
       fog-core (~> 2.6)
@@ -385,6 +386,8 @@ GEM
     net-ssh (7.3.0)
     nio4r (2.7.4)
     nokogiri (1.16.7-arm64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.16.7-x86_64-linux)
       racc (~> 1.4)
     oga (3.4)
       ast
@@ -621,10 +624,10 @@ GEM
     spree_extension (0.1.0)
       activerecord (>= 4.2)
       spree_core
-    spring (2.1.1)
-    spring-watcher-listen (2.0.1)
+    spring (4.2.1)
+    spring-watcher-listen (2.1.0)
       listen (>= 2.7, < 4.0)
-      spring (>= 1.2, < 3.0)
+      spring (>= 4)
     sprockets (4.2.1)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -682,6 +685,7 @@ GEM
 
 PLATFORMS
   arm64-darwin-24
+  x86_64-linux
 
 DEPENDENCIES
   aasm
@@ -743,7 +747,7 @@ DEPENDENCIES
   spree_print_invoice!
   spree_sitemap!
   spring
-  spring-watcher-listen (~> 2.0.0)
+  spring-watcher-listen (~> 2.1.0)
   sprockets-rails
   stimulus-rails
   stripe
