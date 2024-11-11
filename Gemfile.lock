@@ -185,9 +185,9 @@ GEM
     bindex (0.8.1)
     bootsnap (1.18.4)
       msgpack (~> 1.2)
-    bootstrap (4.6.2.1)
+    bootstrap (5.3.3)
       autoprefixer-rails (>= 9.1.0)
-      popper_js (>= 1.16.1, < 2)
+      popper_js (>= 2.11.8, < 3)
     brakeman (6.2.2)
       racc
     builder (3.3.0)
@@ -257,6 +257,7 @@ GEM
     faraday-net_http (3.3.0)
       net-http
     ffi (1.17.0-arm64-darwin)
+    ffi (1.17.0-x86_64-linux-gnu)
     fog-aws (3.29.0)
       base64 (~> 0.2.0)
       fog-core (~> 2.6)
@@ -386,6 +387,8 @@ GEM
     nio4r (2.7.4)
     nokogiri (1.16.7-arm64-darwin)
       racc (~> 1.4)
+    nokogiri (1.16.7-x86_64-linux)
+      racc (~> 1.4)
     oga (3.4)
       ast
       ruby-ll (~> 2.1)
@@ -403,7 +406,7 @@ GEM
     pdf-core (0.10.0)
     pg (1.5.9)
     polyglot (0.3.5)
-    popper_js (1.16.1)
+    popper_js (2.11.8)
     prawn (2.5.0)
       matrix (~> 0.4)
       pdf-core (~> 0.10.0)
@@ -682,6 +685,7 @@ GEM
 
 PLATFORMS
   arm64-darwin-24
+  x86_64-linux
 
 DEPENDENCIES
   aasm
