@@ -63,7 +63,7 @@ gem "prawn-html"
 gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem "soap4r-ng", :git=>"https://github.com/rubyjedi/soap4r.git", :branch=>"master"
 gem "sidekiq"
-gem "sidekiq-cron", "~> 1.1"
+gem "sidekiq-cron", "~> 2.0"
 gem "httparty"
 gem "foreman"
 gem "aws-sdk-sqs"

@@ -180,7 +180,7 @@ GEM
       aws-eventstream (~> 1, >= 1.0.2)
     base64 (0.2.0)
     bcrypt (3.1.20)
-    benchmark (0.3.0)
+    benchmark (0.4.0)
     bigdecimal (3.1.8)
     bindex (0.8.1)
     bootsnap (1.18.4)
@@ -216,6 +216,9 @@ GEM
     concurrent-ruby (1.3.4)
     connection_pool (2.4.1)
     crass (1.0.6)
+    cronex (0.15.0)
+      tzinfo
+      unicode (>= 0.4.4.5)
     csv (3.3.0)
     date (3.4.0)
     debug (1.9.2)
@@ -257,6 +260,7 @@ GEM
     faraday-net_http (3.3.0)
       net-http
     ffi (1.17.0-arm64-darwin)
+    ffi (1.17.0-x86_64-linux-gnu)
     fog-aws (3.29.0)
       base64 (~> 0.2.0)
       fog-core (~> 2.6)
@@ -385,6 +389,8 @@ GEM
     net-ssh (7.3.0)
     nio4r (2.7.4)
     nokogiri (1.16.7-arm64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.16.7-x86_64-linux)
       racc (~> 1.4)
     oga (3.4)
       ast
@@ -551,7 +557,7 @@ GEM
     searchkick (5.3.1)
       activemodel (>= 6.1)
       hashie
-    securerandom (0.3.1)
+    securerandom (0.3.2)
     selenium-webdriver (4.0.0)
       childprocess (>= 0.5, < 5.0)
       rexml (~> 3.2, >= 3.2.5)
@@ -561,10 +567,11 @@ GEM
       logger
       rack (>= 2.2.4)
       redis-client (>= 0.22.2)
-    sidekiq-cron (1.12.0)
-      fugit (~> 1.8)
+    sidekiq-cron (2.0.0)
+      cronex (>= 0.13.0)
+      fugit (~> 1.8, >= 1.11.1)
       globalid (>= 1.0.1)
-      sidekiq (>= 6)
+      sidekiq (>= 6.5.0)
     sitemap_generator (6.3.0)
       builder (~> 3.0)
     spree (4.10.1)
@@ -663,6 +670,7 @@ GEM
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     unf (0.2.0)
+    unicode (0.4.4.5)
     unicode-display_width (2.6.0)
     uri (1.0.0)
     useragent (0.16.10)
@@ -682,6 +690,7 @@ GEM
 
 PLATFORMS
   arm64-darwin-24
+  x86_64-linux
 
 DEPENDENCIES
   aasm
@@ -735,7 +744,7 @@ DEPENDENCIES
   searchkick (= 5.3.1)
   selenium-webdriver (= 4.0.0)
   sidekiq
-  sidekiq-cron (~> 1.1)
+  sidekiq-cron (~> 2.0)
   soap4r-ng!
   spree (= 4.10.1)
   spree_api_v1
