@@ -40,7 +40,7 @@ gem "spree_gateway", "4.1.3", github: "zaintechsembly/spree_gateway", branch: "3
 # gem "spree_multi_vendor"
 # gem "spree_multi_domain", "~>3.3.2", github: "zainrafique/spree-multi-domain"
 gem "spree_sitemap", github: "spree-contrib/spree_sitemap"
-gem "ransack", "4.1.1"
+gem "ransack", "4.2.1"
 gem "rack-cors", require: "rack/cors"
 gem "dotenv-rails"
 gem "aasm"
