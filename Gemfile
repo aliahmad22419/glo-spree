@@ -32,7 +32,7 @@ gem "sass", "~> 3.7", ">= 3.7.4"
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
 # Adding gems from gl0-spree:
-gem "psych", "< 4"
+gem "psych", "< 6"
 gem "spree", "4.10.1"
 # gem "spree_auth_devise", "~> 4.6.3"
 gem "acts_as_list", "~> 1.2.3"

@@ -257,6 +257,7 @@ GEM
     faraday-net_http (3.3.0)
       net-http
     ffi (1.17.0-arm64-darwin)
+    ffi (1.17.0-x86_64-linux-gnu)
     fog-aws (3.29.0)
       base64 (~> 0.2.0)
       fog-core (~> 2.6)
@@ -386,6 +387,8 @@ GEM
     nio4r (2.7.4)
     nokogiri (1.16.7-arm64-darwin)
       racc (~> 1.4)
+    nokogiri (1.16.7-x86_64-linux)
+      racc (~> 1.4)
     oga (3.4)
       ast
       ruby-ll (~> 2.1)
@@ -426,7 +429,8 @@ GEM
       method_source (~> 1.0)
     pry-rails (0.3.11)
       pry (>= 0.13.0)
-    psych (3.3.4)
+    psych (5.2.0)
+      stringio
     public_suffix (6.0.1)
     puma (6.4.3)
       nio4r (~> 2.0)
@@ -642,6 +646,7 @@ GEM
     stimulus-rails (1.3.4)
       railties (>= 6.0.0)
     stringex (2.8.6)
+    stringio (3.1.2)
     stripe (13.1.1)
     terminal-table (3.0.2)
       unicode-display_width (>= 1.1.1, < 3)
@@ -682,6 +687,7 @@ GEM
 
 PLATFORMS
   arm64-darwin-24
+  x86_64-linux
 
 DEPENDENCIES
   aasm
@@ -722,7 +728,7 @@ DEPENDENCIES
   prawn-html
   prawn-rtl-support (~> 0.1.7)
   pry-rails
-  psych (< 4)
+  psych (< 6)
   puma (>= 5.0)
   rack-cors
   rails (~> 7.2.2)
