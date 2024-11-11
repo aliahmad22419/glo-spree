@@ -248,7 +248,7 @@ GEM
     exception_notification (4.5.0)
       actionmailer (>= 5.2, < 8)
       activesupport (>= 5.2, < 8)
-    excon (1.1.1)
+    excon (1.2.0)
     execjs (2.10.0)
     faraday (2.12.0)
       faraday-net_http (>= 2.0, < 3.4)
@@ -257,6 +257,7 @@ GEM
     faraday-net_http (3.3.0)
       net-http
     ffi (1.17.0-arm64-darwin)
+    ffi (1.17.0-x86_64-linux-gnu)
     fog-aws (3.29.0)
       base64 (~> 0.2.0)
       fog-core (~> 2.6)
@@ -385,6 +386,8 @@ GEM
     net-ssh (7.3.0)
     nio4r (2.7.4)
     nokogiri (1.16.7-arm64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.16.7-x86_64-linux)
       racc (~> 1.4)
     oga (3.4)
       ast
@@ -682,6 +685,7 @@ GEM
 
 PLATFORMS
   arm64-darwin-24
+  x86_64-linux
 
 DEPENDENCIES
   aasm
