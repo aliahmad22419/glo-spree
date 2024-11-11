@@ -205,7 +205,6 @@ GEM
       xpath (~> 3.2)
     carmen (1.1.3)
       activesupport (>= 3.0.0)
-    childprocess (4.1.0)
     chromedriver-helper (2.1.1)
       archive-zip (~> 0.10)
       nokogiri (~> 1.8)
@@ -257,6 +256,7 @@ GEM
     faraday-net_http (3.3.0)
       net-http
     ffi (1.17.0-arm64-darwin)
+    ffi (1.17.0-x86_64-linux-gnu)
     fog-aws (3.29.0)
       base64 (~> 0.2.0)
       fog-core (~> 2.6)
@@ -385,6 +385,8 @@ GEM
     net-ssh (7.3.0)
     nio4r (2.7.4)
     nokogiri (1.16.7-arm64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.16.7-x86_64-linux)
       racc (~> 1.4)
     oga (3.4)
       ast
@@ -552,10 +554,12 @@ GEM
       activemodel (>= 6.1)
       hashie
     securerandom (0.3.1)
-    selenium-webdriver (4.0.0)
-      childprocess (>= 0.5, < 5.0)
+    selenium-webdriver (4.26.0)
+      base64 (~> 0.2)
+      logger (~> 1.4)
       rexml (~> 3.2, >= 3.2.5)
-      rubyzip (>= 1.2.2)
+      rubyzip (>= 1.2.2, < 3.0)
+      websocket (~> 1.0)
     sidekiq (7.3.5)
       connection_pool (>= 2.3.0)
       logger
@@ -673,6 +677,7 @@ GEM
       activemodel (>= 6.0.0)
       bindex (>= 0.4.0)
       railties (>= 6.0.0)
+    websocket (1.2.11)
     websocket-driver (0.7.6)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
@@ -682,6 +687,7 @@ GEM
 
 PLATFORMS
   arm64-darwin-24
+  x86_64-linux
 
 DEPENDENCIES
   aasm
@@ -733,7 +739,7 @@ DEPENDENCIES
   sass (~> 3.7, >= 3.7.4)
   sass-rails (~> 6.0)
   searchkick (= 5.3.1)
-  selenium-webdriver (= 4.0.0)
+  selenium-webdriver (= 4.26.0)
   sidekiq
   sidekiq-cron (~> 1.1)
   soap4r-ng!
