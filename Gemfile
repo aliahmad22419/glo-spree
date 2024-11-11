@@ -52,7 +52,7 @@ gem "spree_print_invoice", github: "aliahmad22419/spree_print_invoice", branch: 
 # gem "spree_multi_client",  path: "../spree_multi_client"
 # gem "spree_mailchimp_ecommerce", "~>1.5.1", github: "zaintechsembly/spree_mailchimp_ecommerce"
 gem "aws-sdk-s3", require: false
-gem "searchkick", "5.3.1"
+gem "searchkick", "5.4.0"
 gem "stripe"
 gem "adyen-ruby-api-library", "4.2"
 gem "active_model_otp"
