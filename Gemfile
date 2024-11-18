@@ -54,7 +54,7 @@ gem "spree_print_invoice", github: "aliahmad22419/spree_print_invoice", branch: 
 gem "aws-sdk-s3", require: false
 gem "searchkick", "5.3.1"
 gem "stripe"
-gem "adyen-ruby-api-library", "4.2"
+gem "adyen-ruby-api-library", "10.0.1"
 gem "active_model_otp"
 gem "prawn-rtl-support", "~> 0.1.7"
 gem "prawn-html"
