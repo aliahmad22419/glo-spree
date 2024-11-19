@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-ruby '3.3.2'
+ruby "3.3.2"
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.2.2"
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
@@ -22,7 +22,7 @@ gem "jbuilder"
 # Use SCSS for stylesheets
 gem "sass-rails", "~> 6.0"
 gem "sass", "~> 3.7", ">= 3.7.4"
-
+gem "mutex_m", "~> 0.2.0"
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
 
@@ -34,11 +34,14 @@ gem "bootsnap", require: false
 # Adding gems from gl0-spree:
 gem "psych", "< 4"
 gem "spree", "4.10.1"
-# gem "spree_auth_devise", "~> 4.6.3"
+gem "spree_auth_devise", "~> 4.6.3"
+gem 'spree_emails', '4.3'
 gem "acts_as_list", "~> 1.2.3"
 gem "spree_gateway", "4.1.3", github: "zaintechsembly/spree_gateway", branch: "3-10-stable"
 # gem "spree_multi_vendor"
-# gem "spree_multi_domain", "~>3.3.2", github: "zainrafique/spree-multi-domain"
+gem 'spree_multi_vendor', '0.3.0', github: 'spree-contrib/spree_multi_vendor', branch: 'main', ref: '69b9f5c1595a610d3bd4b316fd11c63eb5696233'
+
+gem "spree_multi_domain", "~>3.3.2", github: "zainrafique/spree-multi-domain"
 gem "spree_sitemap", github: "spree-contrib/spree_sitemap"
 gem "ransack", "4.1.1"
 gem "rack-cors", require: "rack/cors"
@@ -47,7 +50,9 @@ gem "aasm"
 # gem "spree_reviews", github: "spree-contrib/spree_reviews"
 # gem "spree_related_products", path: "../spree_related_products"
 gem "spree_api_v1"
-# gem "spree_gift_card",  path: "../spree_gift_card"
+# gem 'spree_gift_card', '3.2.1', github: 'zaintechsembly/spree_gift_card'
+
+# gem "spree_gift_card",  path: "../spree_gift_card" #SystemStackError (stack level too deep):
 gem "spree_print_invoice", github: "aliahmad22419/spree_print_invoice", branch: "master"
 # gem "spree_multi_client",  path: "../spree_multi_client"
 # gem "spree_mailchimp_ecommerce", "~>1.5.1", github: "zaintechsembly/spree_mailchimp_ecommerce"
@@ -82,8 +87,8 @@ gem "fog-aws"
 gem "asset_sync"
 gem "rollbar"
 gem "exception_notification"
-# gem "spree_backend", path: "../spree_backend"
-# gem "spree_frontend"
+gem "spree_backend"
+gem "spree_frontend"
 gem "elasticsearch"
 gem "net-sftp"
 
