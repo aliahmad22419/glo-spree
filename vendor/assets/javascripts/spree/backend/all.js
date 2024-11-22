@@ -11,5 +11,6 @@
 //= require_tree .
 //= require spree/backend/spree_reviews
 // require spree/backend/spree_braintree_vzero
+//= require spree/backend/spree_gift_card
 //= require spree/backend/spree_print_invoice
 //= require spree/backend/spree_multi_client

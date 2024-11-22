@@ -22,6 +22,9 @@ gem "jbuilder"
 # Use SCSS for stylesheets
 gem "sass-rails", "~> 6.0"
 gem "sass", "~> 3.7", ">= 3.7.4"
+gem "terser"
+# Use CoffeeScript for .coffee assets and views
+gem "coffee-rails"
 gem "mutex_m", "~> 0.2.0"
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
@@ -47,17 +50,22 @@ gem "ransack", "4.1.1"
 gem "rack-cors", require: "rack/cors"
 gem "dotenv-rails"
 gem "aasm"
-# gem "spree_reviews", github: "spree-contrib/spree_reviews"
-# gem "spree_related_products", path: "../spree_related_products"
-gem "spree_api_v1"
-# gem 'spree_gift_card', '3.2.1', github: 'zaintechsembly/spree_gift_card'
+gem "spree_reviews", github: "spree-contrib/spree_reviews" #stack level too deep
 
-# gem "spree_gift_card",  path: "../spree_gift_card" #SystemStackError (stack level too deep):
-gem "spree_print_invoice", github: "aliahmad22419/spree_print_invoice", branch: "master"
+gem "spree_related_products", path: "../spree_related_products"  #stack level too deep
+# gem "spree_related_products", github: "zaintechsembly/spree_related_products"  #stack level too deep
+
+# gem 'spree_gift_card', '3.2.1', github: 'zaintechsembly/spree_gift_card'  #stack level too deep
+gem "spree_gift_card",  path: "../spree_gift_card"  #stack level too deep
+# gem 'spree_multi_client', '~>0.1.7.alpha', github: 'zaintechsembly/spree_multi_client'
 # gem "spree_multi_client",  path: "../spree_multi_client"
-# gem "spree_mailchimp_ecommerce", "~>1.5.1", github: "zaintechsembly/spree_mailchimp_ecommerce"
+gem "spree_api_v1"
+
+gem "spree_print_invoice", github: "aliahmad22419/spree_print_invoice", branch: "master"
+gem "spree_mailchimp_ecommerce", "~>1.5.1", github: "zaintechsembly/spree_mailchimp_ecommerce"
 gem "aws-sdk-s3", require: false
 gem "searchkick", "5.3.1"
+gem 'doorkeeper'
 gem "stripe"
 gem "adyen-ruby-api-library", "4.2"
 gem "active_model_otp"
@@ -87,8 +95,8 @@ gem "fog-aws"
 gem "asset_sync"
 gem "rollbar"
 gem "exception_notification"
-gem "spree_backend"
-gem "spree_frontend"
+gem "spree_backend", "4.6.2"
+gem "spree_frontend", "4.6.0"
 gem "elasticsearch"
 gem "net-sftp"
 
