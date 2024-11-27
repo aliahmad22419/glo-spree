@@ -1,0 +1,23 @@
+<% unless limit.present? %>
+  <% availabe = Spree::LineItem.class_eval{PRODUCT_TYPES} - promotion_rule.preferred_product_type_limits.map{ |ptl| ptl['product_type'].to_sym } %>
+<% end %>
+
+<div class="row no-marginb limit">
+  <div class="form-group col-xs-12 col-md-6 no-marginb">
+    <label for="">Product Type</label>
+    <%= select_tag "#{param_prefix}[preferred_product_type_limits][][product_type]", options_for_select(Spree::LineItem.class_eval{PRODUCT_TYPES}.map{|pt| [pt.to_s.humanize, pt]}, (limit['product_type'] || availabe[0])), { class: 'form-control' } %>
+  </div>
+  <div class="form-group col-xs-12 col-md-6 no-marginb settings">
+    <label for="">Min Amount</label>
+    <%= text_field_tag "#{param_prefix}[preferred_product_type_limits[][amount_min]", (limit.present? ? limit['amount_min'] : '10'), class: 'form-control' %>
+  </div>
+  <button type="button" name="button" class="btn btn-danger rm-limit pull-righ">
+    Remove
+  </button>
+</div>
+
+<script>
+  $('.rm-limit').on('click', (event) => {
+    event.target.closest('.limit').remove();
+  });
+</script>

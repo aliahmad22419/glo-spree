@@ -1,0 +1,36 @@
+<% if order.exchanged_prices[:promo_total].to_f.abs > 0.0 %>
+  <strong>
+    <%= order.labels['promo'] || Spree.t('order.discount') %>:
+    <%= order.display_exchanged(:promo_total) %>
+  </strong>
+  <br>
+<% end %>
+
+<% if inclusive_tax.to_f > 0.0 %>
+  <strong>
+    <%= "#{order.tax_labels[:inclusive]}:" %>
+    <%= order.display_exchanged(inclusive_tax) %>
+  </strong>
+  <br>
+<% end %>
+
+<% if exclusive_tax.to_f > 0.0 %>
+  <strong>
+    <%= "#{order.tax_labels[:exclusive]}:" %>
+    <%= order.display_exchanged(exclusive_tax) %>
+  </strong>
+  <br>
+<% end %>
+
+<% if shipment_tax.to_f > 0.0 %>
+  <strong>
+    <%= Spree.t('order.shipment_tax') %>
+    <%= order.display_exchanged(shipment_tax) %>
+  </strong>
+  <br>
+<% end %>
+
+<strong>
+  <%= Spree.t('order_mailer.total') %>
+  <%= order.display_exchanged(@line_items.sum{ |li| li.amount.to_f }) %>
+</strong>

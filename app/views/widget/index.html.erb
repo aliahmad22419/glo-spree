@@ -1,0 +1,80 @@
+<main id="main-container">
+	<div class="container carousel-container">
+		<!--div class="widget-shop-btn-mob d-md-none">
+			<a href="/<%= @srote%>" target="_blank">SHOP</a>
+		</div-->
+		<div class="widget-carousel owl-carousel owl-theme">
+				<%@products.each do |product| %>
+					<div class="widget-tile d-flex h-100 flex-column">
+						<div class="image-cont text-center">
+							<a href="<%= 'https://' + product&.stores&.first&.url&.to_s + '/' + product&.slug&.to_s %>" target="_blank">
+								<% image =  product&.images&.where(base_image: true)&.present? ? product&.images&.where(base_image: true).first : product&.images&.first%>
+								<img src="<%= image&.styles&.present? ? image&.styles[3][:url] : ''%>", alt="image", width="268"/>
+							</a>
+						</div>
+						<div class="item-info pt-2">
+							<a href="/<%= product&.slug%>" target="_blank" class="widget-link"><%= product.name.capitalize %></a>
+							<div class="item-price pt-1"><%= @base_currency.to_s + " " + @currency_symbol.to_s + sprintf('%.2f', product.price) %></div>
+						</div>
+					</div>
+				<% end %>
+		</div>
+		<!--div class="widget-shop-btn">
+			<a href="/<%= @srote%>" target="_blank">SHOP</a>
+		</div-->
+	</div>
+</main>
+<%= javascript_tag do %>
+	$('.widget-carousel').owlCarousel({
+		loop: false,
+		autoplay:false,
+		autoplayTimeout:3000,
+		autoplayHoverPause:true,
+		stagePadding: 0,
+		nav: true,
+		dots: false,
+		mouseDrag: true,
+		responsiveClass:true,
+		responsive: {
+			0:{
+				items: 1,
+				margin: 10,
+				stagePadding: 0,
+				nav: false,
+				dots: true
+			},
+			450:{
+				items: 2,
+				margin: 26,
+				stagePadding: 0,
+				nav: false,
+				dots: true
+			},
+			768:{
+				items: 2,
+				margin: 26,
+				dots: false,
+				nav: true,
+				loop:true,
+				stagePadding: 0
+			},
+			1000: {
+				items: 4,
+				margin: 27,
+				dots: false
+			},
+			1300:{
+				items: 4,
+				margin: 27,
+				dots: false
+			},
+			1600:{
+				items: 4,
+				margin: 27
+			}
+		},
+
+		navText: ['<i class="chevron chevron-left" aria-hidden="true"></i>','<i class="chevron chevron-right" aria-hidden="true"></i>']
+
+	})
+<% end %>

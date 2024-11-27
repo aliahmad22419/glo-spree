@@ -1,0 +1,99 @@
+<section class="home-slider">
+  <div class="container custom-container">
+    <div class="d-none d-md-block d-lg-block d-xl-block">
+      <h2 class="section-title text-center"><%= data.heading %></h2>
+      <div class="owl-carousel owl-theme carousel-container home-carousel">
+       <% data.html_ui_blocks.each do |product_carosel| %>
+        <div class="post-tile h-100">
+          <a class="post-tile-link d-flex h-100 flex-column" href="<%= valid_url(product_carosel.link, @use_sub_folder_upto, @store.code) %>" target="<%= product_carosel.is_external_link? ? '_blank' : '_self' %>" id="link-0">
+            <%= image_tag(get_image_url(product_carosel), :class => "",:alt => product_carosel.alt) %>
+            <% if product_carosel.heading.present? %>
+              <h3 class="post-image-heading text-center mt-3"><%= product_carosel.heading %></h3>
+            <% end %>
+            <h2 class="post-link text-center"><%= product_carosel.title %></h2>
+
+            <% if product_carosel.banner_item_description.present? %>
+              <div class="banner-item-desc">
+                <p><%=  product_carosel.banner_item_description %></p>
+              </div>
+            <% end %>
+          </a>
+        </div>
+       <% end %>
+      </div>
+    </div>
+    <div class="d-block d-sm-block d-md-none">
+      <h2 class="section-title text-center"><%= data.heading %></h2>
+      <div class="carousel-container">
+       <% data.html_ui_blocks.each do |product_carosel| %>
+        <div class="post-tile">
+          <a class="post-tile-link d-flex h-100 flex-column" href="<%= valid_url(product_carosel.link, @use_sub_folder_upto, @store.code) %>" target="<%= product_carosel.is_external_link? ? '_blank' : '_self' %>" id="link-0">
+            <%= image_tag(get_image_url(product_carosel), :class => "",:alt => product_carosel.alt) %>
+            <% if product_carosel.heading.present? %>
+              <h3 class="post-image-heading text-center mt-3"><%= product_carosel.heading %></h3>
+            <% end %>
+            <h2 class="post-link text-cexnter"><%= product_carosel.title %></h2>
+
+            <% if product_carosel.banner_item_description.present? %>
+              <div class="banner-item-desc">
+                <p><%=  product_carosel.banner_item_description %></p>
+              </div>
+            <% end %>
+          </a>
+        </div>
+      <% end %>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%= javascript_tag do %>
+  $(".home-carousel").owlCarousel({
+  loop: false,
+  autoplay:false,
+  autoplayTimeout:3000,
+  nav: true,
+  autoplayHoverPause:true,
+  stagePadding: 0,
+  dots: false,
+  mouseDrag: true,
+  responsiveClass:true,
+  responsive: {
+  0:{
+  items: 2,
+  stagePadding: 0,
+  nav: true,
+  dots: false
+  },
+  450:{
+  items: 2,
+  stagePadding: 0,
+  nav: true,
+  dots: false
+  },
+  768:{
+  items: 2,
+  margin: 27,
+  dots: false,
+  loop:true,
+  stagePadding: 50
+  },
+  1000: {
+  items: "<%= data.no_of_images %>",
+  margin: 27,
+  dots: false
+  },
+  1300:{
+  items: "<%= data.no_of_images %>",
+  margin: 27,
+  dots: false
+  },
+  1600:{
+  items: "<%= data.no_of_images %>",
+  margin: 27
+  }
+  },
+  navText: ['<%= image_tag("new-home/back-arrow.png", :class => "carousel-nav-img img-prev",:alt => "") %>','<%= image_tag("new-home/next-arrow.png", :class => "carousel-nav-img img-next",:alt => "") %>']
+
+  });
+<% end %>

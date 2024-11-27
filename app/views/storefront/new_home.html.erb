@@ -1,0 +1,274 @@
+<div class="wrapper">
+  <div id="content">
+    <% @components.each do |component| %>
+      <% if component.type_of_component == 'logo' %>
+        <div class="app-header">
+          <header class="header" id="header">
+            <% header_path = (@store.burger_menu_theme ? 'burger_menu_header' : 'header') %>
+            <%= render "storefront/shared/#{header_path}", data: component&.html_ui_blocks&.first %>
+            <div class="mob-overlay <%= (@store.burger_menu_theme ? 'top-0' : '') %>"></div>
+      <% end %>
+      <% if component.type_of_component == 'nav_bar' %>
+        <% cache "store-#{@store.id}-#{@layout.id}-#{component.id}" do %>
+          <%= render "storefront/shared/nav_bar", data: component&.html_ui_blocks %>
+          </header>
+          </div>
+        <% end %>
+      <% end %>
+      <% if component.type_of_component == 'hero_banner' %>
+        <% cache "store-#{@store.id}-#{@layout.id}-#{component.id}" do %>
+          <%= render "storefront/shared/hero_banner", data: component&.html_ui_blocks&.first %>
+        <% end %>
+      <% end %>
+      <% if component.type_of_component == 'product_carousel' %>
+        <% cache "store-#{@store.id}-#{@layout.id}-#{component.id}" do %>
+          <%= render "storefront/shared/product_carosel", data: component %>
+        <% end %>
+      <% end %>
+      <% if component.type_of_component == 'single_banner' %>
+        <% cache "store-#{@store.id}-#{@layout.id}-#{component.id}" do %>
+          <%= render "storefront/shared/single_banner", data: component&.html_ui_blocks&.first %>
+        <% end %>
+      <% end %>
+      <% if component.type_of_component == 'mobile_banner_carousel' %>
+        <% cache "store-#{@store.id}-#{@layout.id}-#{component.id}" do %>
+          <%= render "storefront/shared/mobile_banner_carousel", data: component %>
+        <% end %>
+      <% end %>
+      <% if component.type_of_component == 'banner_carousel' %>
+        <% cache "store-#{@store.id}-#{@layout.id}-#{component.id}" do %>
+          <%= render "storefront/shared/banner_carousel", data: component %>
+        <% end %>
+      <% end %>
+      <% if component.type_of_component == 'custom_carousel' %>
+        <% cache "store-#{@store.id}-#{@layout.id}-#{component.id}" do %>
+          <%= render "storefront/shared/custom_carosel", data: component %>
+        <% end %>
+      <% end %>
+      <% if component.type_of_component == 'announcement_bar' %>
+        <% cache "store-#{@store.id}-#{@layout.id}-#{component.id}" do %>
+          <%= render "storefront/shared/announcement_bar", data: component&.html_ui_blocks&.first %>
+        <% end %>
+      <% end %>
+      <% if component.type_of_component == 'multi_banner' %>
+        <% cache "store-#{@store.id}-#{@layout.id}-#{component.id}" do %>
+          <%= render "storefront/shared/multi_banner", data: component&.html_ui_blocks %>
+        <% end %>
+      <% end %>
+      <% if component.type_of_component == 'info_text' %>
+        <% cache "store-#{@store.id}-#{@layout.id}-#{component.id}" do %>
+          <%= render "storefront/shared/info_text", data: component&.html_ui_blocks&.first %>
+        <% end %>
+      <% end %>
+      <% if component.type_of_component == 'html_block' %>
+        <% cache "store-#{@store.id}-#{@layout.id}-#{component.id}" do %>
+          <%= render "storefront/shared/html_block", data: component&.html_ui_blocks&.first %>
+        <% end %>
+      <% end %>
+
+      <% if component.type_of_component == 'newsletter_cta' %>
+        <% cache "store-#{@store.id}-#{@layout.id}-#{component.id}" do %>
+          <%= render "storefront/shared/newsletter_signup", data: component&.html_ui_blocks&.first %>
+        <% end %>
+      <% end %>
+    <% end %>
+    <% cache "store-#{@store.id}-#{@layout.id}-footer" do %>
+        <%= render "storefront/shared/footer", data: @footer %>
+    <% end %>
+  </div>
+</div>
+
+<%= javascript_tag do %>
+  window.dataLayer.push({'event': 'pageView', 'store': "<%=@store.name%>"})
+<% end %>
+
+<%= javascript_tag do %>
+<% if @data.present? %>
+  window.data = <%= raw @data.to_json %>;
+<% end %>
+$( "#sidebarCollapse" ).click(function( event ) {
+  $('html').toggleClass('scroll-hidden-html');
+  $('body').toggleClass('scroll-hidden');
+  $('nav#sidebar').toggleClass('active');
+  $('.mob-overlay').toggleClass('active');
+});
+$(".mob-search-link").click(function( event ){
+  $('#mobile-nav-sub').toggleClass('d-block');
+});
+
+function updatePreferences(shipToLabel, currency) {
+  var orderToken = getCookie('<%= @store.id.to_s %>' + '_order_token');
+  var currentCurrency = document.getElementById(currency).value;
+  let reqUrl = ""
+  <% if @use_sub_folder_upto %>
+    reqUrl = '/' + '<%= @store.code %>'
+  <% end %>
+
+  if(orderToken){
+    $.ajax({
+     type: "PUT",
+     contentType: "application/json; charset=utf-8",
+     url: reqUrl + "/update_currency",
+     data : JSON.stringify({order_token: orderToken, currency: currentCurrency}),
+     dataType: "json",
+     success: function () {
+        console.log("success!!");
+     },
+     error: function (error){
+        console.log(error);
+     }
+    });
+  }
+
+  var checkStore = '<%= @store.show_ship_countries %>';
+  var preferedStore ='<%= @store.code %>';
+  var shipValue = "";
+  var refresh = true;
+  if (checkStore == 'true'){
+  shipValue = document.getElementById(shipToLabel).value.trim();
+  if(shipValue !== preferedStore){
+    refresh = false;
+    }
+  }
+  document.cookie = '<%= @store.id.to_s %>' + "_curency=" +  currentCurrency + "; path=/;";
+  "<%cookies[(@store.id.to_s + '_curencySymbol').to_sym] = Money.new(100, cookies[(@store.id.to_s + '_curency').to_sym]).currency.symbol%>"
+  if(refresh){
+    $.ajax({
+      type: "POST",
+      contentType: "application/json; charset=utf-8",
+      url: reqUrl + "/clear_cache",
+      success: function () {
+        location.reload();
+      },
+      error: function (error) {
+      console.log(error);
+      }
+    });
+  }else{
+    var clientStores = '<%= raw @client_stores %>'
+    var stores = JSON.parse(clientStores);
+    var shipValueString = JSON.stringify(shipValue);
+    var newStorehash = {};
+    Object.keys(stores).forEach(function (key) {
+    var value = stores[key];
+    newStorehash[JSON.stringify(key.trim())] = value;
+    });
+    window.location.href = "http://" + newStorehash[shipValueString];
+  }
+}
+
+$('.nav-item .collapse').on('show.bs.collapse', function () {
+  $(this).addClass('show');
+  $(this).prev('.link-header').find('.nav-link:last-child').addClass('down');
+  $(this).closest('ul').find('.collapse').not(this).collapse('hide');
+});
+$('.nav-item .collapse').on('hide.bs.collapse', function () {
+  $(this).removeClass('show');
+  $(this).prev('.link-header').find('.nav-link:last-child').removeClass('down');
+});
+
+$('.root-nav .collapse-link').click(function() {
+   var collapse_target = $(this).attr('data-target');
+   var target_div = collapse_target.substring(collapse_target.indexOf('#') + 1);
+   $('.global-navigation-nav .sub-nav-cont').addClass('open');
+   $('.global-navigation-nav .sub-menu-cont').each(function(){
+     var sub_menu_id = $(this).attr('id');
+     if (sub_menu_id == target_div) {
+       $(this).addClass('show');
+     }
+     else {
+       $(this).removeClass('in');
+       $(this).removeClass('show');
+       $(this).removeAttr("aria-expanded");
+       $(this).removeAttr("style");
+     }
+   });
+});
+$('.nav-close-link').click(function(){
+  $('html').removeClass('scroll-hidden-html');
+  $('body').removeClass('scroll-hidden');
+  $('nav#sidebar').removeClass('active');
+  $('.mob-overlay').removeClass('active');
+  $('.global-navigation-nav .sub-nav-cont').removeClass('open');
+  $('.global-navigation-nav .sub-menu-cont').removeClass('in');
+  $('.global-navigation-nav .sub-menu-cont').removeClass('show');
+  $('.global-navigation-nav .sub-menu-cont').removeAttr('aria-expanded');
+  $('.global-navigation-nav .sub-menu-cont').removeAttr('style');
+});
+$('.back-link').click(function(){
+  $(this).closest('.sub-nav-cont').removeClass('open');
+  $(this).closest('.sub-nav-cont').find('.sub-menu-cont').removeClass('show');
+  $(this).closest('.sub-nav-cont').find('.sub-menu-cont').removeClass('in');
+  $(this).closest('.sub-nav-cont').find('.sub-menu-cont').removeAttr('aria-expanded');
+  $(this).closest('.sub-nav-cont').find('.sub-menu-cont').removeAttr('style');
+});
+<%# $( ".footer .mobile-footer .list-group .list-group-holder .list-group-item" ).click(function() {
+  if ( $( this ).next().hasClass( "show" ) ) {
+    $( this ).next().removeClass( "show" );
+  } else {
+    $( this ).next().addClass( "show" );
+  }
+}); %>
+setInterval(function() {
+  $('ul.accordian li.nav-item .sub-menu-cont').each(function(){
+    if(!$(this).find('.nav-column').length){
+      $(this).addClass('empty');
+      $(this).prev('.link-header').find('a.collapse-link').addClass('d-none');
+    }
+  });
+
+  $('.global-navigation-nav .sub-menu-cont').each(function(){
+    var sub_menu_id = $(this).attr('id');
+    if(!$(this).find('.nav-column').length){
+
+      $(this).addClass('empty');
+      $('.root-nav li').find("a.collapse-link[data-target='#" + sub_menu_id + "']:not(.d-none)").addClass('d-none');
+    }
+  });
+});
+<% end %>
+
+<style>
+.notificationbar{
+    font-family: "Josefin Sans";
+    padding: 8px;
+    font-size: 16px;
+}
+</style>
+
+<% if @store.test_mode %>
+  <script type="text/javascript" charset="utf-8">
+    window.onload = function() {
+      setTimeout(function () {
+        // Include no index no follow
+        // Removes any existing meta robots tag
+        $('meta[name="robots"]').remove();
+        // Create an empty meta element, called 'meta'
+        var meta = document.createElement('meta');
+        // Add a name attribute to the meta, with the value 'robots'
+        meta.name = 'robots';
+        // Add a content attribute to the meta element, with the value 'noindex, follow'
+        meta.content = 'noindex, nofollow';
+        // Insert this meta element into the head of the page, using jQuery
+        $('head').append(meta);
+        // Include under development message
+        $('#content').prepend('<div class="notificationbar2" style="background-color: #041F2F;text-align: center;color: #ffffff;font-family: GothamBook; font-size:15px;"><br>---THIS SITE IS UNDER DEVELOPMENT. NO ORDERS WILL BE PROCESSED---</div>');
+        // Include prompt notification
+        script = document.createElement('script');
+        script.onload = function() {
+          // jQuery is available now
+          // Check If Cookie exists and if it doesn't exists
+          if( $.cookie('demostorepbk') == null ) {
+            // Create cookie
+            $.cookie( 'demostorepbk', '1',  { expires: 1, path: '/' } );
+            alert ('This site is under development. No orders will be processed.');
+            // Your code here...
+          }
+        };
+        script.type = 'text/javascript';
+        script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js';
+        document.getElementsByTagName('head')[0].appendChild(script);
+      }, 1000);
+    };
+  </script>
+<% end %>

@@ -1,0 +1,12 @@
+<h4>
+  Hi,
+  <%= @to.to_s%>
+</h4>
+<p>
+  <%= @message%>
+</p>
+<p>
+  <% if @vendor_page.present? %>
+    <%= link_to  "Reply further", @vendor_page %>
+  <% end %>
+</p>

@@ -1,0 +1,37 @@
+<strong><%= "#{raw(line_item.product.vendor.name.upcase)} : #{raw(line_item.variant.product.name.upcase)}" %>&nbsp;</strong>
+<br>
+Quantity: <%= line_item.quantity %>
+
+<% line_item.variant&.option_values&.each do |var_opt| %>
+  <br>
+  • <%= var_opt.option_type&.name %>: <%= "#{var_opt.name}" %>
+<% end %>
+<br>
+
+<% customizations = line_item.line_item_customizations.joins(:customization).order("spree_customizations.order, spree_customizations.updated_at ASC") %>
+<% customizations.each do |personalization| %>
+  • <%= personalization.name %>: <%= "#{personalization.text}" %>&nbsp;
+  <br>
+<% end %>
+
+<% line_item_shipment_id = line_item&.inventory_units&.first&.shipment_id %>
+<% shipment = @shipments.select { |s| s.id.eql?(line_item_shipment_id) rescue nil }[0].try(:selected_shipping_rate) %>
+
+<% if shipment.present? %>
+  <%= shipment.name %>: <%= line_item.display_exchanged(shipment.cost.to_f * line_item.saved_exchange_rate) %>
+<% end %>
+
+<% line_item.exchanged_prices[:splitted_taxes][:included].each do |tax| %>
+  <br>
+  <%= tax[:label] %>: <%= line_item.display_exchanged tax[:amount] %>
+<% end %>
+<br>
+<% line_item.exchanged_prices[:splitted_taxes][:additional].each do |tax| %>
+  <br>
+  <%= tax[:label] %>: <%= line_item.display_exchanged tax[:amount] %>
+<% end %>
+
+<br>
+<%= I18n.t('order_mailer.line_item.sub_total') %> <%= line_item.display_exchanged(:amount) %>&nbsp;
+<br>
+<br>

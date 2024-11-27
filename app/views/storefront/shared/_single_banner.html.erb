@@ -1,0 +1,23 @@
+<section class="gift-section d-none d-md-block d-lg-block d-xl-block">
+ <h2 class="banner-title" style="font-size: 1.625rem;line-height: 2.25rem;text-align: <%= data&.text_allignment%>;color: <%= data&.font_color%>;<%=data&.text_allignment%>:8%"> <%= data&.heading%></h2>
+  <div class="container custom-container">
+    <div class="row">
+      <div class="col-lg-12">
+        <a href="<%= valid_url(data&.link, @use_sub_folder_upto, @store.code) %>" target="<%= data&.is_external_link? ? '_blank' : '_self' %>">
+          <%= image_tag(get_image_url(data), :class => "",:alt => data&.alt) %>
+          <% if data&.text_allignment == 'center' %>
+           <div class="gifts-content" style="background-color: <%= data&.background_color%>;color: <%= data&.font_color%>;top: 45%;left: 25%;">
+          <% else %>
+           <div class="gifts-content" style="background-color: <%= data&.background_color%>;color: <%= data&.font_color%>;<%=data&.text_allignment%>:4%">
+          <% end %>
+          <div class="gifts-heading"> <%= data&.title%></div>
+          <div class="gifts-desc"> <%= data&.caption %><br></div>
+          <% if data&.cta_label.present?%>
+            <a href="<%= data&.cta_link%>" rel="nofollow"  style="center" target="_blank" class="btn btn-primary cta-btn"><%= data&.cta_label %></a>
+          <%end%>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

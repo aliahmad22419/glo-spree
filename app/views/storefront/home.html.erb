@@ -1,0 +1,383 @@
+<!--<div class="text-alert">PARAMS</div>-->
+<%# params.keys.each do |k| %>
+<!--	<div class="text-alert"><%#= k %> :   <%#= params[k] %></div>-->
+<%# end %>
+<div class="wrapper">
+  <div id="content">
+    <div class="app-header">
+    <% if @store&.preferred_enable_announcement_bar%>
+      <div class="notificationbar-ip p-2">
+        <%= @store&.preferred_announcement_bar.html_safe%>
+      </div>
+      <% end %>
+      <header class="header" id="header">
+        <% if @store.preferred_store_type == "iframe" %>
+          <%= render "storefront/shared/spc_header_preferences", data: @logo %>
+          <div class="mob-overlay"></div>
+        <% else %>
+           <% if @store.burger_menu_theme %>
+            <%= render "storefront/shared/burger_menu_header", data: @logo %>
+            <div class="mob-overlay top-0"></div>
+          <% else %>
+            <%= render "storefront/shared/header", data: @logo %>
+            <div class="mob-overlay"></div>
+            <%= render "storefront/shared/nav_bar" , data: @nav_bar %>
+          <% end %>
+        <% end %>
+      </header>
+    </div>
+    <app-root></app-root>
+    <% if @store.preferred_store_type == "iframe" %>
+        <%= render "storefront/shared/footer", data: @footer%>
+    <% else %>
+      <% if ["checkout", "checkout_complete", "signout", "stripe_auth", "crypto_success"].exclude?(controller.action_name) %>
+        <%= render "storefront/shared/footer", data: @footer%>
+      <% end %>
+      <% if controller.action_name == "checkout" && ["stripe_auth"].include?(controller.action_name) %>
+        <%= render "storefront/shared/footer_checkout"%>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+<div class="overlay"></div>
+
+<%= javascript_tag do %>
+ window.dataLayer.push({'event': 'pageView', 'store': "<%=@store.name%>"})
+<% end %>
+
+<%= javascript_tag do %>
+	<% if @categories.present? %>
+		window.categories = <%= raw @categories.to_json %>;
+	<% end %>
+	<% if @categoryListing.present? %>
+		window.categoryListing = <%= raw @categoryListing.to_json %>;
+	<% end %>
+	<% if @data.present? %>
+		window.data = <%= raw @data.to_json %>;
+	<% end %>
+  function updatePreferences(shipToLabel, currency) {
+    var orderToken = getCookie('<%= @store.id.to_s %>' + '_order_token');
+    var currentCurrency = document.getElementById(currency).value;
+    let reqUrl = ""
+    <% if @use_sub_folder_upto %>
+      reqUrl = '/' + '<%= @store.code %>'
+    <% end %>
+
+    if(orderToken){
+      $.ajax({
+        type: "PUT",
+        contentType: "application/json; charset=utf-8",
+        url: reqUrl + "/update_currency",
+        data : JSON.stringify({order_token: orderToken, currency: currentCurrency}),
+        dataType: "json",
+        success: function (result) {
+          console.log("success!!");
+        },
+        error: function (error){
+          console.log(error);
+        }
+      });
+    }
+    var checkStore = '<%= @store.show_ship_countries %>';
+    var preferedStore ='<%= @store.code %>';
+    var shipValue = "";
+    var refresh = true;
+    if (checkStore == 'true'){
+      shipValue = document.getElementById(shipToLabel).value.trim();
+      if(shipValue !== preferedStore){
+          refresh = false;
+        }
+      }
+      document.cookie = '<%= @store.id.to_s %>' + "_curency=" +  currentCurrency + "; path=/;";
+      "<%cookies[(@store.id.to_s + '_curencySymbol').to_sym] = Money.new(100, cookies[(@store.id.to_s + '_curency').to_sym]).currency.symbol%>"
+    if(refresh){
+      $.ajax({
+        type: "POST",
+        contentType: "application/json; charset=utf-8",
+        url: reqUrl + "/clear_cache",
+        success: function () {
+          location.reload();
+        },
+        error: function (error) {
+          console.log(error);
+        }
+      });
+    }
+  else{
+        var clientStores = '<%= raw @client_stores %>'
+        var stores = JSON.parse(clientStores);
+        var shipValueString = JSON.stringify(shipValue);
+        var newStorehash = {};
+        Object.keys(stores).forEach(function (key) {
+            var value = stores[key];
+            newStorehash[JSON.stringify(key.trim())] = value;
+        });
+        window.location.href = "http://" + newStorehash[shipValueString];
+    }
+  }
+  $( "#sidebarCollapse" ).click(function( event ) {
+    $('html').toggleClass('scroll-hidden-html');
+    $('body').toggleClass('scroll-hidden');
+    $('nav#sidebar').toggleClass('active');
+    $('.mob-overlay').toggleClass('active');
+  });
+  $(".mob-search-link").click(function( event ){
+    $('#mobile-nav-sub').toggleClass('d-block');
+  });
+  $('.nav-link.toggle-link').click(function( event ){
+    $(this).closest('.dropdown').each(function(){
+      $(this).toggleClass('open');
+      $(this).closest('ul').find('.dropdown').not(this).removeClass('open');
+    });
+    console.log('toggle-click');
+  });
+  $('.nav-item .collapse').on('show.bs.collapse', function () {
+    $(this).addClass('show');
+    //$(this).prev('.link-header').find('.nav-link:last-child').addClass('down');
+    $(this).closest('ul').find('.collapse').not(this).collapse('hide');
+  });
+  $('.nav-item .collapse').on('hide.bs.collapse', function () {
+    $(this).removeClass('show');
+    //$(this).prev('.link-header').find('.nav-link:last-child').removeClass('down');
+  });
+
+  $('.root-nav .collapse-link').click(function() {
+     var collapse_target = $(this).attr('data-target');
+     var target_div = collapse_target.substring(collapse_target.indexOf('#') + 1);
+     $('.global-navigation-nav .sub-nav-cont').addClass('open');
+     $('.global-navigation-nav .sub-menu-cont').each(function(){
+       var sub_menu_id = $(this).attr('id');
+       if (sub_menu_id != target_div) {
+         $(this).removeClass('show');
+         $(this).removeClass('in');
+         $(this).removeAttr("aria-expanded");
+         $(this).removeAttr("style");
+       }
+     });
+  });
+  $('.nav-close-link').click(function(){
+    $('html').removeClass('scroll-hidden-html');
+    $('body').removeClass('scroll-hidden');
+    $('nav#sidebar').removeClass('active');
+    $('.mob-overlay').removeClass('active');
+    $('.global-navigation-nav .sub-nav-cont').removeClass('open');
+    $('.global-navigation-nav .sub-menu-cont').removeClass('in');
+    $('.global-navigation-nav .sub-menu-cont').removeClass('show');
+    $('.global-navigation-nav .sub-menu-cont').removeAttr('aria-expanded');
+    $('.global-navigation-nav .sub-menu-cont').removeAttr('style');
+  });
+
+  $('.back-link').click(function(){
+    $(this).closest('.sub-nav-cont').removeClass('open');
+    $(this).closest('.sub-nav-cont').find('.sub-menu-cont').removeClass('show');
+    $(this).closest('.sub-nav-cont').find('.sub-menu-cont').removeClass('in');
+    $(this).closest('.sub-nav-cont').find('.sub-menu-cont').removeAttr('aria-expanded');
+    $(this).closest('.sub-nav-cont').find('.sub-menu-cont').removeAttr('style');
+  });
+
+
+  setInterval(function() {
+    $('nav#sidebar ul.components li .dropdown.show').removeClass('show');
+    $('nav#sidebar ul.components li .dropdown .dropdown-menu.show').removeClass('show');
+    $('nav#sidebar ul.accordian li.nav-item .sub-menu-cont').each(function(){
+      if($(this).hasClass('show')){
+        $(this).prev('.link-header').find('.nav-link:last-child').attr('aria-expanded','true');
+      }
+      if(!$(this).find('.nav-column').length){
+        $(this).addClass('empty');
+        $(this).prev('.link-header').find('a.collapse-link').addClass('d-none');
+      }
+    });
+
+    $('.global-navigation-nav .sub-menu-cont').each(function(){
+      var sub_menu_id = $(this).attr('id');
+      if(!$(this).find('.nav-column').length){
+        $(this).addClass('empty');
+        $('.root-nav li').find("a.collapse-link[data-target='#" + sub_menu_id + "']:not(.d-none)").addClass('d-none');
+      }
+    });
+
+  });
+
+  function waitForElm(selector) {
+    return new Promise(resolve => {
+      if (document.querySelector(selector)) {
+        return resolve(document.querySelector(selector));
+      }
+      const observer = new MutationObserver(mutations => {
+        if (document.querySelector(selector)) {
+          resolve(document.querySelector(selector));
+          observer.disconnect();
+        }
+      });
+      observer.observe(document.body, {
+        childList: true,
+        subtree: true
+      });
+    });
+  }
+
+  waitForElm('#sidebar .list-group-holder').then((elm) => {
+    $('.list-group-holder .list-group-item-action').click(function(){
+      let collapse_target = $(this).attr('href');
+      let aria_exp = $(this).attr('aria-expanded');
+      let target_div = collapse_target.substring(collapse_target.indexOf('#') + 1);
+      //let target_div_elm = $(this).closest('.list-group-holder').find('#'+target_div);
+      let target_div_elm = document.getElementById(target_div);
+      console.log(target_div_elm.classList);
+      if ($(this).hasClass('down')) {
+        target_div_elm.classList.remove('d-none');
+      }
+      else if (!$(this).hasClass('down')) {
+        target_div_elm.classList.remove('show');
+        target_div_elm.classList.add('d-none');
+      }
+      //console.log(target_div)
+    });
+    $('.list-group-item-action').collapse({
+      toggle: false
+  })
+  }).catch((error) => { });
+
+  waitForElm('.mobile-footer .list-group-holder').then((elm) => {
+    $('.list-group-holder .list-group-item-action').click(function(){
+      let collapse_target = $(this).attr('href');
+      let aria_exp = $(this).attr('aria-expanded');
+      let target_div = collapse_target.substring(collapse_target.indexOf('#') + 1);
+      let target_div_elm = document.getElementById(target_div);
+      console.log(target_div_elm.classList);
+      if ($(this).hasClass('down')) {
+        target_div_elm.classList.remove('d-none');
+      }
+      else if (!$(this).hasClass('down')) {
+        target_div_elm.classList.remove('show');
+        target_div_elm.classList.add('d-none');
+      }
+      //console.log(target_div)
+    });
+  }).catch((error) => { });
+
+  /*waitForElm('.daily-stock-accordion .daily-stock-card').then((elm) => {
+    $('.daily-stock-card .ds-toggler').click(function(){
+      let collapse_target = $(this).attr('data-target');
+      let aria_exp = $(this).attr('aria-expanded');
+      let target_div = collapse_target.substring(collapse_target.indexOf('#') + 1);
+      let target_div_elm = document.getElementById(target_div);
+      console.log(target_div_elm.classList);
+      if ($(this).hasClass('down')) {
+        target_div_elm.classList.remove('show');
+        target_div_elm.classList.add('d-none');
+      }
+      else if (!$(this).hasClass('down')) {
+        target_div_elm.classList.remove('d-none');
+      }
+      //console.log(target_div)
+    });
+  }).catch((error) => { });*/
+
+  waitForElm('.dropdown-flag.mob').then((elm) => {
+    $('.dropdown-flag .dropdown-toggle').click(function(){
+      $(this).closest('.dropdown').toggleClass('open');
+      $(this).next('.dropdown-menu').toggleClass('open');
+    });
+  }).catch((error) => { });
+
+  $('.pref_dropdown .dropdown-toggle').each(function(index) {
+    $(this).on("click", function() {
+      $(this).closest('.dropdown').toggleClass('open');
+      $(this).next('.dropdown-menu').toggleClass('open');
+    });
+  });
+
+  waitForElm('#sidebar .pref_dropdown').then((elm) => {
+    $('#sidebar .dropdown-toggle').click(function(){
+      $(this).closest('.dropdown').toggleClass('open');
+      $(this).next('.dropdown-menu').toggleClass('open');
+    });
+  }).catch((error) => { });
+
+  document.addEventListener("DOMContentLoaded", function() {
+      // Get all collapse links
+      let collapseLinks = document.querySelectorAll('.mob-nav .collapse-link');
+      let collapseDivs = document.querySelectorAll('.mob-nav .sub-menu-cont');
+
+      // Add click event listener to each collapse link
+      collapseLinks.forEach(function(link) {
+          link.addEventListener('click', function(event) {
+              event.preventDefault(); // Prevent default link behavior
+
+              // Find the associated collapse element
+              let collapse_target = this.getAttribute('data-target');
+
+              let targetId = collapse_target.substring(collapse_target.indexOf('#') + 1);
+              let targetElement = document.getElementById(targetId);
+
+              // Toggle the 'collapsed' class on the target element
+              if (targetElement && link.classList.contains('down')) {
+                  //targetElement.classList.toggle('open');
+                  targetElement.classList.remove('d-none');
+                  //console.log('opened')
+              }
+              else  {
+                  targetElement.classList.add('d-none');
+                  //link.setAttribute("aria-expanded", "false");
+                  //console.log('collapsed')
+              }
+              //console.log(link.classList)
+              collapseLinks.forEach(function(element) {
+                //console.log(element.getAttribute('aria-controls'));
+                if (element.getAttribute('aria-controls') != targetId) {
+                  element.classList.remove('down');
+                }
+              });
+              collapseDivs.forEach(function(element) {
+                setTimeout(function () {
+                  if (element.id != targetId) {
+                    //console.log(element.id);
+                    element.classList.remove('d-none');
+                  }
+                }, 200);
+              });
+          });
+      });
+  });
+
+
+<% end %>
+
+<% if @store.test_mode %>
+  <script type="text/javascript" charset="utf-8">
+    window.onload = function() {
+      setTimeout(function () {
+        // Include no index no follow
+        // Removes any existing meta robots tag
+        $('meta[name="robots"]').remove();
+        // Create an empty meta element, called 'meta'
+        var meta = document.createElement('meta');
+        // Add a name attribute to the meta, with the value 'robots'
+        meta.name = 'robots';
+        // Add a content attribute to the meta element, with the value 'noindex, follow'
+        meta.content = 'noindex, nofollow';
+        // Insert this meta element into the head of the page, using jQuery
+        $('head').append(meta);
+        // Include under development message
+        $('#content').prepend('<div class="notificationbar2" style="background-color: #041F2F;text-align: center;color: #ffffff;font-family: GothamBook; font-size:15px;"><br>---THIS SITE IS UNDER DEVELOPMENT. NO ORDERS WILL BE PROCESSED---</div>');
+        // Include prompt notification
+        script = document.createElement('script');
+        script.onload = function() {
+          // jQuery is available now
+          // Check If Cookie exists and if it doesn't exists
+          if( $.cookie('demostorepbk') == null ) {
+            // Create cookie
+            $.cookie( 'demostorepbk', '1',  { expires: 1, path: '/' } );
+            alert ('This site is under development. No orders will be processed.');
+            // Your code here...
+          }
+        };
+        script.type = 'text/javascript';
+        script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js';
+        document.getElementsByTagName('head')[0].appendChild(script);
+      }, 1000);
+    };
+  </script>
+<% end %>

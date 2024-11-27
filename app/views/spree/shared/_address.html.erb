@@ -1,0 +1,62 @@
+<div class="address vcard">
+  <div class="fn"><%= address.full_name %></div>
+  <% unless address.company.blank? %>
+    <div class="org">
+      <%= address.company %>
+    </div>
+  <% end %>
+  <div class="adr">
+    <div class="street-address">
+      <div class="street-address-line">
+        <%= address.address1 %>
+      </div>
+      <% unless address.address2.blank? %>
+        <div class="street-address-line">
+          <%= address.address2 %>
+        </div>
+      <% end %>
+    </div>
+    <div class="local">
+      <% if address.apartment_no.present? %>
+        <div class="fn"><%= address.apartment_no %></div>
+      <% end %>
+       <% if address.city.present? %>
+        <span class="locality"><%= address.city %></span>
+      <% end %>
+      <% if address.state.present? %>
+        <span class="region"><%= address.state %></span>
+      <% end %>
+      <% if address.estate_name.present? %>
+        <div class="fn"><%= address.estate_name %></div>
+      <% end %>
+      <% if address.region.present? %>
+        <span class="region"><%= address.region %></span>
+      <% end %>
+      <% if address.district.present? %>
+        <span class="locality"><%= address.district %></span>
+      <% end %>
+      <% if address.zipcode.present? %>
+        <span class="postal-code"><%= address.zipcode %></span>
+      <% end %>
+    </div>
+  </div>
+
+  <% unless address.phone.blank? %>
+    <div class="tel">
+      <span class="type"><%= Spree.t(:phone) %></span>
+      <%= address.phone %>
+    </div>
+  <% end %>
+  <% unless address.alternative_phone.blank? %>
+    <div class="alternative-phone tel">
+      <span class="type"><%= Spree.t(:alternative_phone) %></span>
+      <%= address.alternative_phone %>
+    </div>
+  <% end %>
+
+  <div class="local">
+    <% if address.country.present? %>
+      <div class="country-name"><%= address.country.try(:name) %></div>
+    <% end %>
+  </div>
+</div>

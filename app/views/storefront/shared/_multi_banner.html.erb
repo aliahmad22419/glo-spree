@@ -1,0 +1,26 @@
+<section class="promo-section featured-vendors-area">
+  <div class="container custom-container">
+
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="promo-holder">
+         <% data.each do |multi_banner| %>
+          <div class="promo-box w-100">
+            <h2 class="banner-title" style="font-size: 1.625rem;line-height: 2.25rem;text-align:<%= multi_banner&.text_allignment%>;color: <%= multi_banner&.font_color;%>; <%=multi_banner&.text_allignment%>:8%"> <%= multi_banner.heading %></h2>
+            <a href="<%= valid_url(multi_banner.link, @use_sub_folder_upto, @store.code) %>" target="<%= multi_banner.is_external_link? ? '_blank' : '_self' %>">
+              <%= image_tag(get_image_url(multi_banner), :class => "",:alt => multi_banner.alt) %>
+              <div class="promo-content" style="text-align: <%= multi_banner&.text_allignment%>;color: <%= multi_banner&.font_color;%>; <%=multi_banner&.text_allignment%>:8%">
+                <div class="promo-title"><%= multi_banner.title %></div>
+                <div class="promo-desc"><%= multi_banner.caption %></div>
+                <% if multi_banner&.cta_label.present?%>
+                  <a href="<%= multi_banner&.cta_link%>" rel="nofollow"  style="center" target="_blank" class="btn btn-primary cta-btn"><%= multi_banner&.cta_label %></a>
+                <%end%>
+              </div>
+            </a>
+          </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

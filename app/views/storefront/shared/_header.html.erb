@@ -1,0 +1,68 @@
+<%= render "storefront/shared/header_preferences", data: @logo %>
+
+<nav id="sidebar">
+  <ul class="list-unstyled components mob-nav accordian" id="accordionMenu">
+    <% @nav_bar&.each_with_index do |nav_bar, index|%>
+      <li class="nav-item mb-1" id="nav-item-<%= index + 1 %>">
+        <div class="<%= nav_bar.html_ui_block_sections && nav_bar.html_ui_block_sections.count > 0 ? 'link-header' : 'nav-link-cont' %>" id="link-header-<%= index + 1 %>">
+          <a class="nav-link <%= 'pr-0' if nav_bar.html_ui_block_sections && nav_bar.html_ui_block_sections.count > 0 %>" href="<%= valid_url(nav_bar.link, @use_sub_folder_upto, @store.code) %>"><%= nav_bar.title %></a>
+          <% if nav_bar.html_ui_block_sections && nav_bar.html_ui_block_sections.count > 0  %>
+          <a class="nav-link collapse-link px-0 collapsed" href="#" type="button" data-toggle="collapse" data-target="#collapse-<%= index + 1 %>" aria-expanded="false" aria-controls="collapse-<%= index + 1 %>" onclick="$(this).toggleClass(&quot;down&quot;);"></a>
+          <% end %>
+        </div>
+        <% if nav_bar.html_ui_block_sections && nav_bar.html_ui_block_sections.count > 0 %>
+          <div id="collapse-<%= index + 1 %>" class="collapse sub-menu-cont" aria-labelledby="link-header-<%= index + 1 %>" data-parent="#accordionMenu">
+            <% nav_bar.html_ui_block_sections.each do |html_section| %>
+            <% if html_section.type_of_section == 'links' %>
+              <div class="nav-column">
+                <!--h3>
+                  <%= html_section.name %>
+                </h3-->
+                <ul>
+                  <% html_section.html_links&.order(sort_order: :asc)&.each do |link| %>
+                    <li>
+                      <a class="sub-category" href="<%= valid_url(link.link, @use_sub_folder_upto, @store.code) %>"><%= link.name %></a>
+                    </li>
+                  <% end %>
+                </ul>
+              </div>
+              <% elsif html_section.type_of_section == 'image' %>
+              <% end %>
+            <% end %>
+          </div>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+  <div class="BorderBottom BorderBottom-grey mx-3"></div>
+  <ul class="list-unstyled user-links mt-3">
+    <% unless @store.checkout_v3? %>
+      <li>
+        <% if cookies["#{@store.id.to_s + '_access_token'}".to_sym].present? %>
+          <a class="d-flex wishlist-heart" id="wishlist-heart-header" href="<%=link_with_subdomain_or_not(@use_sub_folder_upto, @store.code, '/user/wishlist') %>">
+            <%= image_tag("new-home/heart.svg", :class => "",:width => "23", :height => "23", :alt => "wishlist") %>
+            <span>MY WISHLIST</span>
+          </a>
+        <% else %>
+          <a class="d-flex wishlist-heart" id="wishlist-heart" href="<%=link_with_subdomain_or_not(@use_sub_folder_upto, @store.code, '/wishlist') %>">
+            <%= image_tag("new-home/heart.svg", :class => "",:width => "23", :height => "23", :alt => "wishlist") %>
+            <span>MY WISHLIST</span>
+          </a>
+        <% end %>
+      </li>
+      <li>
+        <% if cookies["#{@store.id.to_s + '_access_token'}".to_sym].present? %>
+          <a class="d-flex profile-icon" id="profile-icon-header" href="<%=link_with_subdomain_or_not(@use_sub_folder_upto, @store.code, '/user/account') %>">
+            <%= image_tag("new-home/user.svg", :class => "",:width => "23", :height => "23", :alt => "user-profile") %>
+            <span>MY ACCOUNT</span>
+          </a>
+        <% else %>
+          <a class="d-flex profile-icon" id="profile-icon-header" href="<%=link_with_subdomain_or_not(@use_sub_folder_upto, @store.code, '/signin-signup') %>">
+            <%= image_tag("new-home/user.svg", :class => "",:width => "23", :height => "23", :alt => "user-profile") %>
+            <span>MY ACCOUNT</span>
+          </a>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</nav>

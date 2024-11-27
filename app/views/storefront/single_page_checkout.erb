@@ -1,0 +1,55 @@
+<div class="wrapper">
+  <div id="content">
+    <div class="app-header">
+      <header class="header" id="header">
+        <%= render "storefront/shared/spc_header_preferences", data: @logo %>
+        <div class="mob-overlay"></div>
+      </header>
+    </div>
+    <app-root></app-root>
+  </div>
+</div>
+<div class="overlay"></div>
+
+<%= javascript_tag do %>
+  <% if @data.present? %>
+    window.data = <%= raw @data.to_json %>;
+  <% end %>
+<% end %>
+
+<% if @store.test_mode %>
+  <script type="text/javascript" charset="utf-8">
+    window.onload = function() {
+      setTimeout(function () {
+        // Include no index no follow
+        // Removes any existing meta robots tag
+        $('meta[name="robots"]').remove();
+        // Create an empty meta element, called 'meta'
+        var meta = document.createElement('meta');
+        // Add a name attribute to the meta, with the value 'robots'
+        meta.name = 'robots';
+        // Add a content attribute to the meta element, with the value 'noindex, follow'
+        meta.content = 'noindex, nofollow';
+        // Insert this meta element into the head of the page, using jQuery
+        $('head').append(meta);
+        // Include under development message
+        $('#content').prepend('<div class="notificationbar2" style="background-color: #041F2F;text-align: center;color: #ffffff;font-family: GothamBook; font-size:15px;"><br>---THIS SITE IS UNDER DEVELOPMENT. NO ORDERS WILL BE PROCESSED---</div>');
+        // Include prompt notification
+        script = document.createElement('script');
+        script.onload = function() {
+          // jQuery is available now
+          // Check If Cookie exists and if it doesn't exists
+          if( $.cookie('demostorepbk') == null ) {
+            // Create cookie
+            $.cookie( 'demostorepbk', '1',  { expires: 1, path: '/' } );
+            alert ('This site is under development. No orders will be processed.');
+            // Your code here...
+          }
+        };
+        script.type = 'text/javascript';
+        script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js';
+        document.getElementsByTagName('head')[0].appendChild(script);
+      }, 1000);
+    };
+  </script>
+<% end %>

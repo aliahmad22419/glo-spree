@@ -1,0 +1,39 @@
+<!--<section class="home-banner">
+ <h2 style="text-align: <%= data&.text_allignment%>;color: <%= data&.font_color%>;<%=data&.text_allignment%>:8%"><%= data&.heading %></h2>
+  <div class="container-fluid">
+    <div class="row">
+      <a style="width:100%" href="<%= data&.link %>">
+        <%= image_tag(get_image_url(data), :class => "hero-banner",:alt => data&.alt) %>
+        <h1 class="hero-banner-heading" style="text-align: <%= data&.text_allignment%>;color: <%= data&.font_color%>;<%=data&.text_allignment%>:8%;display:block"><%= data&.title %></h1>
+      </a>
+    </div>
+  </div>
+</section> -->
+<section class="home-banner">
+ <h2 class="banner-title" style="font-size: 1.625rem;line-height: 2.25rem;text-align:center;text-align: <%= data&.text_allignment%>;color: <%= data&.font_color%>;<%=data&.text_allignment%>:8%"><%= data&.heading %> </h2>
+  <div class="container-fluid">
+    <div class="row">
+    <a  style="width:100%" href="<%= valid_url(data&.link, @use_sub_folder_upto, @store.code) %>">
+      <%= image_tag(get_image_url(data), :class => "hero-banner",:alt => data&.alt) %>
+       <% if data&.text_allignment == 'center' %>
+        <h1  class="banner-heading" style="text-align: <%= data&.text_allignment%>;color: <%= data&.font_color%>;left:0;right:0">
+          <div ><%= data&.title  %></div>
+          <div class="sub-head" style="font-size: 1.625rem;line-height: 2.25rem;color: <%= data&.font_color%>;"><%= data&.caption  %></div>
+          <% if data&.cta_label.present?%>
+            <a href="<%= data&.cta_link%>" rel="nofollow"  style="center" target="_blank" class="btn btn-primary cta-btn"><%= data&.cta_label %></a>
+          <%end%>
+        </h1>
+        
+        <% else %>
+        <h1  class="banner-heading" style="text-align: <%= data&.text_allignment%>;color: <%= data&.font_color%>;<%=data&.text_allignment%>:8%">
+          <div ><%= data&.title  %></div>
+          <div class="sub-head" style="font-size: 1.625rem;line-height: 2.25rem;color: <%= data&.font_color%>;"><%= data&.caption  %></div>
+          <% if data&.cta_label.present?%>
+            <a href="<%= data&.cta_link%>" rel="nofollow"  style="center" target="_blank" class="btn btn-primary cta-btn"><%= data&.cta_label %></a>
+          <%end%>
+        </h1>
+       <% end %>
+    </a>
+    </div>
+  </div>
+</section>

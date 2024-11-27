@@ -1,0 +1,38 @@
+<% unless @store.burger_menu_theme %>
+  <div class="container p-0 d-none d-lg-block d-xl-block">
+    <ul class="nav menu-holder">
+     <% data&.each do |nav_block| %>
+        <li class="nav-item">
+          <a class="nav-link main-category" href="<%= valid_url(nav_block&.link, @use_sub_folder_upto, @store.code) %>" target="<%= nav_block&.is_external_link? ? '_blank' : '_self' %>"><%= nav_block&.title %></a>
+           <div>
+          <% nav_block&.html_ui_block_sections.each do |html_section| %>
+            <% if html_section&.type_of_section == 'links' %>
+              <div class="nav-column">
+                <h3>
+                    <%= html_section&.name %>
+                </h3>
+                 <ul>
+                <% html_section&.html_links&.order(sort_order: :asc)&.each do |link| %>
+                  <li>
+                    <a class="sub-category" href="<%= valid_url(link.link, @use_sub_folder_upto, @store.code) %>" target="<%= link.is_external_link? ? '_blank' : '_self' %>"><%= link&.name %></a>
+                  </li>
+                <% end %>
+                </ul>
+              </div>
+            <% elsif html_section&.type_of_section == 'image' %>
+              <div class="nav-column nav-image">
+                <div class="menu-image">
+                  <%= link_to image_tag(get_image_url(html_section), :class => "",:alt => html_section&.alt, :width => "313", :height => "313"), valid_url(html_section&.link, @use_sub_folder_upto, @store.code),  target: html_section.is_external_link? ? '_blank' : '_self' %>
+                  <div class="image-text">
+                    <a href="<%= valid_url(html_section&.link, @use_sub_folder_upto, @store.code) %>" target="<%= html_section&.is_external_link? ? '_blank' : '_self' %>"><%= html_section&.name %></a>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

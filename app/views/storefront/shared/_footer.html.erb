@@ -1,0 +1,263 @@
+<footer class="footer">
+  <div class="container custom-container">
+    <div class="col-lg-12 p-0 d-none d-lg-flex d-xl-flex justify-content-between">
+      <% data&.each do |footer| %>
+          <% if footer.type_of_html_ui_block == "links" %>
+            <div class="footer-widget">
+              <div class="widget-title"><%= footer.title %></div>
+                <div class="widget-content">
+                  <% footer.html_links&.order(sort_order: :asc)&.each do |html_link| %>
+                    <ul>
+                      <% if html_link.link_type == "mail" %>
+                        <li><a href="mailto:<%= html_link.link %>" target="<%= html_link.is_external_link? ? '_blank' : '_self' %>"><%= html_link.name%></a></li>
+                      <% elsif html_link.link_type == "tel" %>
+                        <li><a href="tel:<%= html_link.link %>" target="<%= html_link.is_external_link? ? '_blank' : '_self' %>"><%= html_link.name%></a></li>
+                      <% else %>
+                        <li><a href="<%= valid_url(html_link.link, @use_sub_folder_upto, @store.code) %>" target="<%= html_link.is_external_link? ? '_blank' : '_self' %>"><%= html_link.name%></a></li>
+                      <% end %>
+                    </ul>
+                  <% end %>
+                </div>
+            </div>
+
+          <% elsif footer.type_of_html_ui_block == "site-config" %>
+            <div class="footer-widget">
+              <h5 class="widget-title mb-0"><%= footer.title %></h5>
+              <div class="widget-content select-region">
+                <form class="select-form">
+                  <% if @store.show_ship_countries == true %>
+                    <div class="form-group">
+                      <label for="ship_to_label">Ship To:</label>
+                      <select class="form-control ng-valid" id="ship_to_label_footer" name="ship_to_label">
+                        <% @client.stores.each do |store| %>
+                          <% if cookies["#{@store.id.to_s + '_preferred_store'}".to_sym] == store.code %>
+                            <option selected="selected" value="<%= store.code %>"> <%= store.name %> </option>
+                          <% else %>
+                            <option value="<%= store.code %> "> <%= store.name %> </option>
+                          <% end %>
+                        <% end %>
+                      </select>
+                    </div>
+                  <% end %>
+                  <div class="form-group">
+                    <label for="currency">Pay in:</label>
+                    <select class="form-control ng-valid" id="curencyfooter" name="curencyfooter">
+                        <% @store.supported_currencies.each do |currency| %>
+                          <% if cookies["#{@store.id.to_s + '_curency'}".to_sym] == currency %>
+                            <option selected="selected" value="<%= currency %> "> <%= currency %> </option>
+                          <% else %>
+                            <option value="<%= currency %> "> <%= currency %> </option>
+                          <% end %>
+                        <% end %>
+                      </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="currency">Language:</label>
+                    <select class="form-control" id="lang">
+                      <option>English</option>
+                      <option>German</option>
+                      <option>Danish</option>
+                      <option>Polish</option>
+                    </select>
+                  </div>
+                </form>
+                <button class="btn btn-primary" id="set-preferrences" onclick="updatePreferences('ship_to_label_footer', 'curencyfooter')"> Update </button>
+              </div>
+            </div>
+          <% elsif footer.type_of_html_ui_block == "social" %>
+             <% if @store.fb_username != "" || @store.insta_username != "" || @store.twitter_username != "" || @store.pinterest_username || @store.linkedin_username || @store.line_username %>
+              <div class="footer-widget">
+                <h5 class="widget-title mb-0"><%= footer.title %></h5>
+                <div class="widget-content">
+                  <ul class="social-links pt-md-1">
+                    <% if @store.fb_username != "" %>
+                      <li><a href="https://www.facebook.com/<%= @store.fb_username %>" rel="nofollow" target="_blank"><%= image_tag("new-home/fb.svg", :class => "",:alt => "fb", :width => "32") %></a></li>
+                    <% end %>
+                    <% if @store.insta_username != "" %>
+                      <li><a href="https://www.instagram.com/<%= @store.insta_username %>" rel="nofollow" target="_blank"><%= image_tag("new-home/instagram.svg", :class => "",:alt => "instagram", :width => "32") %></a></li>
+                    <% end %>
+                    <% if @store.twitter_username != "" %>
+                      <li><a href="https://twitter.com/<%= @store.twitter_username %>?lang=en" rel="nofollow" target="_blank"><%= image_tag("new-home/twitter.svg", :class => "",:alt => "twitter", :width => "32") %></a></li>
+                    <% end %>
+                    <% if @store.pinterest_username != "" %>
+                      <li><a href="https://www.pinterest.com/<%= @store.pinterest_username %>" rel="nofollow" target="_blank"><%= image_tag("new-home/pinterest.svg", :class => "",:alt => "pinterest", :width => "32") %></a></li>
+                    <% end %>
+                    <% if @store.linkedin_username != "" %>
+                      <li><a href="https://sg.linkedin.com/company/<%= @store.linkedin_username %>" rel="nofollow" target="_blank"><%= image_tag("new-home/linkedin.svg", :class => "",:alt => "linkedin", :width => "32") %></a></li>
+                    <% end %>
+                    <% if @store.line_username != "" %>
+                      <li><a href="https://page.line.me/<%= @store.line_username %>" rel="nofollow" target="_blank"><%= image_tag("new-home/line-social.svg", :class => "",:alt => "line", :width => "32") %></a></li>
+                    <% end %>
+                    <% if @store.preferences[:youtube_username] != "" %>
+                      <li><a href="https://www.youtube.com/<%= @store.preferences[:youtube_username] %>" rel="nofollow" target="_blank"><%= image_tag("new-home/youtube.png", :class => "",:alt => "youtube", :width => "32") %></a></li>
+                    <% end %>
+                    <% if @store.preferences[:wechat_username] != "" %>
+                      <li><a href="https://www.wechat.com/<%= @store.preferences[:wechat_username] %>" rel="nofollow" target="_blank"><%= image_tag("new-home/wechat.png", :class => "",:alt => "wechat", :width => "32") %></a></li>
+                    <% end %>
+                    <% if @store.preferences[:tiktok_username] != "" %>
+                      <li><a href="https://www.tiktok.com/<%= @store.preferences[:tiktok_username] %>" rel="nofollow" target="_blank"><%= image_tag("new-home/tiktok.png", :class => "",:alt => "tiktok", :width => "32") %></a></li>
+                    <% end %>
+                  </ul>
+                </div>
+             </div>
+            <% end %>
+          <% end %>
+      <% end %>
+    </div>
+    <div class="col-lg-12 p-0 d-none d-lg-flex d-xl-flex container custom-container copyright-cont ">
+      <div class="col-12 d-flex flex-column flex-lg-row">
+        <div class="col-12 col-lg-3 d-flex justify-content-center justify-content-lg-start align-items-lg-end pb-2 pay-methods-avail">
+          <div class="meth-link"><%= image_tag("new-home/amex.svg", :class => "",:alt => "amex", :width => "60") %></div>
+          <div class="meth-link"><%= image_tag("new-home/visa.svg", :class => "",:alt => "visa", :width => "60") %></div>
+          <div class="meth-link"><%= image_tag("new-home/mastercard.svg", :class => "",:alt => "mastercard", :width => "60") %></div>
+        </div>
+        <% if @copy_rights_text.present? %>
+          <div class="col-12 col-lg-6 text-center d-flex flex-column align-items-center powered-by">
+            <div>© <%=@copy_rights_text%> <br></div>
+            <div class="powered-link-cont"><span>Powered by</span><span class="ml-1"><a href="https://techsembly.com">Techsembly</a></span></div>
+          </div>
+        <% end %>
+        <div class="col-12 col-lg-3"></div>
+      </div>
+      </div>
+      <div class="mobile-footer section-cont d-block d-md-block d-sm-block d-lg-none w-100">
+
+        <div class="col-12 px-0">
+          <div class="list-group w-100 mb-4">
+            <% data&.each do |footer| %>
+            <% if footer.type_of_html_ui_block == "links" %>
+            <div class="list-group-holder">
+              <a aria-expanded="false" class="list-group-item list-group-item-action" data-target="#collapse-<%= footer.id%>" data-toggle="collapse" href="#collapse-<%= footer.id%>" onclick="$(this).toggleClass(&quot;down&quot;);"> <%= footer.title %></a>
+              <div aria-expanded="false" class="filter-content collapse" id="collapse-<%= footer.id%>" style="">
+                <div class="footer-widget">
+                 <% footer.html_links&.order(id: :asc, created_at: :asc)&.each do |html_link| %>
+                  <ul>
+                    <% if html_link.link_type == "mail" %>
+                      <li><a href="mailto:<%= html_link.link %>" target="<%= html_link.is_external_link? ? '_blank' : '_self' %>"><%= html_link.name%></a></li>
+                    <% elsif html_link.link_type == "tel" %>
+                      <li><a href="tel:<%= html_link.link %>" target="<%= html_link.is_external_link? ? '_blank' : '_self' %>"><%= html_link.name%></a></li>
+                    <% else %>
+                      <li><a href="<%= valid_url(html_link.link, @use_sub_folder_upto, @store.code) %>" target="<%= html_link.is_external_link? ? '_blank' : '_self' %>"><%= html_link.name%></a></li>
+                    <% end %>
+                  </ul>
+                 <% end %>
+                </div>
+              </div>
+              <div class="BorderBottom"></div>
+            </div>
+
+            <% elsif footer.type_of_html_ui_block == "site-config" %>
+            <div class="list-group-holder">
+              <a aria-expanded="false" class="list-group-item list-group-item-action" data-target="#collapse4" data-toggle="collapse" href="#collapse4" onclick="$(this).toggleClass(&quot;down&quot;);"> <%= footer.title %> </a>
+              <div aria-expanded="true" class="filter-content collapse" id="collapse4">
+                <div class="footer-widget">
+                <h5 class="widget-title mb-0"><%= footer.title %></h5>
+                <div class="widget-content select-region">
+                  <form class="select-form">
+                    <% if @store.show_ship_countries == true %>
+                      <div class="form-group">
+                        <label for="ship_to_label">Ship To:</label>
+                        <select class="form-control ng-valid" id="ship_to_label_footer-mob" name="ship_to_label-mob">
+                          <% @client.stores.each do |store| %>
+                            <% if cookies["#{@store.id.to_s + '_preferred_store'}".to_sym] == store.code %>
+                              <option selected="selected" value="<%= store.code %>"> <%= store.name %> </option>
+                            <% else %>
+                              <option value="<%= store.code %> "> <%= store.name %> </option>
+                            <% end %>
+                          <% end %>
+                        </select>
+                      </div>
+                    <% end %>
+                    <div class="form-group">
+                      <label for="currency">Pay in:</label>
+                      <select class="form-control ng-valid" id="curencyfooter-mob" name="curencyfooter-mob">
+                          <% @store.supported_currencies.each do |currency| %>
+                            <% if cookies["#{@store.id.to_s + '_curency'}".to_sym] == currency %>
+                              <option selected="selected" value="<%= currency %> "> <%= currency %> </option>
+                            <% else %>
+                              <option value="<%= currency %> "> <%= currency %> </option>
+                            <% end %>
+                          <% end %>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="currency">Language:</label>
+                      <select class="form-control" id="lang">
+                        <option>English</option>
+                        <option>German</option>
+                        <option>Danish</option>
+                        <option>Polish</option>
+                      </select>
+                    </div>
+                  </form>
+                  <button class="btn btn-primary mb-4" id="set-preferrences" onclick="updatePreferences('ship_to_label_footer-mob', 'curencyfooter-mob')"> Update </button>
+                </div>
+              </div>
+              </div>
+              <div class="BorderBottom"></div>
+            </div>
+            <% end %>
+            <% end %>
+          </div>
+        </div>
+        <% data&.each do |footer| %>
+         <% if footer.type_of_html_ui_block == "social" %>
+          <% if @store.fb_username != "" || @store.insta_username != "" || @store.twitter_username != "" || @store.pinterest_username || @store.linkedin_username || @store.line_username %>
+            <div class="col-12">
+              <div class="footer-widget">
+                <div class="widget-content">
+                  <ul class="social-links xy-center">
+                    <% if @store.fb_username != "" %>
+                      <li><a href="https://www.facebook.com/<%= @store.fb_username %>" rel="nofollow" target="_blank"><%= image_tag("new-home/fb.svg", :class => "",:alt => "fb") %></a></li>
+                    <% end %>
+                    <% if @store.insta_username != "" %>
+                      <li><a href="https://www.instagram.com/<%= @store.insta_username %>" rel="nofollow" target="_blank"><%= image_tag("new-home/instagram.svg", :class => "",:alt => "instagram") %></a></li>
+                    <% end %>
+                    <% if @store.twitter_username != "" %>
+                      <li><a href="https://twitter.com/<%= @store.twitter_username %>?lang=en" rel="nofollow" target="_blank"><%= image_tag("new-home/twitter.svg", :class => "",:alt => "twitter") %></a></li>
+                    <% end %>
+                    <% if @store.pinterest_username != "" %>
+                      <li><a href="https://www.pinterest.com/<%= @store.pinterest_username %>" rel="nofollow" target="_blank"><%= image_tag("new-home/pinterest.svg", :class => "",:alt => "pinterest") %></a></li>
+                    <% end %>
+                    <% if @store.linkedin_username != "" %>
+                      <li><a href="https://sg.linkedin.com/company/<%= @store.linkedin_username %>" rel="nofollow" target="_blank"><%= image_tag("new-home/linkedin.svg", :class => "",:alt => "linkedin") %></a></li>
+                    <% end %>
+                    <% if @store.line_username != "" %>
+                      <li><a href="https://page.line.me/<%= @store.line_username %>" rel="nofollow" target="_blank"><%= image_tag("new-home/line-social.svg", :class => "",:alt => "line", :width => "32") %></a></li>
+                    <% end %>
+                    <% if @store.preferences[:youtube_username] != "" %>
+                      <li><a href="https://www.youtube.com/<%= @store.preferences[:youtube_username] %>" rel="nofollow" target="_blank"><%= image_tag("new-home/youtube.png", :class => "",:alt => "youtube", :width => "32") %></a></li>
+                    <% end %>
+                    <% if @store.preferences[:wechat_username] != "" %>
+                      <li><a href="https://www.wechat.com/<%= @store.preferences[:wechat_username] %>" rel="nofollow" target="_blank"><%= image_tag("new-home/wechat.png", :class => "",:alt => "wechat", :width => "32") %></a></li>
+                    <% end %>
+                    <% if @store.preferences[:tiktok_username] != "" %>
+                      <li><a href="https://www.tiktok.com/<%= @store.preferences[:tiktok_username] %>" rel="nofollow" target="_blank"><%= image_tag("new-home/tiktok.png", :class => "",:alt => "tiktok", :width => "32") %></a></li>
+                    <% end %>
+                  </ul>
+                </div>
+              </div>
+            </div>
+           <% end %>
+         <% end %>
+        <% end %>
+      </div>
+    </div>
+    <div class="container custom-container copyright-cont d-lg-none">
+      <div class="col-12 d-flex flex-column flex-lg-row">
+        <div class="col-12 col-lg-3 d-flex justify-content-center justify-content-lg-start align-items-lg-end pb-2 pay-methods-avail">
+          <div class="meth-link"><%= image_tag("new-home/amex.svg", :class => "",:alt => "amex", :width => "60") %></div>
+          <div class="meth-link"><%= image_tag("new-home/visa.svg", :class => "",:alt => "visa", :width => "60") %></div>
+          <div class="meth-link"><%= image_tag("new-home/mastercard.svg", :class => "",:alt => "mastercard", :width => "60") %></div>
+        </div>
+        <div class="col-12 col-lg-6 text-center d-flex flex-column align-items-center powered-by">
+          <% if @copy_rights_text.present? %>
+            <div>© <%=@copy_rights_text%> <br></div>
+            <div class="powered-link-cont"><span>Powered by</span><span class="ml-1"><a href="https://techsembly.com">Techsembly</a></span></div>
+          <% end %>
+        </div>
+        <div class="col-12 col-lg-3"></div>
+      </div>
+    </div>
+
+</footer>

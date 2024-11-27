@@ -1,0 +1,9 @@
+<p data-hook="admin_product_form_stores" class="omega two columns">
+  <%= f.field_container :stores, class: ['form-group'] do %>
+    <%= f.label :store_ids, Spree.t(:stores) %>
+		<%#= f.text_field :store_ids, value: @product.store_ids.join(',') %>
+		<%= f.select :store_ids, Spree::Store.all.to_a.collect{|l|[l.name.humanize, l.id]}, {include_blank: true, multiple: true}, {class: 'select2', "data-placeholder" => Spree.t(:select_a_stock_location), multiple: true} %>
+  <% end %>
+</p>
+
+

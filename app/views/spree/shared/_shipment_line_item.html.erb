@@ -1,0 +1,25 @@
+<% customizations = line_item.line_item_customizations.joins(:customization).order("spree_customizations.order, spree_customizations.updated_at ASC") %>
+<% if customizations.present? %>
+  <tr>
+    <td>
+      <% if @product_name %>
+        <div class="item-name">
+          <%= raw(line_item.variant.product.name) %>
+        </div>
+      <% end %>
+
+      <% customizations.each do |personalization| %>
+        <div class="italic">
+          <%= personalization.name %>
+        </div>
+        <div class="pl-13">
+          <% # instance method %>
+          <%= "#{personalization.text}" %>
+        </div>
+      <% end %>
+    </td>
+    <td class="text-center">    <base href="/">
+      <%= line_item.quantity %>
+    </td>
+  </tr>
+<% end %>

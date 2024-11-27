@@ -1,0 +1,18 @@
+<h4>
+  Welcome to
+  <%= @store_name.to_s%>
+</h4>
+<p>
+  <%= @name.to_s%>
+  has invited you to access <%= @store_name.to_s%>
+  as a vendor. To accept this invitation, create a vendor account.
+</p>
+<p>
+  If you weren't accepting this invitation, you can ignore
+</p>
+<p>
+  This invitation will expire in 7 days.
+</p>
+<p>
+    <%= link_to  "Create Vendor Account", @link %>
+</p>

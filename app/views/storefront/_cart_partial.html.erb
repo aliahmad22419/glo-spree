@@ -1,0 +1,197 @@
+<ul class="nav head-links justify-content-end align-items d-none d-lg-flex d-xl-flex pb-2">
+  <% unless store.burger_menu_theme %>
+    <% unless store.checkout_v3? %>
+      <li class="nav-item">
+        <% if cookies["#{store.id.to_s + '_access_token'}".to_sym].present? %>
+          <a class="profile-icon" id="profile-icon-access-token-cart" href="<%=link_with_subdomain_or_not(use_sub_folder_upto, store.code, '/user/account') %>">
+            <%= image_tag("new-home/user.svg", :class => "",:alt => "user-profile", :height => "25", :width => "25") %>
+          </a>
+        <% else %>
+          <a class="profile-icon" id="profile-icon-sign-partial" href="<%=link_with_subdomain_or_not(use_sub_folder_upto, store.code, '/signin-signup') %>">
+            <%= image_tag("new-home/user.svg", :class => "",:alt => "user-profile", :height => "25", :width => "25") %>
+          </a>
+        <% end %>
+      </li>
+      <li class="nav-item">
+        <% if cookies["#{store.id.to_s + '_access_token'}".to_sym].present? %>
+          <a id="wishlist-heart-cart-partial" class="wishlist-heart" href="<%=link_with_subdomain_or_not(use_sub_folder_upto, store.code, '/user/wishlist') %>">
+            <%= image_tag("new-home/heart.svg", :class => "",:alt => "wishlist", :height => "25", :width => "25") %>
+          </a>
+        <% else %>
+          <a id="wishlist-heart-cart-partial" class="wishlist-heart" href="<%=link_with_subdomain_or_not(use_sub_folder_upto, store.code, '/wishlist') %>">
+            <%= image_tag("new-home/heart.svg", :class => "",:alt => "wishlist", :height => "25", :width => "25") %>
+          </a>
+        <% end %>
+      </li>
+    <% end %>
+  <% end %>
+  <li class="nav-item">
+    <div class="dropdown add-to-basket">
+      <a id="cart-bag-partial" class="cart-bag" href="<%=link_with_subdomain_or_not(use_sub_folder_upto, store.code, '/cart') %>">
+        <%= image_tag("new-home/bag.svg", :class => "",:alt => "cart", :height => "25", :width => "25") %>
+          <% if selected_order && selected_order&.line_items&.count > 0 %>
+          <div class="cart-qty"><%= selected_order&.line_items&.count %></div>
+          <% end %>
+      </a>
+      <div class="dropdown-menu dropdown-menu-right">
+        <% if selected_order  && selected_order&.line_items&.count > 0%>
+          <h4 class="dropdown-heading text-center">Just added to your basket</h4>
+          <% selected_order.line_items.each do |line_item| %>
+            <% line_item.price_values(cookies["#{store.id.to_s + '_curency'}".to_sym]) %>
+            <div class="checkout-details d-flex" *ngFor="let lineitem of lineItems.value['data']">
+              <div class="checkout-img mr-2">
+                <% urls = line_item.variant&.image_urls %>
+                <%= image_tag(urls[:thumbnail] || urls[:small] || urls[:default] || store&.active_storge_url(store&.default_thumbnail), :class => "", :alt => "") %>
+              </div>
+              <div class="checkout-description">
+                <div class="pro-name-cont">
+                  <h5><%= line_item.name %></h5>
+                </div>
+                <div class="checkout-price">
+                  <p>Quantity: <%= line_item.quantity %></p>
+                  <span>
+                    <%= cookies["#{store.id.to_s + '_curency'}".to_sym] %>
+                    <%= Money.new(100, cookies["#{store.id.to_s + '_curency'}".to_sym]).currency.symbol %>
+                    <%= line_item.exchanged_prices[:amount] %>
+                  </span>
+                </div>
+              </div>
+            </div>
+          <% end %>
+          <a href="<%=link_with_subdomain_or_not(use_sub_folder_upto, store.code, '/cart') %>" class="btn btn-primary w-100" id="cart-checkout-btn-partial">Checkout</a>
+        <% else %>
+          <h4 class="dropdown-heading text-center">Your Cart is empty!</h4>
+          <a href="<%= link_with_subdomain_or_not(use_sub_folder_upto, store.code, '/') %>" class="btn btn-primary w-100">Shop</a>
+        <% end %>
+      </div>
+    </div>
+  </li>
+</ul>
+<ul class="nav search justify-content-end align-items d-none d-lg-flex d-xl-flex">
+  <li class="nav-item">
+    <div class="search-item-form ng-valid" novalidate="" >
+      <div class="input-group">
+        <input aria-describedby="basic-addon2" aria-label="Find something unique" class="form-control nav-search-field" id="search-bar" placeholder="Find something unique" type="text">
+        <div class="input-group-append">
+          <button class="btn btn-search" id="search-bar-button" type="button" onclick="getSearchValue()">
+            <%= image_tag("new-home/search-white.svg", :class => "",:alt => "search image") %>
+          </button>
+        </div>
+      </div>
+    </div>
+  </li>
+</ul>
+<ul class="nav navbar-nav navbar-right d-sm-flex d-md-flex flex-row d-sm-flex d-lg-none text-right justify-content-end mob-top-links">
+  <li><a class="p-2 d-inline mob-search-link"><%= image_tag("new-home/search.svg", :class => "",:alt => "search image") %></a></li>
+  <li>
+    <div class="dropdown dropdown-flag mob px-1">
+      <a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle" data-toggle="dropdown" href="#" id="dropdownccyButton">
+      </a>
+      <div aria-labelledby="dropdowncyButton" class="dropdown-menu">
+        <form name = "preferencesform" class="select-form ng-valid" novalidate="">
+          <% if store.show_ship_countries == true %>
+            <div class="form-group">
+              <label for="ship_to_label">Ship To:</label>
+              <select class="form-control ng-valid" id="ship_to_label-h-mob" name="ship_to_label" autocomplete="off">
+                <% client.stores.each do |store| %>
+                  <% if cookies["#{store.id.to_s + '_preferred_store'}".to_sym] == store.code %>
+                    <option selected="selected" value="<%= store.code %>"> <%= store.name %> </option>
+                  <% else %>
+                    <option value="<%= store.code %> "> <%= store.name %> </option>
+                  <% end %>
+                <% end %>
+              </select>
+            </div>
+          <% end %>
+          <div class="form-group">
+            <label for="curency">Pay in:</label>
+            <select class="form-control ng-valid" id="curency-h-mob" name="currencies">
+              <% store.supported_currencies.each do |currency| %>
+                <% if cookies["#{store.id.to_s + '_curency'}".to_sym] == currency %>
+                  <option selected="selected" value="<%= currency %> "> <%= currency %></option>
+                <% else %>
+                  <option value="<%= currency %> "> <%= currency %> </option>
+                <% end %>
+              <% end %>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="lang">Language:</label>
+            <select class="form-control ng-valid" id="language" name="language">
+              <option value="/en/en">English</option>
+              <option value="/en/zh-CN">Chinese</option>
+              <option value="/en/ms">Malaysian</option>
+              <option value="/en/ja">Japanese</option>
+            </select>
+          </div>
+        </form>
+        <button class="btn btn-primary w-100" id="update-preferences-cart"  onclick="updatePreferences('ship_to_label-h-mob', 'curency-h-mob')"> Update Preferences </button>
+      </div>
+    </div>
+  </li>
+  <% unless store.checkout_v3? %>
+    <li>
+      <% if cookies["#{store.id.to_s + '_access_token'}".to_sym].present? %>
+        <a class="pl-2 py-1 pr-1 d-inline profile-icon" id="profile-icon-cart-partial" href="<%=link_with_subdomain_or_not(use_sub_folder_upto, store.code, '/user/account') %>"><%= image_tag("new-home/user.svg", :class => "",:alt => "user-profile") %></a>
+      <% else %>
+        <a class="pl-2 py-1 pr-1 d-inline profile-icon" id="profile-icon-cart-partial" href="<%=link_with_subdomain_or_not(use_sub_folder_upto, store.code, '/signin-signup') %>"><%= image_tag("new-home/user.svg", :class => "",:alt => "user-profile") %></a>
+      <% end %>
+    </li>
+    <li>
+      <% if cookies["#{store.id.to_s + '_access_token'}".to_sym].present? %>
+        <a class="px-2 py-1 d-inline wishlist-heart" id="wishlist-heart-partial" href="<%=link_with_subdomain_or_not(use_sub_folder_upto, store.code, '/user/wishlist') %>">
+          <%= image_tag("new-home/heart.svg", :class => "", :alt => "wishlist") %>
+        </a>
+      <% else %>
+        <a class="px-2 py-1 d-inline wishlist-heart" id="wishlist-heart-partial" href="<%=link_with_subdomain_or_not(use_sub_folder_upto, store.code, '/wishlist') %>">
+          <%= image_tag("new-home/heart.svg", :class => "", :alt => "wishlist") %>
+        </a>
+      <% end %>
+    </li>
+  <% end %>
+  <li>
+    <div class="dropdown add-to-basket">
+      <a class="p-1 mob-cart-btn cart-bag" id="cart-bag" href="<%=link_with_subdomain_or_not(use_sub_folder_upto, store.code, '/cart') %>">
+        <%= image_tag("new-home/bag.svg", :class => "",:alt => "cart") %>
+        <% if selected_order && selected_order&.line_items&.count > 0%>
+          <div class="cart-qty"><%= selected_order&.line_items&.count %></div>
+        <% end %>
+      </a>
+
+      <div class="dropdown-menu dropdown-menu-right mob-cart-dropdown">
+        <% if selected_order  && selected_order&.line_items&.count > 0 %>
+        <h4 class="dropdown-heading text-center">Just added to your basket</h4>
+
+          <% selected_order.line_items.each do |line_item| %>
+            <% line_item.price_values(cookies["#{store.id.to_s + '_curency'}".to_sym]) %>
+          <div class="checkout-details d-flex" *ngFor="let lineitem of lineItems.value['data']">
+            <div class="checkout-img mr-2">
+              <% urls = line_item.variant&.image_urls %>
+              <%= image_tag(urls[:thumbnail] || urls[:small] || urls[:default] || store&.active_storge_url(store&.default_thumbnail), :class => "", :alt => "") %>
+            </div>
+            <div class="checkout-description">
+              <div class="pro-name-cont">
+                <h5><%= line_item.name %></h5>
+              </div>
+              <div class="checkout-price">
+                <p>Quantity: <%= line_item.quantity %> </p>
+                <span>
+                  <%= cookies["#{store.id.to_s + '_curency'}".to_sym] %>
+                  <%= Money.new(100, cookies["#{store.id.to_s + '_curency'}".to_sym]).currency.symbol %>
+                  <%= line_item.exchanged_prices[:amount] %>
+                </span>
+              </div>
+            </div>
+          </div>
+          <% end %>
+
+        <a href="<%=link_with_subdomain_or_not(use_sub_folder_upto, store.code, '/cart') %>" class="btn btn-primary w-100" id="cart-checkout-btn">Checkout</a>
+        <% else %>
+          <h4 class="dropdown-heading text-center">Your Cart is empty!</h4>
+          <a href="<%= link_with_subdomain_or_not(use_sub_folder_upto, store.code, '/') %>" class="btn btn-primary w-100">Shop</a>
+        <% end %>
+      </div>
+    </div>
+  </li>
+</ul>

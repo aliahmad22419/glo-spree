@@ -1,0 +1,66 @@
+<% if line_item.delivery_mode == 'givex_digital' %>
+  <p style="font-weight: normal;font-size: 12px;line-height: 14px;color:#000; margin: 0;">Recipient's name:
+    <span style="color: #757575;"><%= line_item.receipient_first_name.to_s + ' ' +  line_item.receipient_last_name.to_s %></span>
+  </p>
+  <p style="font-size: 12px;line-height: 14px;color:#000; margin: 0 0 18px;">Recipient's email address:
+    <span style="color: #757575;"><%= line_item.receipient_email.to_s%></span>
+  </p>
+  <p style="font-size: 12px;line-height: 14px;color:#000; margin: 0 0 18px;">Special message:
+    <span style="color: #757575;"><%=line_item.message %></span>
+  </p>
+  <p style="font-weight: 700;font-size: 12px;line-height: 14px;color:#000; margin: 0;">
+    <%= raw(line_item.variant.product.name) %>(<%=line_item.variant.sku %>)
+  </p>
+  <p style="font-size: 12px;font-style: normal;line-height: 14px;color:#000; margin: 0 0 18px;"><%= line_item.display_exchanged(:amount) %>&nbsp;<br>
+  </p>
+  <p style="border-bottom:1px solid #DBD9D9; font-weight: 700;font-size: 12px;line-height: 14px;color:#000; margin: 0 0 18px; padding-bottom:18px;">Gift Gard Value:
+    <span style="float: right"><%= line_item.display_exchanged(:amount) %></span>
+  </p>
+<% elsif line_item.delivery_mode == 'givex_physical' %>
+
+  <p style="font-weight: normal;font-size: 12px;line-height: 14px;color:#000; margin: 0;">Recipient's name:
+    <span style="color: #757575;"><%= @order&.ship_address&.firstname.to_s + ' ' +  @order&.ship_address&.lastname.to_s %></span>
+  </p>
+
+  <p style="font-size: 12px;line-height: 14px;color:#000; margin: 0 0 18px;">Shipping address:
+    <span style="color: #757575;">
+      <% address =  @order&.ship_address %>
+      <%= address.address1 %>
+      <% if address.address2.present? %>
+        <%= address.address2 %>
+      <% end %>
+      <% if address.apartment_no.present? %>
+        <%= address.apartment_no %>
+      <% end %>
+      <% if address.estate_name.present? %>
+        <%= address.estate_name %>
+      <% end %>
+      <% if address.district.present? %>
+        <%= address.district %>
+      <% end %>
+      <% if address.city.present? %>
+        <%= address.city %>
+      <% end %>
+      <% if address.state_name.present? %>
+        <%= address.state_name %>
+      <% end %>
+      <% if address.country.present? %>
+        <%= address.country.name %>&nbsp;
+      <% end %>
+      <% if address.region.present? %>
+          <%= address.region %>&nbsp;
+      <% end %>
+
+    </span>
+  </p>
+  <p style="font-size: 12px;line-height: 14px;color:#000; margin: 0 0 18px;">Special message:
+    <span style="color: #757575;"><%=line_item.message %></span>
+  </p>
+
+  <p style="font-size: 12px;line-height: 14px;color:#000; margin: 0;">
+    <%= raw(line_item.variant.product.name) %>(<%=line_item.variant.sku %>)
+  </p>
+  <p style="font-size: 12px;font-style: normal;line-height: 14px;color:#000; margin: 0 0 18px;"><%= line_item.display_exchanged(:amount) %>&nbsp;<br>
+
+<% end %>
+

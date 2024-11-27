@@ -1,0 +1,91 @@
+<div class="container-fluid">
+  <div class="row align-items spacing">
+    <!-- old --><!-- <div class="col-1 col-sm-2 col-md-2 col-lg-4 p-0 toggle-menu-cont"> -->
+    <div class="col-1 col-sm-2 col-md-2 col-lg-4 p-0 toggle-menu-cont d-flex align-items-center">
+      <!-- old -->
+      <!--conditional class "d-lg-none" to be added to button if old menu to be supported-->
+      <!-- <button class="btn mobile-menu d-md-block d-sm-block d-lg-none" id="sidebarCollapse" type="button"> -->
+      <button class="btn mobile-menu <%= (@store.burger_menu_theme ? '' : 'd-lg-none')%>" id="sidebarCollapse" type="button" title="sidebar">
+        <svg height="21" viewBox="0 0 100 100" width="17.5">
+          <rect height="10" width="100" y="10"></rect>
+          <rect height="10" width="100" y="45"></rect>
+          <rect height="10" width="100" y="80"></rect>
+        </svg>
+      </button>
+      <ul class="shipping d-none flex-row d-lg-flex d-xl-flex">
+        <% if @store.show_ship_countries %>
+          <li>Ship To</li>
+          <li><%= image_tag(@store.active_storge_url(@store.flag), :class => "",:alt => "store flag") %></li>
+        <% else %>
+          <li>Currency</li>
+        <% end %>
+        <li>
+          <div class="dropdown pref_dropdown">
+            <a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle" data-toggle="dropdown" href="#" id="dropdownMenuButton"><%= cookies["#{@store.id.to_s + '_curency'}".to_sym] %> <%= Money.new(100, cookies["#{@store.id.to_s + '_curency'}".to_sym]).currency.symbol %> </a>
+            <div aria-labelledby="dropdownMenuButton" class="dropdown-menu" >
+              <form name = "preferencesform" class="select-form ng-valid" novalidate="">
+                <% if @store.show_ship_countries %>
+                  <div class="form-group">
+                    <label for="ship_to_label">Ship To:</label>
+                    <select class="form-control ng-valid" id="ship_to_label" name="ship_to_label" autocomplete="off">
+                      <% @client.stores.each do |store| %>
+                        <% if cookies["#{@store.id.to_s + '_preferred_store'}".to_sym] == store.code %>
+                          <option selected="selected" value="<%= store.code %>"> <%= store.name %> </option>
+                        <% else %>
+                          <option value="<%= store.code %> "> <%= store.name %> </option>
+                        <% end %>
+                      <% end %>
+                    </select>
+                  </div>
+                <% end %>
+                <div class="form-group">
+                  <label for="curency">Pay in:</label>
+                  <select class="form-control ng-valid" id="curency" name="currencies">
+                    <% @store.supported_currencies.each do |currency| %>
+                      <% if cookies["#{@store.id.to_s + '_curency'}".to_sym] == currency %>
+                        <option selected="selected" value="<%= currency %> "> <%= currency %></option>
+                      <% else %>
+                        <option value="<%= currency %> "> <%= currency %> </option>
+                      <% end %>
+                    <% end %>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="lang">Language:</label>
+                  <select class="form-control ng-valid" id="langua" name="language">
+                    <option value="/en/en">English</option>
+                    <option value="/en/zh-CN">Chinese</option>
+                    <option value="/en/ms">Malaysian</option>
+                    <option value="/en/ja">Japanese</option>
+                  </select>
+                </div>
+              </form>
+              <button class="btn btn-primary w-100" id="update-preferences-header"  onclick="updatePreferences('ship_to_label', 'curency')"> Update Preferences </button>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-5 col-4 p-0 pl-2">
+      <div class="logo">
+        <a class="d-block" href="<%= data&.logo_url.present? ? data&.logo_url : link_with_subdomain_or_not(@use_sub_folder_upto, @store.code, '/') %>">
+          <%= image_tag(get_image_url(data), :class => "",:alt => data&.alt) %>
+        </a>
+      </div>
+    </div>
+
+    <div class="col-lg-4 col-md-6 col-sm-5 col-7 p-0 menu-links-cont" id="menu_cart_items">
+      <%= render partial: "cart_partial",  locals: {store: @store, client: @client, selected_order: @selected_order, use_sub_folder_upto: @use_sub_folder_upto }  %>
+    </div>
+  </div>
+  <div class="row spacing mobile-nav-sub mob-search-cont d-lg-none pt-2 pt-md-0 pb-md-2 d-none" id="mobile-nav-sub">
+    <div class="mobile-search-mini-form col-12 px-0">
+      <div class="mobile-search-box search-item-form d-flex" id="mobile_search_mini_form">
+        <input aria-describedby="basic-addon2" aria-label="Find something unique" autocapitalize="none" id="search-bar-mob" class="form-control nav-search-field" placeholder="Find something unique" type="text">
+        <button class="btn btn-search" type="button" onclick="getSearchValueMob()">
+          <%= image_tag("new-home/search-white.svg", :class => "",:alt => "search image") %>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

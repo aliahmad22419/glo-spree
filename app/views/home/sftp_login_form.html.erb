@@ -1,0 +1,38 @@
+
+<% if @file_url.present? %>
+   <div class="col-xs-6 col-md-3">
+      <%= link_to "Download ", @file_url, download:true, target: "_blank", class: "btn btn-success" %>
+      <%= link_to "Back", "https://#{request.host}/admin/sftp/login", class: "btn btn-dark" %>
+   </div>
+<% end %>
+
+<% unless @file_url.present? %>
+   <br/>
+   <% if @error_message.present? %>
+      <div class="col-xs-6 col-md-3 alert alert-danger"><%= @error_message %></div>
+   <% end %>
+   <br/>
+
+   <%= form_tag "/admin/sftp/download", method: :post do %>
+      <div class="col-xs-6 col-md-3">
+         <label>Email:</label>
+         <%= email_field_tag :email, '', placeholder: 'Enter Email', class: 'form-control' %>
+      </div>
+      <br/>
+      <div class="col-xs-6 col-md-3">
+         <label>Password:</label>
+         <%= password_field_tag :password, '', placeholder: 'Enter Password', class: 'form-control' %>
+      </div>
+      <br/>
+      <div class="col-xs-6 col-md-3">
+         <label>File Name to Download:</label>
+         <%= text_field_tag :filename, '', placeholder: 'e.g. Billing.dat', class: 'form-control' %>
+         <em>Please provide exact file name with extention</em>
+         <em>Contact your admin for details</em>
+      </div>
+      <br/>
+      <div class="col-xs-6 col-md-3">
+         <%= submit_tag "Authorize!", class: 'btn btn-success text-center' %>
+      </div>
+   <% end %>
+<% end %>

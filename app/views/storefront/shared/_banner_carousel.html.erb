@@ -1,0 +1,63 @@
+<section class="banner-carousel-section">
+  <div class="container custom-container px-0">
+    <div class="banner-carousel-container">
+      <div class="owl-carousel owl-theme banner-carousel">
+       <% data.html_ui_blocks.each do |custom_carosel|%>
+          <div class="slide-tile h-100">
+            <%= image_tag(get_image_url(custom_carosel), :class => "",:alt => custom_carosel.alt) %>
+            <div class="slide-content w-100 text-center">
+              <h2 class="slide-title text-center"><%= custom_carosel.heading %></h2>
+              <div class="banner-btns-cont d-flex justify-content-center">
+                <a class="btn btn-transparent slide-btn mr-2" href="<%= valid_url(custom_carosel.link, @use_sub_folder_upto, @store.code) %>" target="<%= custom_carosel.is_external_link? ? '_blank' : '_self' %>"><%= custom_carosel.title %></a>
+                <% if custom_carosel&.cta_label.present?%>
+                  <a href="<%= custom_carosel&.cta_link%>" rel="nofollow"  style="center" target="_blank" class="btn btn-primary cta-btn"><%= custom_carosel&.cta_label %></a>
+                <%end%>
+              </div>
+            </div>
+          </div>
+       <% end %>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%= javascript_tag do %>
+  $(".banner-carousel").owlCarousel({
+    loop: false,
+    autoplay:false,
+    autoplayHoverPause:false,
+    nav: true,
+    stagePadding: 0,
+    dots: true,
+    mouseDrag: true,
+    responsiveClass:true,
+    responsive: {
+        0:{
+            items: 1,
+            stagePadding: 0,
+            nav: true,
+            dots: true
+        },
+        450:{
+            items: 1
+        },
+        768:{
+            items: 1
+        },
+        1000: {
+            items: 1,
+            margin: 0,
+            dots: true
+        },
+        1300:{
+            items: 1,
+            dots: true
+        },
+        1600:{
+            items: 1
+        }
+    },
+    navText: ['<%= image_tag("new-home/back-arrow.png", :class => "carousel-nav-img img-prev",:alt => "") %>','<%= image_tag("new-home/next-arrow.png", :class => "carousel-nav-img img-next",:alt => "") %>']
+  });
+
+<% end %>

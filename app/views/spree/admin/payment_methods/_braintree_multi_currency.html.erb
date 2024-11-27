@@ -1,0 +1,38 @@
+<div class="panel panel-default">
+  <div class="panel-heading" id="multi-curr-heading" style="cursor: pointer;">
+    <h1 class="panel-title"><span class="icon icon-chevron-right"></span> <%= Spree.t('braintree.multi_currency_setting')%></h1>
+  </div>
+
+  <div class="panel-body collapsed" id="multi-curr-preferences" style="display: none;">
+    <div class="form-actions" data-hook="buttons">
+      <h1 class="panel-title pull-right"><span class="icon icon-plus btn btn-primary btn-sm add-merchant_account"></span></h1>
+      <h4>Please input account in following format</h4>
+      <h6>curreny code:merchant account id</h6>
+      <h6>Example: PKR:merchant_from_pakistan</h6>
+      <div class='col-md-9 curriencies'>
+        <% @object.preferred_currency_merchant_accounts.each do |k,v| %>
+          <%= get_preference_currencies(@object, :currency_merchant_accounts, f, "#{k}:#{v}") %>
+        <% end %>
+        </div>
+      </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#multi-curr-heading').on('click', function() {
+      $('#multi-curr-preferences').slideToggle()
+      $('#multi-curr-preferences').toggleClass('collapsed')
+      $('span.icon', $(this)).toggleClass('icon-chevron-down')
+    })
+
+    $('.add-merchant_account').on('click', function() {
+      $(".curriencies").append('<%= braintree_multi_currency_fields(f.object, f) %>')
+    })
+
+    $('.remove-merchant-account').on('click', function() {
+      $(this).prev('input').remove()
+      $(this).remove()
+    })
+  });
+</script>

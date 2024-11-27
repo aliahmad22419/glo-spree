@@ -1,0 +1,166 @@
+<%= render "storefront/shared/header_preferences", data: @logo %>
+
+<nav id="sidebar" class="<%= (@store.burger_menu_theme ? 'auto-w' : '')%>">
+  <div class="global-navigation-wrap" id="global-navigation">
+    <div class="col-12 nav-wrap-inner px-0">
+      <div class="col-12 nav-top">
+        <div class="col-12 nav-top-inner d-flex align-items-center justify-content-between px-1">
+          <div class="nav-top-left col-2 col-lg-6 px-0">
+            <a class="nav-close-link d-block d-lg-none">
+              <%= image_tag("new-home/cross.png", :class => "close-icon",:width=> "18", :alt => "X") %>
+            </a>
+            <a class="d-none d-lg-block logo text-left" href="<%= link_with_subdomain_or_not(@use_sub_folder_upto, @store.code, '/') %>">
+              <%= image_tag(get_image_url(data), :class => "", :width=> "100", :alt => data&.alt) %>
+            </a>
+          </div>
+          <div class="nav-top-right text-center text-lg-right col-10 col-lg-6 pr-lg-0">
+            <a class="d-block d-lg-none logo text-center" href="<%= link_with_subdomain_or_not(@use_sub_folder_upto, @store.code, '/') %>">
+              <%= image_tag(get_image_url(data), :class => "", :width=> "100" ,:alt => data&.alt) %>
+            </a>
+            <a class="nav-close-link d-none d-lg-block">
+              <%= image_tag("new-home/cross.png", :class => "close-icon" , :width=> "18" ,:alt => "X") %>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 nav-shipping-cont pt-4">
+        <ul class="shipping d-flex align-items-center py-2">
+          <% if @store.show_ship_countries %>
+            <li><%= image_tag(@store.active_storge_url(@store.flag), :class => "",:alt => "store flag") %></li>
+          <% else %>
+          <% end %>
+          <li>
+            <div class="dropdown pref_dropdown">
+              <a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle" data-toggle="dropdown" href="#" id="dropdownMenuButton"><%= cookies["#{@store.id.to_s + '_curency'}".to_sym] %> <%= Money.new(100, cookies["#{@store.id.to_s + '_curency'}".to_sym]).currency.symbol %> </a>
+              <div aria-labelledby="dropdownMenuButton" class="dropdown-menu" >
+                <form name = "preferencesform" class="select-form ng-valid" novalidate="">
+                  <% if @store.show_ship_countries %>
+                    <div class="form-group">
+                      <label for="ship_to_label">Ship To:</label>
+                      <select class="form-control ng-valid" id="ship_to_label" name="ship_to_label" autocomplete="off">
+                        <% @client.stores.each do |store| %>
+                          <% if cookies["#{@store.id.to_s + '_preferred_store'}".to_sym] == store.code %>
+                            <option selected="selected" value="<%= store.code %>"> <%= store.name %> </option>
+                          <% else %>
+                            <option value="<%= store.code %> "> <%= store.name %> </option>
+                          <% end %>
+                        <% end %>
+                      </select>
+                    </div>
+                  <% end %>
+                  <div class="form-group">
+                    <label for="curency">Pay in:</label>
+                    <select class="form-control ng-valid" id="curency" name="currencies">
+                      <% @store.supported_currencies.each do |currency| %>
+                        <% if cookies["#{@store.id.to_s + '_curency'}".to_sym] == currency %>
+                          <option selected="selected" value="<%= currency %> "> <%= currency %></option>
+                        <% else %>
+                          <option value="<%= currency %> "> <%= currency %> </option>
+                        <% end %>
+                      <% end %>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="lang">Language:</label>
+                    <select class="form-control ng-valid" id="languistic" name="language">
+                      <option value="/en/en">English</option>
+                      <option value="/en/zh-CN">Chinese</option>
+                      <option value="/en/ms">Malaysian</option>
+                      <option value="/en/ja">Japanese</option>
+                    </select>
+                  </div>
+                </form>
+                <button class="btn btn-primary w-100" id="update-preferences-burger-menu"  onclick="updatePreferences('ship_to_label', 'curency')"> Update Preferences </button>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <nav id="global-nav-nav" aria-label="Global Navigation" class="col-12 d-lg-flex global-navigation-nav">
+        <div class="col-12 px-0 pr-lg-3 root-nav-cont">
+          <ul class="list-unstyled components root-nav">
+            <% @nav_bar.each_with_index do |nav_bar, index|%>
+              <li class="nav-item d-flex" id="nav-item-<%= index + 1 %>">
+                <div class="<%= nav_bar.html_ui_block_sections && nav_bar.html_ui_block_sections.count > 0 ? 'link-header d-flex align-items-center justify-content-between' : 'nav-link-cont' %>" id="link-header-<%= index + 1 %>">
+                  <a class="nav-link pl-0 <%= 'sep-link' if nav_bar.html_ui_block_sections && nav_bar.html_ui_block_sections.count > 0 %>" href="<%= valid_url(nav_bar.link, @use_sub_folder_upto, @store.code) %>"><%= nav_bar.title %></a>
+                  <% if nav_bar.html_ui_block_sections && nav_bar.html_ui_block_sections.count > 0  %>
+                    <a class="nav-link collapse-link pr-0 collapsed" type="button" data-toggle="collapse" data-target="#collapse-<%= index + 1 %>" aria-expanded="false" aria-controls="collapse-<%= index + 1 %>"></a>
+                  <% end %>
+                </div>
+              </li>
+            <% end %>
+          </ul>
+          <ul class="list-unstyled user-links mt-3">
+            <% unless @store.checkout_v3? %>
+              <li class="wishlist-icon-cont">
+                <% if cookies["#{@store.id.to_s + '_access_token'}".to_sym].present? %>
+                  <a class="d-flex pl-0 wishlist-heart" id="wishlist-heart-burger-menu" href="<%=link_with_subdomain_or_not(@use_sub_folder_upto, @store.code, '/user/wishlist') %>">
+                    <%#= image_tag("new-home/heart.svg", :class => "",:width => "23", :height => "23", :alt => "wishlist") %>
+                    <span>Wishlist</span>
+                  </a>
+                <% else %>
+                  <a class="d-flex pl-0 wishlist-heart" id="wishlist-heart-burger-menu" href="<%=link_with_subdomain_or_not(@use_sub_folder_upto, @store.code, '/wishlist') %>">
+                    <%#= image_tag("new-home/heart.svg", :class => "",:width => "23", :height => "23", :alt => "wishlist") %>
+                    <span>Wishlist</span>
+                  </a>
+                <% end %>
+              </li>
+              <li class="profile-link-cont">
+                <% if cookies["#{@store.id.to_s + '_access_token'}".to_sym].present? %>
+                  <a class="d-flex pl-0 profile-icon" id="profile-icon-burger-menu" href="<%=link_with_subdomain_or_not(@use_sub_folder_upto, @store.code, '/user/account') %>">
+                    <%#= image_tag("new-home/user.svg", :class => "",:width => "23", :height => "23", :alt => "user-profile") %>
+                    <span>Account</span>
+                  </a>
+                <% else %>
+                  <a class="d-flex pl-0 profile-icon" id="profile-icon-burger-menu" href="<%=link_with_subdomain_or_not(@use_sub_folder_upto, @store.code, '/signin-signup') %>">
+                    <%#= image_tag("new-home/user.svg", :class => "",:width => "23", :height => "23", :alt => "user-profile") %>
+                    <span>Account</span>
+                  </a>
+                <% end %>
+              </li>
+            <% end %>
+            <li class="cust-serv-cont">
+              <a class="d-flex pl-0" id="customer-service" href="//<%= @store&.customer_service_url %>">
+                <span>Customer Service</span>
+              </a>
+            </li>
+          </ul>
+          <div class="side-nav-contact-cont pt-4 pb-3">
+            <h6 class="call-heading mt-2 mb-0">Call Us</h6>
+            <div class="tel-link-cont">
+              <a href="tel:<%= @store&.contact_number %>" class="tel-link p-0"><%= @store&.contact_number %></a>
+            </div>
+            <div class="mail-link-cont">
+              <a href="mailto:<%= @store&.mail_to %>" class="mail-link p-0"><%= @store&.mail_to %></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 sub-nav-cont px-0 pt-2 pt-lg-0">
+          <div class="col-12 back-link-cont d-lg-none pb-2">
+            <a class="back-link" href="#">Back</a>
+          </div>
+          <% @nav_bar.each_with_index do |nav_bar, index|%>
+            <% if nav_bar.html_ui_block_sections && nav_bar.html_ui_block_sections.count > 0 %>
+              <div id="collapse-<%= index + 1 %>" class="collapse sub-menu-cont" aria-labelledby="link-header-<%= index + 1 %>">
+                <% nav_bar.html_ui_block_sections.each do |html_section| %>
+                  <% if html_section.type_of_section == 'links' %>
+                    <div class="nav-column">
+                      <ul class="list-unstyled">
+                        <% html_section.html_links&.order(sort_order: :asc)&.each do |link| %>
+                          <li class="nav-item">
+                            <a class="sub-category" href="<%= valid_url(link.link, @use_sub_folder_upto, @store.code) %>"><%= link.name %></a>
+                          </li>
+                        <% end %>
+                      </ul>
+                    </div>
+                  <% elsif html_section.type_of_section == 'image' %>
+                  <% end %>
+                <% end %>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+      </nav>
+    </div>
+  </div>
+</nav>

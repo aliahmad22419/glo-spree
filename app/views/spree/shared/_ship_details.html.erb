@@ -1,0 +1,68 @@
+<table align="left" border="0" cellpadding="0" cellspacing="0" width="300" class="mcnBoxedTextContentContainer" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+  <tbody>
+    <tr>
+      <td class="mcnBoxedTextContentColumn" style="padding-top: 9px;padding-right: 18px;padding-bottom: 9px;padding-left: 18px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+        <table border="0" cellspacing="0" class="mcnTextContentContainer" width="100%" style="min-width: 100% !important;background-color: #EDEDED;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+          <tbody>
+            <tr>
+              <td valign="top" class="mcnTextContent" style="padding: 18px;color: #4A4A4A;font-family: &quot;Open Sans&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;font-size: 14px;font-weight: normal;text-align: left;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;word-break: break-word;line-height: 150%;">
+                <span style="font-family:helvetica neue,helvetica,arial,verdana,sans-serif">
+                  <!-- <span style="color:#002365"> -->
+                    <strong>SHIPPING DETAILS&nbsp;</strong>
+                  <!-- </span> -->
+                </span>
+                <br>
+                <br>
+                <span style="font-family:helvetica neue,helvetica,arial,verdana,sans-serif">
+                  <% if address.email.present? %>
+                    <%= address.email %>
+                    <br>
+                  <% end %>
+                  <%= "#{address.firstname} #{address.lastname}" %>&nbsp;
+                  <br>
+                  <%= address.address1 %>&nbsp;&nbsp;
+                  <br>
+                  <% if address.address2.present? %>
+                    <%= address.address2 %>
+                    <br>
+                  <% end %>
+                  <% if address.apartment_no.present? %>
+                    <%= address.apartment_no %>
+                    <br>
+                  <% end %>
+                  <% if address.city.present? %>
+                    <%= address.city %>
+                    <br>
+                  <% end %>
+                  <% if address.state.present? %>
+                    <%= address.state %>
+                    <br>
+                  <% end %>
+                  <% if address.state_name.present? %>
+                    <%= address.state_name %>
+                    <br>
+                  <% end %>
+                  <% if address.region.present? %>
+                    <%= address.region %>&nbsp;
+                    <br>
+                  <% end %>
+                  <% if address.district.present? %>
+                    <%= address.district %>
+                    <br>
+                  <% end %>
+                  <%= address.zipcode if address.zipcode.present? %>&nbsp;
+                  <br>
+                  <%= address.phone if address.phone.present? %>&nbsp;
+                  <br>
+                  <% if address.country.present? %>
+                    <%= address.country.name %>&nbsp;
+                  <% end %>
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+  </tbody>
+</table>

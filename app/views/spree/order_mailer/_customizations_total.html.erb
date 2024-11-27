@@ -1,0 +1,23 @@
+<% amount = line_item.exchanged_prices[:customizations_total].to_f %>
+<% if amount > 0.0 %>
+  <tr>
+    <td class="six sub-columns">
+      <%= I18n.t('order_mailer.line_item.personalized_price') %>
+    </td>
+    <td class="six sub-columns last right">
+      <%= line_item.display_exchanged(amount * line_item.quantity) %>
+    </td>
+  </tr>
+<% end %>
+
+<% @product_name = false %>
+<%= render 'spree/shared/shipment_line_item', line_item: line_item %>
+
+<tr>
+  <td class="six sub-columns">
+    <%= I18n.t('order_mailer.line_item.sub_total') %>
+  </td>
+  <td class="six sub-columns last right">
+    <%= line_item.display_exchanged(:amount) %>
+  </td>
+</tr>

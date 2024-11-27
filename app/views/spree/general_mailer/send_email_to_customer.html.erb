@@ -1,0 +1,15 @@
+<h4>
+  Hi,
+  <%= @name.to_s%>
+</h4>
+<p>
+  <%= "Question: " + @question.to_s%>
+</p>
+<p>
+	<%= "Answer: " + @answer.to_s%>
+</p>
+<p>
+  <% if @vendor_page %>
+    <%= link_to  "Reply further", @vendor_page %>
+  <% end %>
+</p>

@@ -1,0 +1,130 @@
+<% if line_item.delivery_mode == 'givex_digital' %>
+
+  <p style="font-weight: normal;font-size: 12px;line-height: 14px;color:#000; margin: 0;">Customer's first name:
+    <span style="color: #757575;"><%=@order&.bill_address&.firstname %></span>
+  </p>
+  <p style="font-size: 12px;line-height: 14px;color:#000; margin: 0;">Customer's last name:
+    <span style="color: #757575;"><%=@order&.bill_address&.lastname %></span>
+  </p>
+  <p style="font-size: 12px;line-height: 14px;color:#000; margin: 0 0 18px;">Customer's email:
+    <span style="color: #757575;"><%=@order&.email %></span>
+  </p>
+  <p style="font-size: 12px;line-height: 14px;color:#000; margin: 0;">Recipients first name:
+    <span style="color: #757575;"><%= line_item.receipient_first_name %></span>
+  </p>
+  <p style="font-size: 12px;line-height: 14px;color:#000; margin: 0 0 18px;">Recipients Iast name:
+    <span style="color: #757575;"><%= line_item.receipient_last_name %></span>
+  </p>
+  <p style="font-size: 12px;line-height: 14px;color:#000; margin: 0;">Card type:
+    <span style="color: #757575;"><%= line_item.delivery_mode == 'givex_digital' ? 'Digital' : 'Physical' %></span>
+  </p>
+  <p style="font-size: 12px;line-height: 14px;color:#000; margin: 0 0 18px;">Special message:
+    <span style="color: #757575;"><%=line_item.message %></span>
+  </p>
+  <p style="font-size: 12px;line-height: 14px;color:#000; margin: 0 0 18px;">Order #<%=line_item.order.number %> Summary:
+  </p>
+  <p style="font-weight: 700;font-size: 12px;line-height: 14px;color:#000; margin: 0 0 18px;">
+    <%= raw(line_item.variant.product.name) %>
+    <br>
+    (<%=line_item.variant.sku %>)
+  </p>
+  <p style="font-size: 12px;font-style: italic;line-height: 14px;color:#000; margin: 0 0 18px;">Would you like a physical card?<br>
+    <span style="color: #757575;font-style: normal;;">
+    <%= line_item.delivery_mode == 'givex_digital' ? 'No, please send me a digital card.' : 'Yes, please send me a physical card.' %>
+  </span>
+  </p>
+
+  <p style="border-bottom:1px solid #DBD9D9; font-weight: 700;font-size: 12px;line-height: 14px;color:#000; margin: 0 0 18px; padding-bottom:18px;">
+    Subtotal:
+    <span style="float: right"><%= line_item.display_exchanged(:amount) %></span>
+  </p>
+
+<% elsif  line_item.delivery_mode == 'givex_physical' %>
+
+  <p style="font-weight: normal;font-size: 12px;line-height: 14px;color:#000; margin: 0;">Customer's first name:
+    <span style="color: #757575;"><%=@order&.bill_address&.firstname %></span>
+  </p>
+  <p style="font-size: 12px;line-height: 14px;color:#000; margin: 0;">Customer's last name:
+    <span style="color: #757575;"><%=@order&.bill_address&.lastname %></span>
+  </p>
+  <p style="font-size: 12px;line-height: 14px;color:#000; margin: 0 0 18px;">Customer's email:
+    <span style="color: #757575;"><%=@order&.email %></span>
+  </p>
+  <p style="font-size: 12px;line-height: 14px;color:#000; margin: 0;">Recipients first name:
+    <span style="color: #757575;"><%= @order&.ship_address&.firstname %></span>
+  </p>
+  <p style="font-size: 12px;line-height: 14px;color:#000; margin: 0 0 18px;">Recipients Iast name:
+    <span style="color: #757575;"><%= @order&.ship_address&.lastname %></span>
+  </p>
+  <p style="font-size: 12px;line-height: 14px;color:#000; margin: 0 0 18px;">Card type:
+    <span style="color: #757575;"><%= line_item.delivery_mode == 'givex_digital' ? 'Digital' : 'Physical' %></span>
+  </p>
+  <p style="font-size: 12px;line-height: 14px;color:#000; margin: 0;">Shipping method:
+    <span style="color: #757575;">
+      <% line_item_shipment_id = line_item&.inventory_units&.first&.shipment_id %>
+      <% shipment = @shipments.select { |s| s.id.eql?(line_item_shipment_id) rescue nil }[0].try(:selected_shipping_rate) %>
+      <% if shipment.present? %>
+        <%= shipment.name %>: <%= line_item.display_exchanged(shipment.cost.to_f * line_item.saved_exchange_rate) %>
+      <% end %>
+    </span>
+  </p>
+
+  <p style="font-size: 12px;line-height: 14px;color:#000; margin: 0;">Shipping address:
+    <span style="color: #757575;">
+      <% address =  @order&.ship_address %>
+      <%= address.address1 %>
+      <% if address.address2.present? %>
+        <%= address.address2 %>
+      <% end %>
+      <% if address.apartment_no.present? %>
+        <%= address.apartment_no %>
+      <% end %>
+      <% if address.estate_name.present? %>
+        <%= address.estate_name %>
+      <% end %>
+      <% if address.district.present? %>
+        <%= address.district %>
+      <% end %>
+      <% if address.city.present? %>
+        <%= address.city %>
+      <% end %>
+      <% if address.state_name.present? %>
+        <%= address.state_name %>
+      <% end %>
+      <% if address.country.present? %>
+        <%= address.country.name %>&nbsp;
+      <% end %>
+      <% if address.region.present? %>
+          <%= address.region %>&nbsp;
+      <% end %>
+    </span>
+  </p>
+
+  <p style="font-size: 12px;line-height: 14px;color:#000; margin: 0 0 18px;">Contact number:
+    <span style="color: #757575;">
+      <%= address.phone%>&nbsp;
+    </span>
+  </p>
+  <p style="font-size: 12px;line-height: 14px;color:#000; margin: 0 0 18px;">Special message:
+    <span style="color: #757575;"><%=line_item.message %></span>
+  </p>
+  <p style="font-size: 12px;line-height: 14px;color:#000; margin: 0;">Order #<%=line_item.order.number %> Summary:
+  </p>
+  <p style="font-size: 12px;line-height: 14px;color:#000; margin: 0;">
+    <%= raw(line_item.variant.product.name) %>
+    (<%=line_item.variant.sku %>)
+  </p>
+  <p style="font-size: 12px;font-style: italic;line-height: 14px;color:#000; margin: 0 0 18px;">Would you like a physical card?<br>
+    <span style="color: #757575;font-style: normal;;">
+    <%= line_item.delivery_mode == 'givex_digital' ? 'No, please send me a digital card.' : 'Yes, please send me a physical card.' %>
+  </span>
+  </p>
+
+  <p style="border-bottom:1px solid #DBD9D9; font-weight: 700;font-size: 12px;line-height: 14px;color:#000; margin: 0 0 18px; padding-bottom:18px;">
+    Subtotal:
+    <span style="float: right"><%= line_item.display_exchanged(:amount) %></span>
+  </p>
+
+
+
+<% end %>

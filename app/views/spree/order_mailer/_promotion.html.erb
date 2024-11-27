@@ -1,0 +1,38 @@
+<table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnBoxedTextBlock" style="min-width: 100%;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+  <tbody class="mcnBoxedTextBlockOuter">
+    <tr>
+      <td valign="top" class="mcnBoxedTextBlockInner" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+        <table align="left" border="0" cellpadding="0" cellspacing="0" width="100%" style="min-width: 100%;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;" class="mcnBoxedTextContentContainer">
+          <tbody>
+            <tr>
+              <td style="padding-top: 9px;padding-left: 18px;padding-bottom: 9px;padding-right: 18px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                <table border="0" cellspacing="0" class="mcnTextContentContainer" width="100%" style="min-width: 100% !important;background-color: #F5E1D3;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                  <tbody>
+                    <tr>
+                      <td valign="top" class="mcnTextContent" style="padding: 18px;color: #4A4A4A;font-family: &quot;Open Sans&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;font-size: 14px;font-weight: normal;line-height: 200%;text-align: left;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;word-break: break-word;">
+                        <div style="text-align: center;">
+                          <span style="font-family:helvetica neue,helvetica,arial,verdana,sans-serif">
+                            <%= @config[:promotions]&.html_safe %>
+                            <% if @config[:promotions].blank? %>
+                              <!-- <span style="color:#002365"> -->
+                                <strong>ENJOY 10% OFF YOUR NEXT ORDER* WHEN YOU USE THE CODE:&nbsp;</strong>
+                                <br>
+                                <u><strong>HELLOGLO</strong></u>&nbsp;
+                                <br>
+                                *Discount valid for 7 days from date of this purchase&nbsp;
+                              <!-- </span> -->
+                            <% end %>
+                          </span>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+  </tbody>
+</table>

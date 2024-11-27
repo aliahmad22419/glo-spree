@@ -1,0 +1,12 @@
+<div class="field alpha omega eight columns">
+  <label><%= Spree.t('store_rule.choose_stores') %></label><br>
+  <input type='hidden' name='<%= param_prefix %>[store_ids_string]' class='pick_store fullwidth' value='<%= promotion_rule.store_ids.join(",") %>'>
+</div>
+<script>
+  Spree.routes.store_search = '<%= spree.admin_stores_path(format: :json) %>';
+  $('.pick_store').storeAutocomplete();
+</script>
+
+<!-- silly override I know -->
+<!-- due to css issues over input class, store_picker renamed as pick_store -->
+<!-- otherwise no need for this shit -->

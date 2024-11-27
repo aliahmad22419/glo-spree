@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="<%= @store&.preferred_default_language || 'en' %>">
+	<head>
+		<title><%= @tab_title %></title>
+		<% if favicon_url.present? %>
+			<%= favicon_link_tag favicon_url, rel: "#{@store.name} icon" %>
+		<% end %>
+		<%= csrf_meta_tags %>
+		<%= csp_meta_tag %>
+		<meta name="google-site-verification" content="<%=@store&.google_site_verification_tag %>">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta property="title" content="<%=@tab_title %>">
+		<meta name="description" content="<%=@description %>">
+		<meta property="og:type" content="<%=@og_type %>">
+		<% if action_name == 'home' || action_name == 'sub_categories'%>
+			<meta property="og:title" content="<%=@og_title %>">
+			<meta name="og:description" content="<%=@og_description %>">
+		<% else %>
+			<meta property="og:title" content="<%=@tab_title %>">
+			<meta name="og:description" content="<%=@description %>">
+		<% end %>
+
+		<% if action_name == 'home' || action_name == 'sub_categories' || action_name == 'vendor'%>
+			<meta property="image" content="<%=@image_url %>">
+			<meta property="og:image" content="<%=@image_url %>">
+		<% end %>
+		<% if action_name == 'sub_categories'%>
+			<% if @product_detail %>
+				<meta property="image" content="<%=@image_url %>">
+				<meta property="og:image" content="<%=@image_url %>">
+				<meta property="og:url" content="<%=@url %>">
+				<meta property="product:brand" content="<%=@brand %>">
+				<meta property="product:availability" content="<%=@availability %>">
+				<meta property="product:condition" content="<%=@condition %>">
+				<meta property="product:price:amount" content="<%=@price %>">
+				<meta property="product:price:currency" content="<%=@currency %>">
+				<meta property="product:retailer_item_id" content="<%=@retailer_item_id %>">
+				<meta property="product:item_group_id" content="<%=@item_group_id %>">
+        <% @images&.each do |img| %>
+          <link rel="preload" id=<%= img.id %> href=<%=(img.present? ? get_product_image_url(img, @detail_page_size) : "" ) %> as="image"/>
+        <% end %>
+			<% end %>
+		<% end %>
+
+		<%= render partial: "google_tags" %>
+
+		<script type="text/javascript">
+			window.dataLayer = window.dataLayer || []
+		</script>
+		<% if action_name == 'sub_categories'%>
+			<% if @product_detail %>
+				<script type="text/javascript">
+					window.dataLayer.push({
+						'event': 'productView', 
+						'product_name': "<%= @product_name.to_s %>",
+						'product_sku': "<%= @item_group_id.to_s %>",
+						'store': "<%= @store.name.to_s %>"
+					})
+				</script>
+			<% end %>
+		<% end %>
+
+		<script type="text/javascript">
+			function googleTranslateElementInit() {
+				new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+			}
+		</script>
+		<% if @store.present? && @store.layout_setting&.preferred_custom_js_links.present? %>
+        <% @store.layout_setting&.preferred_custom_js_links.each_with_index do |custom_js_link, index| %>
+			<% elem_id = (custom_js_link['id'].presence || "custom-js-#{index}") %>
+            <script type="text/javascript" id="<%= elem_id %>" src="<%= custom_js_link.fetch('url') %>" <%= custom_js_link['renderAs'] %> >
+            </script>
+            <% end %>
+		<% else %>
+			<script type="text/javascript">
+				<%= @store.layout_setting.preferred_custom_js.html_safe rescue nil %>
+			</script>
+		<% end %>
+
+		<%# if @store.present? && @store.gtm_tags.present? %>
+
+			<%# @store.gtm_tags.each_with_index do |tag, index| %>
+<!--				  <script async src="https://www.googletagmanager.com/gtag/js?id=<%#= tag %>"></script>-->
+<!--				<<script>-->
+<!--					<window.dataLayer = window.dataLayer || [];-->
+<!--					<function gtag(){dataLayer.push(arguments);}-->
+<!--					<gtag('js', new Date());-->
+
+<!--					<gtag('config', <%#= tag %>);-->
+<!--					<window["gtag" + <%#= index %>] = gtag-->
+<!--				<</script>-->
+			<%# end %>
+		<%# end %>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha256-UhQQ4fxEeABh4JrcmAJ1+16id/1dnlOEVCFOxDef9Lw=" crossorigin="anonymous" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha256-kksNxjDRxd/5+jGurZUJd1sdR2v+ClrCl3svESBaJqw=" crossorigin="anonymous" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.green.min.css" integrity="sha256-xAPiyaYLsJkRp8VxEwi9Cl5qPxyqLO0U5aJwyRRiOKA=" crossorigin="anonymous" />
+		<% if @store.present? && @store.try(:id).eql?(40) %>
+			<script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/63a9599d3c330a0db358f86f3/d250638052539f10d96ed15dc.js");</script>
+		<% end %>
+		<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+		<%= javascript_pack_tag 'storefront' %>
+		<%= stylesheet_pack_tag 'storefront' %>
+    <%= stylesheet_link_tag    'storefront', media: 'all'%>
+    <%= javascript_include_tag 'application'%>
+<!--		<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha256-pTxD+DSzIwmwhOqTFN+DB+nHjO4iAsbgfyFq5K5bcE0=" crossorigin="anonymous" defer></script>-->
+		<%= render partial: "custom_styles" %>
+	</head>
+	<body data-pagetype="<%=@data_attribute %>">
+		
+		<link
+			rel="stylesheet"
+			href="https://checkoutshopper-test.adyen.com/checkoutshopper/sdk/3.8.1/adyen.css"
+			integrity="sha384-y1lKqffK5z+ENzddmGIfP3bcMRobxkjDt/9lyPAvV9H3JXbJYxCSD6L8TdyRMCGM"
+			crossorigin="anonymous"
+		>
+
+
+
+		<% if @store.present? && @store.gtm_tags.present? %>
+			<% @store.gtm_tags.each_with_index do |tag, index| %>
+				<!-- Google Tag Manager (noscript) -->
+				<noscript>
+					<iframe src="https://www.googletagmanager.com/ns.html?id=<%= tag %>" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+				</noscript>
+				<!-- End Google Tag Manager (noscript) -->
+				
+			<% end %>
+		<% end %>
+
+		<%= yield %>
+	</body>
+</html>

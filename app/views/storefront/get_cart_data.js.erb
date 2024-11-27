@@ -1,0 +1,10 @@
+$("#menu_cart_items").html("<%= j render partial: "cart_partial",  locals: {store: @store, client: @client, selected_order: @selected_order, use_sub_folder_upto: @use_sub_folder_upto } %>")
+console.log('<%= @toggle%>')
+
+<% if @selected_order && @toggle %>
+  $("#menu_cart_items").find(".add-to-basket").find(".dropdown-menu").toggle("open");
+  window.scrollTo(0,0)
+  document.addEventListener('click', () => {
+      $("#menu_cart_items").find(".add-to-basket").find(".dropdown-menu").toggle("open");
+  }, { once: true });
+<% end %>

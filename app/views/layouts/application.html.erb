@@ -6,6 +6,9 @@
     <meta name="mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <% if favicon_url.present? %>
+      <%= favicon_link_tag favicon_url, rel: "#{@store.name} icon" %>
+    <% end %>
 
     <%= yield :head %>
 

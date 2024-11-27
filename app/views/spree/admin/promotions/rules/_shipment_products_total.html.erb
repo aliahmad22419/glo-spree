@@ -1,0 +1,19 @@
+<div class="form-actions">
+  <%= button Spree.t(:add), 'add.svg', 'button', id: "add-limit", class: "btn-success pull-right" %>
+</div>
+<br >
+<br >
+
+<div class="shipment-products-limits">
+  <% promotion_rule.preferred_product_type_limits.each do |limit| %>
+    <%= render partial: "spree/admin/promotions/rules/shipment_products_limit",
+      locals: { promotion_rule: promotion_rule, param_prefix: param_prefix, limit: limit} %>
+  <% end %>
+</div>
+
+<script>
+  $('#add-limit').on('click', (event) => {
+    $('.shipment-products-limits').append("<%= j render partial: 'spree/admin/promotions/rules/shipment_products_limit',
+      locals: { promotion_rule: promotion_rule, param_prefix: param_prefix, limit: {} } %>");
+  });
+</script>
