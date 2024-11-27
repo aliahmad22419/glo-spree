@@ -1,8 +1,22 @@
+# From Rails 7
+# development:
+#   adapter: async
+
+# test:
+#   adapter: test
+
+# production:
+#   adapter: redis
+#   url: <%= ENV.fetch("REDIS_URL") { "redis://localhost:6379/1" } %>
+#   channel_prefix: glo_spree_production
+
+# From Master
 development:
-  adapter: async
+  adapter: redis
+  url: redis://localhost:6379/1
 
 test:
-  adapter: test
+  adapter: async
 
 production:
   adapter: redis

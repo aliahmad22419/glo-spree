@@ -1,5 +1,5 @@
 module Spree
-  module ShippingCategory
+  module ShippingCategoryDecorator
     def self.prepended(base)
       base.before_destroy :check_linked_products
     end

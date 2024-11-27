@@ -1,0 +1,11 @@
+development:
+  ssl_options:
+    ca_file: null
+
+test:
+  ssl_options:
+    ca_file: null
+
+production:
+  ssl_options:
+    ca_file: null

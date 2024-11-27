@@ -1,0 +1,55 @@
+reports_generation_job:
+  cron: "0 0 * * *"
+  class: "ReportSchedulerWorker"
+  queue: report_scheduler
+  description: "This job generates reports for feed on daily bases"
+sitemaps_generation_job:
+  cron: "0 0 * * *"
+  class: "SiteMapsWorker"
+  queue: sitemap
+  description: "This job generates sitemaps for a client on daily bases"
+scheule_sales_reports_job:
+  cron: "0 0 * * *"
+  class: "ScheduleSalesReportsWorker"
+  queue: schedule_sales_reports
+  description: "This job generates sales report conditionally per day or per week or week month"
+expired_sale_product_job:
+  cron: "0 0 * * *"
+  class: "ExpiredSaleProductsWorker"
+  queue: expired_sale_products
+  description: "This job ends sale for products with sale end date in past"
+schedule_card_generation_job:
+  cron: "0 * * * *"
+  class: "ScheduledDeliveryOfCardsEmailWorker"
+  queue: cards_to_be_generated_and_delivered
+  description: "This worker generates scheduled cards"
+error_logging_job:
+  cron: "15 * * * *"
+  class: "ErrorLoggerWorker"
+  queue: error_logging
+  description: "This worker logs if any shipmint or card is not generated"
+order_recompletion_job:
+  cron: "*/15 * * * *"
+  class: "OrderRecompletionWorker"
+  queue: recompletion
+  description: "This job periodically re-attempts to generate missing shipments, TS, or Givex cards."
+auto_exchange_rate_job:
+  cron: "0 0 * * *"
+  class: "AutoExchangeRatesWorker"
+  queue: auto_exchange_rates
+  description: "This worker updates exchanges rates for client who have set their setting to auto update."
+system_reports_job:
+  cron: "30 0 * * * America/Chicago"
+  class: "SystemReportsWorker"
+  queue: system_reports_queue
+  description: "This job uploads daily/monthly sales and cards report to sftp."
+whitelist_emails_job:
+  cron: "0 */1 * * *"
+  class: "WhitelistEmailWorker"
+  queue: whitelist_email_queue
+  description: "This worker updates ses white listed emails status."
+brim_report_job:
+  cron: "1 0 * * * America/Chicago"
+  class: "BrimReportTransactionWorker"
+  queue: brim_report
+  description: "This job generates and uploads the Brim report daily at midnight CT."

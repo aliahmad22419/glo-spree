@@ -6,8 +6,8 @@ module Spree
       module ItemTotalDecorator
         def self.prepended(base)
           # Override symbol and use lebel (gt, lt instead of >, <)
-          preference :operator_min, :string, default: 'gt'
-          preference :operator_max, :string, default: 'lt'
+          base.preference :operator_min, :string, default: 'gt'
+          base.preference :operator_max, :string, default: 'lt'
         end
 
         def eligible?(order, _options = {})

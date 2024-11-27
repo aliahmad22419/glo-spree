@@ -4,7 +4,7 @@ module Spree
       module Storefront
         module TaxonsControllerDecorator
           def self.prepended(base)
-            before_action :require_spree_current_user, only: [ :get_dropdown_data ]
+            base.before_action :require_spree_current_user, only: [ :get_dropdown_data ]
           end
 
           def breadcrums
@@ -32,4 +32,3 @@ module Spree
 end
 
 ::Spree::Api::V2::Storefront::TaxonsController.prepend(Spree::Api::V2::Storefront::TaxonsControllerDecorator)
-

@@ -9,7 +9,7 @@ module UserEmailValidations
     # clear all validations for email
     _validators.reject!{ |key, value| key == :email }
     _validate_callbacks.each do |callback|
-      callback.raw_filter.attributes.reject! { |key| key == :email } if callback.raw_filter.respond_to?(:attributes)
+      callback.filter.attributes.reject! { |key| key == :email } if callback.filter.respond_to?(:attributes)
     end
 
     # email validations

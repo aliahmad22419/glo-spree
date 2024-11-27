@@ -1,6 +1,6 @@
 
 module Spree
-  class Printables
+  module Printables
     module BaseViewDecorator
       def self.prepended(base)
         base.attr_accessor :store_locale

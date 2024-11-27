@@ -1,5 +1,5 @@
 module Spree
-  module Payment
+  class Payment
     module GatewayOptionsDecorator
       APP_FEE_TYPES = { percentage: 'percentage', flat_rate: 'flat_rate' }.freeze
 

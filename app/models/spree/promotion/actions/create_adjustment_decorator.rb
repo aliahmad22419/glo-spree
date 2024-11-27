@@ -3,7 +3,7 @@ module Spree
     module Actions
       module CreateAdjustmentDecorator
         def self.prepended(base)
-          before_validation -> { self.calculator ||= Spree::Calculator::FlatPercentItemTotal.new }
+          base.before_validation -> { self.calculator ||= Spree::Calculator::FlatPercentItemTotal.new }
         end
         ORDER_CALCULATORS = ['FlexiRate', 'FlatRate', 'TieredFlatRate', 'TieredPercent'] # RelatedProductDiscount
 
