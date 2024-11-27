@@ -1,0 +1,2 @@
+class SftpUser < ApplicationRecord
+end
