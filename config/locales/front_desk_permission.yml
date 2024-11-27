@@ -1,0 +1,50 @@
+en:
+  front_desk: 
+    zones: 
+      allow: []
+      disallow: ['*']
+    exchange_rates:
+      allow: []
+      disallow: ['create']
+    fulfilment_info:
+      allow: []
+      disallow: ['*']
+    fulfilment_team:
+      allow: []
+      disallow: ['*']
+    promotion_rules:
+      allow: []
+      disallow: ['*']
+    promotion_actions:
+      allow: []
+      disallow: ['*']
+    promotion:
+      allow: []
+      disallow: ['*']
+    whitelist_emails:
+      allow: []
+      disallow: ['*']
+    ts_gift_cards:
+      allow: ['update_status']
+      disallow: ['create', 'pdf_details', 'cancel_gift_cards']
+    aws_files:
+      allow: []
+      disallow: ['*']
+    clients:
+      allow: []
+      disallow: ['is_new_company', 'iframe_business_details']
+    stores:
+      allow: []
+      disallow: ['client_stores', 'iframe_store_layout_settings', 'get_iframe_store_layout_settings', 'send_dns_details', 'get_acm_certificate', 'load_balancer_ssl_setup_alert']
+    products:
+      allow: []
+      disallow: ['iframe_flow_product', 'update_iframe_product', 'upload_gallery_image']
+    admins:
+      allow: []
+      disallow: ['*']
+    sub_admins:
+      allow: []
+      disallow: ['*']
+    galleries:
+      allow: []
+      disallow: ['index', 'create', 'update', 'destroy', 'destroy_multiple']

@@ -1,14 +1,14 @@
-# Files in the config/locales directory are used for internationalization and
-# are automatically loaded by Rails. If you want to use locales other than
-# English, add the necessary files in this directory.
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
 #
 # To use the locales, use `I18n.t`:
 #
-#     I18n.t "hello"
+#     I18n.t 'hello'
 #
 # In views, this is aliased to just `t`:
 #
-#     <%= t("hello") %>
+#     <%= t('hello') %>
 #
 # To use a different locale, set it with `I18n.locale`:
 #
@@ -16,16 +16,111 @@
 #
 # This would use the information in config/locales/es.yml.
 #
-# To learn more about the API, please read the Rails Internationalization guide
-# at https://guides.rubyonrails.org/i18n.html.
+# The following keys must be escaped otherwise they will not be retrieved by
+# the default I18n backend:
 #
-# Be aware that YAML interprets the following case-insensitive strings as
-# booleans: `true`, `false`, `on`, `off`, `yes`, `no`. Therefore, these strings
-# must be quoted to be interpreted as strings. For example:
+# true, false, on, off, yes, no
 #
-#     en:
-#       "yes": yup
-#       enabled: "ON"
+# Instead, surround them with single quotes.
+#
+# en:
+#   'true': 'foo'
+#
+# To learn more, please read the Rails Internationalization guide
+# available at https://guides.rubyonrails.org/i18n.html.
 
 en:
+  spree:
+    ts_card:
+      not_cancel: Unable to Process Gift Card Cancellation
+      not_found: Unable to Retrieve Gift Card Information
+      not_storefront_card: Card not purchased from storefront
+      status_updated: Card status updated successfully
+    givex:
+      not_storefront_card: Card not purchased from storefront
+      not_found: Unable to Retrieve Gift Card Information
+    linked_product_vendor_changed: Can't change vendor for linked product.
+    linked_product_changed: Please remove the product from inventory then unlink it.
+    weighted_flat_rate: Weighted Flate Rate
+    product_vendor_changed_error: Any of your order's items vendor has changed. Please reload your page.
+    there_are_no_items_for_this_order: There are no items in this order. Please add an item to the order to continue.
+    adjustment_labels:
+      tax_rates:
+        including_tax: '%{name}%{amount}'
+    promotion_rule_types:
+      shipment_products_total:
+        description: Shipping discount if product type added
+        name: Order Limit on Shipment
+    outdated_cross_browser_cart: You have carts across multiple browsers. Please check details and proceed...
+    order_completed_already: Order has been completed already. Refreshing cart...
+    refresh_cart: Refreshing cart...
+    zero_cart_error: "Zero payment not allowed"
+    insufficient_stock_lines_present: Items '%{product_name}' have insufficient quantity.
+    insufficient_stock_present: Items '%{product_name}' is out of stock.
+    order_amount_due: Order has due amount %{amount}.
+    eligibility_errors:
+      messages:
+        wrong_country: "This promo is not applicable for the selected country"
+    promotion:
+      exclude_for_product_on_sale:
+        "Exclude promotion applying to items with sale price"
+    order:
+      gift_total: "Paid via Gift Card:"
+      discount: "Discount"
+      inclusive_tax: "Tax Inclusive of prices:"
+      exclusive_tax: "Tax Exclusive of prices:"
+      shipment_tax: "Shipment Tax:"
+    bulk_order:
+      destroy: "Unable to destroy order in %{state} state"
+      not_authorize: 'You are not authorized to access this page.'
+    not_found: "The resource you were looking for not found"
   hello: "Hello world"
+  order:
+    line_item:
+      agree_to_email_change: You must agree to 'The recipient email address used at time of processing the order have been used to sent the gift card. If you have any concerns regarding this please let us know'
+    mailer:
+      thank_you: "Thank you, %{store_front}!"
+  order_mailer:
+    order:
+      sub_total: "Order Subtotal:"
+      discount: "Discount:"
+    line_item:
+      sub_total: "Item Subtotal:"
+      personalized_price: "Personalized Price:"
+  general_mailer:
+    one_time_password:
+      subject: "One Time Password (OTP) for your secure sign-in"
+  shipment_mailer:
+    shipped_email:
+      dear_customer: "Dear %{customer}"
+      instructions: "The below items in relation to order #%{number} have now been shipped"
+      shipment_summary: "Your Shipment #%{number}"
+      shipping_method: "Shipping method: %{shipping_method}"
+      subject: Shipment Notification
+      thanks: Thank you for your business.
+      tracking_id: Tracking ID
+      shipped_by: Shipped By
+      track_link: "Tracking Link: %{url}"
+      note: "Note: If you ordered multiple products from different Partners, these will be dispatched separately. You can\nlog into your account to keep up to date with all deliveries "
+  activerecord:
+    attributes:
+      spree/gift_card:
+        variant: 'Variant'
+      spree/vendor:
+        name: Name
+  stripe:
+    error:
+      connected_account:
+        blank: "Please connect your account with stripe"
+  batch_schedule:
+    greater_end_date: "must be equal or greater than start date"
+    smaller_end_date: "must be between an year"
+  fulfilment:
+    replacement:
+      create_success: "Replacement created successfully"
+      create_fail: "Failed to create replacement"
+      update_fail: "Failed to update replacement"
+      exists: "Replacement already exists"
+  scheduled_report:
+    once:
+      in_future: "No records saved or updated\nYou are attempting to update one time report which cannot be updated before 24 hours\nLast changed: %{updated_at} UTC"

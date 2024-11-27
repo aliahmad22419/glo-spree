@@ -1,0 +1,17 @@
+fr:
+  pdf:
+    gift_card:
+      header:
+        title: 'Carte Cadeau'
+      footer:
+        sample: 'Échantillon'
+      details:
+        card_type: 'Carte Cadeau'
+        value: 'Valeur de la carte cadeau'
+        number: 'Numéro de la Carte Cadeau'
+        expiry: "Date d'expiration"
+        order_reference: 'Numéro de commande'
+        product_info: 'Description du produit'
+        terms_conditions: 'Conditions générales'
+        redemption_info: 'Instructions de rachat'
+        support_contact: 'Service clientèle'

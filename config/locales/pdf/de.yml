@@ -1,0 +1,17 @@
+de:
+  pdf:
+    gift_card:
+      header:
+        title: 'Geschenkkarte'
+      footer:
+        sample: 'Probe'
+      details:
+        card_type: 'Geschenkkarte'
+        value: 'Wert der Geschenkkarte'
+        number: 'Geschenkkartennummer'
+        expiry: "Ablaufdatum"
+        order_reference: 'Bestellnummer'
+        product_info: 'Produktbeschreibung'
+        terms_conditions: 'Allgemeine Geschäftsbedingungen'
+        redemption_info: 'Einlösungsanleitung'
+        support_contact: 'Kundendienst'

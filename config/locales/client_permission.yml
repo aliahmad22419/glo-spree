@@ -1,0 +1,20 @@
+en:
+  client: 
+    zones: 
+      allow: ['*']
+      disallow: []
+    ts_gift_cards:
+      allow: ['*']
+      disallow: ['cancel_gift_cards']
+    fulfilment_info:
+      allow: []
+      disallow: ['*']
+    fulfilment_team:
+      allow: []
+      disallow: ['*']
+    admins:
+      allow: []
+      disallow: ['*']
+    sub_admins:
+      allow: []
+      disallow: ['*']

@@ -1,0 +1,108 @@
+en:
+  vendor: 
+    zones: 
+      allow: []
+      disallow: ['create', 'update', 'destroy']
+    homes: 
+      allow: []
+      disallow: ['update_scheduled_reports']
+    promotion_categories:
+      allow: []
+      disallow: ['create', 'update', 'destroy']
+    clients:
+      allow: []
+      disallow: ['create', 'update', 'destroy', 'create_ts_client', 'is_new_company', 'iframe_business_details']
+    tags:
+      allow: []
+      disallow: ['create', 'update', 'destroy']
+    order_tags:
+      allow: []
+      disallow: ['create', 'update', 'destroy']
+    option_types:
+      allow: []
+      disallow: ['create', 'update', 'destroy']
+    properties:
+      allow: []
+      disallow: ['create', 'update', 'destroy']
+    exchange_rates:
+      allow: []
+      disallow: ['create', 'update', 'destroy']
+    client_email_templates:
+      allow: []
+      disallow: ['create', 'update', 'destroy']
+    email_templates:
+      allow: []
+      disallow: ['create', 'update', 'destroy']
+    galleries:
+      allow: []
+      disallow: ['index', 'create', 'update', 'destroy', 'destroy_multiple']
+    givex_cards:
+      allow: []
+      disallow: ['create', 'update', 'destroy', 'pdf_details', 'givex_request', 'givex_activate_card', 'cancel_gift_cards'] # ["index", "show"] 
+    pages:
+      allow: []
+      disallow: ['create', 'update', 'destroy']
+    promotions:
+      allow: ['form_data']
+      disallow: []
+    payment_methods:
+      allow: []
+      disallow: ['create', 'update', 'destroy']
+    redirects:
+      allow: []
+      disallow: ['create', 'update', 'destroy']
+    shipping_categories:
+      allow: []
+      disallow: ['create', 'update', 'destroy']
+    stores:
+      allow: []
+      disallow: ['client_stores', 'create', 'update', 'destroy', 'publish_html_layouts', 'email_configurations', 'get_acm_certificate', 'regenerate_dns', 'update_apple_passbook', 'stripe_dashboard', 'update_strip_info', 'update_payment_methods',
+                'update_pickup_address', 'update_v3_flow_address', 'general_settings', 'layout_settings', 'iframe_store_layout_settings', 'get_iframe_store_layout_settings', 'send_dns_details', 'load_balancer_ssl_setup_alert']
+    tax_categories:
+      allow: []
+      disallow: ['create', 'update', 'destroy']
+    tax_rates:
+      allow: []
+      disallow: ['create', 'update', 'destroy', 'destroy_multiple']
+    ts_gift_cards:
+      allow: []
+      disallow: ['create', 'update', 'destroy', 'cancel_gift_cards', 'update_status']
+    vendors:
+      allow: []
+      disallow: ['create', 'sign_up', 'destroy', 'destroy_multiple']
+    users:
+      allow: []
+      disallow: ['create', 'destroy','create_sub_client','create_bulk_sub_client','scheduled_reports', 'export_users', 'import_sub_client', 'export_client_users', 'create_fd_user']
+    promotion_rules:
+      allow: []
+      disallow: ['*']
+    promotion_actions:
+      allow: []
+      disallow: ['*']
+    promotion:
+      allow: []
+      disallow: ['*']
+    orders:
+      allow: []
+      disallow: ['download_order_gift_cards']
+    fulfilment_info:
+      allow: []
+      disallow: ['*']
+    fulfilment_team:
+      allow: []
+      disallow: ['*']
+    whitelist_emails:
+      allow: []
+      disallow: ['*']
+    aws_files:
+      allow: []
+      disallow: ['*']
+    products:
+      allow: []
+      disallow: ['iframe_flow_product', 'update_iframe_product', 'upload_gallery_image']
+    admins:
+      allow: []
+      disallow: ['*']
+    sub_admins:
+      allow: []
+      disallow: ['*']

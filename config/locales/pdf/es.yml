@@ -1,0 +1,17 @@
+es:
+  pdf:
+    gift_card:
+      header:
+        title: 'Tarjeta de regalo'
+      footer:
+        sample: 'Muestra'
+      details:
+        card_type: 'Tarjeta de regalo'
+        value: 'Valor de la tarjeta de regalo'
+        number: 'Número de la tarjeta'
+        expiry: 'Fecha de vencimiento'
+        order_reference: 'Número de pedido'
+        product_info: 'Descripción del producto'
+        terms_conditions: 'Términos y condiciones'
+        redemption_info: 'Instrucciones de canje'
+        support_contact: 'Servicio al cliente'

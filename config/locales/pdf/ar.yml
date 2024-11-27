@@ -1,0 +1,17 @@
+ar:
+  pdf:
+    gift_card:
+      header:
+        title: 'بطاقة هدية'
+      footer:
+        sample: 'عينة'
+      details:
+        card_type: 'بطاقة هدية'
+        value: 'قيمة بطاقة الهدايا'
+        number: 'رقم البطاقة'
+        expiry: 'تاريخ الانتهاء'
+        order_reference: 'رقم الطلب'
+        product_info: 'وصف المنتج'
+        terms_conditions: 'الشروط والأحكام'
+        redemption_info: 'تعليمات الاسترداد'
+        support_contact: 'خدمة العملاء'

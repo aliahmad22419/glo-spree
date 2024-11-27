@@ -1,0 +1,17 @@
+en:
+  pdf:
+    gift_card:
+      header:
+        title: 'GIFT CARD'
+      footer:
+        sample: 'Sample'
+      details:
+        card_type: 'GIFT CARD'
+        value: 'GIFT CARD VALUE'
+        number: 'GIFT CARD NUMBER'
+        expiry: 'EXPIRY DATE'
+        order_reference: 'ORDER NUMBER'
+        product_info: 'PRODUCT DESCRIPTION'
+        terms_conditions: 'TERMS & CONDITIONS'
+        redemption_info: 'REDEMPTION INSTRUCTION'
+        support_contact: 'Customer Service'

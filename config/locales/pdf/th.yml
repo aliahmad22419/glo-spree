@@ -1,0 +1,17 @@
+th:
+  pdf:
+    gift_card:
+      header:
+        title: 'บัตรของขวัญ'
+      footer:
+        sample: 'ตัวอย่าง'
+      details:
+        card_type: 'บัตรของขวัญ'
+        value: 'มูลค่าบัตรของขวัญ'
+        number: 'หมายเลขบัตรของขวัญ'
+        expiry: 'วันหมดอายุ'
+        order_reference: 'หมายเลขคำสั่งซื้อ'
+        product_info: 'รายละเอียดสินค้า'
+        terms_conditions: 'ข้อกำหนดและเงื่อนไข'
+        redemption_info: 'คำแนะนำในการแลก'
+        support_contact: 'บริการลูกค้า'

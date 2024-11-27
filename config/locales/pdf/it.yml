@@ -1,0 +1,17 @@
+it:
+  pdf:
+    gift_card:
+      header:
+        title: 'Carta Regalo'
+      footer:
+        sample: 'Campione'
+      details:
+        card_type: 'Carta Regalo'
+        value: 'Valore della carta regalo'
+        number: 'Numero Carta Regalo'
+        expiry: 'Data di scadenza'
+        order_reference: 'Numero Ordine'
+        product_info: 'Descrizione del prodotto'
+        terms_conditions: 'Termini e condizioni'
+        redemption_info: 'Istruzioni per il riscatto'
+        support_contact: 'Servizio clienti'

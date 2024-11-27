@@ -1,0 +1,17 @@
+zh-Hant:
+  pdf:
+    gift_card:
+      header:
+        title: '礼品卡'
+      footer:
+        sample: '样本'
+      details:
+        card_type: '礼品卡'
+        value: '礼品卡金额'
+        number: '礼品卡号'
+        expiry: '到期日'
+        order_reference: '订单号'
+        product_info: '产品描述'
+        terms_conditions: '条款和条件'
+        redemption_info: '兑换说明'
+        support_contact: '客户服务'

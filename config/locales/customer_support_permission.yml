@@ -1,0 +1,25 @@
+en:
+  customer_support:
+    orders:
+      allow: ['search_orders_customer_service', 'show','index', 'send_emails', 'update_shipment_card_schedule', 'refund', 'update_notes']
+      disallow: ['download_order_gift_cards']
+    passwords:
+      allow: ['*']
+      disallow: []
+    users:
+      allow: ['update_user', 'profile', 'email_for_customer_support']
+      disallow: ['export_users', 'import_sub_client', 'export_client_users', 'create_fd_user']
+    line_items:
+      allow: ['send_gift_cards_email', 'send_gift_cards_sms', 'regenerate_gift_cards', 'update_recipient_email']
+      disallow: []
+    stores:
+      allow: ['all_stores']
+      disallow: ['client_stores', 'create', 'update', 'destroy', 'publish_html_layouts', 'email_configurations', 'get_acm_certificate', 'regenerate_dns', 'update_apple_passbook', 'stripe_dashboard', 'update_strip_info', 'update_payment_methods',
+                'update_pickup_address', 'update_v3_flow_address', 'general_settings', 'layout_settings', 'iframe_store_layout_settings', 'get_iframe_store_layout_settings', 'send_dns_details', 'load_balancer_ssl_setup_alert']
+    ts_gift_cards:
+      allow: ['cancel_gift_cards']
+      disallow: ['create', 'pdf_details', 'update_status']
+    givex_cards:
+      allow: ['cancel_gift_cards']
+      disallow: ['index', 'create', 'show', 'pdf_details', 'send_email', 'send_sms', 'givex_request', 'givex_activate_card']
+    other_disallowed_action: ['*']

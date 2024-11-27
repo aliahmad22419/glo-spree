@@ -1,0 +1,17 @@
+pt:
+  pdf:
+    gift_card:
+      header:
+        title: 'Cartão Presente'
+      footer:
+        sample: 'Amostra'
+      details:
+        card_type: 'Cartão Presente'
+        value: 'Valor do cartão presente'
+        number: 'Número do Cartão Presente'
+        expiry: 'Data de validade'
+        order_reference: 'Número do pedido'
+        product_info: 'Descrição do produto'
+        terms_conditions: 'Termos e condições'
+        redemption_info: 'Instruções de resgate'
+        support_contact: 'Atendimento ao cliente'

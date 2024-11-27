@@ -1,0 +1,9 @@
+en:
+  service_login_sub_admin:
+    admins:
+      allow: ['profile', 'update_password']
+      disallow: ['index','clients']
+    sub_admins:
+      allow: ['clients', 'authenticate_sub_client']
+      disallow: ['show', 'create', 'destroy', 'destroy_multiple', 'reinstate']
+    other_disallowed_action: ['*']

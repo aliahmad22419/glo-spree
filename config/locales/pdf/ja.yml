@@ -1,0 +1,17 @@
+ja:
+  pdf:
+    gift_card:
+      header:
+        title: 'ギフトカード'
+      footer:
+        sample: 'サンプル'
+      details:
+        card_type: 'ギフトカード'
+        value: 'ギフトカードの価値'
+        number: 'ギフトカード番号'
+        expiry: '有効期限'
+        order_reference: '注文番号'
+        product_info: '商品説明'
+        terms_conditions: '利用規約'
+        redemption_info: '引換手順'
+        support_contact: 'カスタマーサービス'

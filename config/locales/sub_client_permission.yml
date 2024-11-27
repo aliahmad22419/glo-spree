@@ -1,0 +1,38 @@
+en:
+  sub_client: 
+    zones: 
+      allow: ['*']
+      disallow: []
+    ts_gift_cards:
+      allow: ['*']
+      disallow: ['cancel_gift_cards']
+    fulfilment_info:
+      allow: []
+      disallow: ['*']
+    fulfilment_team:
+      allow: []
+      disallow: ['*']
+    users:
+      allow: ['import_sub_client', 'export_client_users', 'create_sub_client', 'create_fd_user', 'index', 'show', 'update', 'destroy', 'create', 'create_bulk_sub_client', 'profile', 'export_users', 'scheduled_reports', 'service_login_users']
+      disallow: []
+    whitelist_emails:
+      allow: ['*']
+      disallow: []
+    aws_files:
+      allow: ['*']
+      disallow: []      
+    clients:
+      allow: []
+      disallow: ['is_new_company', 'iframe_business_details']
+    stores:
+      allow: []
+      disallow: ['iframe_store_layout_settings', 'send_dns_details']
+    products:
+      allow: []
+      disallow: ['iframe_flow_product', 'update_iframe_product']
+    admins:
+      allow: []
+      disallow: ['*']
+    sub_admins:
+      allow: []
+      disallow: ['*']

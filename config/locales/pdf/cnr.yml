@@ -1,0 +1,17 @@
+cnr:
+  pdf:
+    gift_card:
+      header:
+        title: 'Poklon kartica'
+      footer:
+        sample: 'Sample'
+      details:
+        card_type: 'Poklon kartica'
+        value: 'Vrijednost poklon kartice'
+        number: 'Broj poklon kartice'
+        expiry: 'Datum isteka'
+        order_reference: 'Broj narudžbe'
+        product_info: 'Opis proizvoda'
+        terms_conditions: 'Uslovi korišćenja'
+        redemption_info: 'Uputstvo za iskorišćavanje'
+        support_contact: 'Korisnička podrška'

@@ -1,0 +1,18 @@
+en:
+  fulfilment_admin: 
+    zones: 
+      allow: ['create_fulfilment_zone', 'update_fulfilment_zone', 'destroy', 'assign_order', 'show', 'index']
+      disallow: []
+    fulfilment_info:
+      allow: ['*']
+      disallow: []
+    fulfilment_team:
+      allow: ['*']
+      disallow: []
+    orders:
+      allow: ['show', 'update_notes']
+      disallow: ['download_order_gift_cards']
+    users:
+      allow: ['show', 'index', 'create_sub_client', 'destroy', 'update', 'profile']
+      disallow: ['export_users', 'import_sub_client', 'export_client_users', 'create_fd_user']
+    other_disallowed_action: ['*']
