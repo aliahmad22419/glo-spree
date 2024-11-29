@@ -1,0 +1,1 @@
+require "#{Rails.root}/lib/custom_acts_as_taggable_on"

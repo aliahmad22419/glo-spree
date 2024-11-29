@@ -1,13 +1,13 @@
 
-# Following changes are related to latest version of acts_as_taggable_on gem 
+# Following changes are related to latest version of acts_as_taggable_on gem
 # If we update acts_as_taggable_on gem we will have to update the spree core gem
 # and it can break changes. So thats why i have just picked only tenant related changes and put them in this file to support tenant based feature.
 
 gem_dir = Gem::Specification.find_by_name("acts-as-taggable-on").gem_dir
-require "#{gem_dir}/lib/acts_as_taggable_on/taggable/core"
+require "#{gem_dir}/lib/acts-as-taggable-on/taggable/core"
 
 ActsAsTaggableOn::Tag.class_eval do
-  
+
 #   def self.tenant_based(tenant_id)
 #     where("spree_tags.client_id=?", tenant_id)
 #   end
@@ -157,6 +157,6 @@ ActsAsTaggableOn::Tag.class_eval do
 #       include Ownership
 #       include Related
 #     end
-    
+
 #   end
 end
