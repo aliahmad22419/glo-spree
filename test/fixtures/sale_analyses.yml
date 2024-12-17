@@ -1,0 +1,111 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  order_number: MyString
+  storefront: MyString
+  time_zone: MyString
+  date_placed: 2022-11-21 18:19:05
+  status: MyString
+  customer: MyString
+  currency: MyString
+  delivery_pickup_date: 2022-11-21 18:19:05
+  shipped_date: 2022-11-21 18:19:05
+  delivery_pickup_time: MyString
+  shipped_time: MyString
+  tax_inclusive: 9.99
+  additional_tax: 9.99
+  tags: MyText
+  total: 9.99
+  vendor: MyString
+  time_placed: 2022-11-21 18:19:05
+  order_status: MyString
+  customer_full_name: MyString
+  customer_address: MyString
+  customer_first_name: MyString
+  customer_last_name: MyString
+  shipping_delivery_country: MyString
+  customer_phone: MyString
+  customer_email: MyString
+  product_name: MyString
+  product_sku: MyString
+  vendor_sku: MyString
+  variant: MyString
+  product_quantity: 1
+  product_price: 9.99
+  order_currency: MyString
+  vendor_currency: 
+  exchange_rate: 9.99
+  sub_total: 9.99
+  shipping_amount: 9.99
+  total_shipping_amount: 9.99
+  discount_amount: 9.99
+  associated_order_value: 9.99
+  shipping_method: MyString
+  tags: MyText
+  gift_card_number: MyText
+  special_message: MyText
+  card_type: MyString
+  recipient_name: MyString
+  recipient_first_name: MyString
+  recipient_last_name: MyString
+  recipient_email: MyString
+  recipient_phone_number: MyString
+  marketing_enabled: MyString
+  product_tag: MyString
+  order_id: 1
+  line_item_id: 1
+
+two:
+  order_number: MyString
+  storefront: MyString
+  time_zone: MyString
+  date_placed: 2022-11-21 18:19:05
+  status: MyString
+  customer: MyString
+  currency: MyString
+  delivery_pickup_date: 2022-11-21 18:19:05
+  shipped_date: 2022-11-21 18:19:05
+  delivery_pickup_time: MyString
+  shipped_time: MyString
+  tax_inclusive: 9.99
+  additional_tax: 9.99
+  tags: MyText
+  total: 9.99
+  vendor: MyString
+  time_placed: 2022-11-21 18:19:05
+  order_status: MyString
+  customer_full_name: MyString
+  customer_address: MyString
+  customer_first_name: MyString
+  customer_last_name: MyString
+  shipping_delivery_country: MyString
+  customer_phone: MyString
+  customer_email: MyString
+  product_name: MyString
+  product_sku: MyString
+  vendor_sku: MyString
+  variant: MyString
+  product_quantity: 1
+  product_price: 9.99
+  order_currency: MyString
+  vendor_currency: 
+  exchange_rate: 9.99
+  sub_total: 9.99
+  shipping_amount: 9.99
+  total_shipping_amount: 9.99
+  discount_amount: 9.99
+  associated_order_value: 9.99
+  shipping_method: MyString
+  tags: MyText
+  gift_card_number: MyText
+  special_message: MyText
+  card_type: MyString
+  recipient_name: MyString
+  recipient_first_name: MyString
+  recipient_last_name: MyString
+  recipient_email: MyString
+  recipient_phone_number: MyString
+  marketing_enabled: MyString
+  product_tag: MyString
+  order_id: 1
+  line_item_id: 1
