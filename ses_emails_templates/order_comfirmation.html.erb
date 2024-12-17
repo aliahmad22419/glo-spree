@@ -1,0 +1,296 @@
+<table border='0' cellpadding='0' cellspacing='0' width='100%' class='mcnTextBlock' style='min-width: 100%;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;'>
+  <tbody class='mcnTextBlockOuter'>
+  <tr>
+    <td valign='top' class='mcnTextBlockInner' style='padding-top: 9px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;'>
+      <table align='left' border='0' cellpadding='0' cellspacing='0' style='max-width: 100%;min-width: 100%;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;' width='100%' class='mcnTextContentContainer'>
+        <tbody>
+        <tr>
+          <td valign='top' class='mcnTextContent' style='padding-top: 0;padding-right: 18px;padding-bottom: 9px;padding-left: 18px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;word-break: break-word;color: #202020;font-family: Helvetica;font-size: 16px;line-height: 150%;text-align: left;'>
+            <h2 class='null' style='text-align: center;display: block;margin: 0;padding: 0;color: #202020;font-family: Helvetica;font-size: 22px;font-style: normal;font-weight: bold;line-height: 125%;letter-spacing: normal;'>
+                  <span style='font-family:helvetica neue,helvetica,arial,verdana,sans-serif'>
+                    {{ title }}
+                  </span>
+            </h2>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </td>
+  </tr>
+  </tbody>
+</table>
+<table border='0' cellpadding='0' cellspacing='0' width='100%' class='mcnTextBlock' style='min-width: 100%;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;'>
+  <tbody class='mcnTextBlockOuter'>
+  <tr>
+    <td valign='top' class='mcnTextBlockInner' style='padding-top: 9px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;'>
+      <table align='left' border='0' cellpadding='0' cellspacing='0' style='max-width: 100%;min-width: 100%;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;' width='100%' class='mcnTextContentContainer'>
+        <tbody>
+        <tr>
+          <td valign='top' class='mcnTextContent' style='padding-top: 0;padding-right: 18px;padding-bottom: 9px;padding-left: 18px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;word-break: break-word;color: #202020;font-family: Helvetica;font-size: 16px;line-height: 150%;text-align: left;'>
+            <div style='text-align: center;'>
+              <font face='helvetica neue, helvetica, arial, verdana, sans-serif'>
+                    <span style='font-size:18px'>
+                      {{ description }}
+                    </span>
+              </font>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<table border='0' cellpadding='0' cellspacing='0' width='100%' class='mcnBoxedTextBlock' style='min-width: 100%;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;'>
+  <tbody class='mcnBoxedTextBlockOuter'>
+  <tr>
+    <td valign='top' class='mcnBoxedTextBlockInner' style='mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;'>
+      <table align='left' border='0' cellpadding='0' cellspacing='0' width='300' class='mcnBoxedTextContentContainer' style='border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;'>
+        <tbody>
+        <tr>
+          <td class='mcnBoxedTextContentColumn' style='padding-top: 9px;padding-right: 18px;padding-bottom: 9px;padding-left: 18px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;'>
+            <table border='0' cellspacing='0' class='mcnTextContentContainer' width='100%' style='min-width: 100% !important;background-color: #EDEDED;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;'>
+              <tbody>
+              <tr>
+                <td valign='top' class='mcnTextContent' style='padding: 18px;color: #4A4A4A;font-family: &quot;Open Sans&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;font-size: 14px;font-weight: normal;text-align: left;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;word-break: break-word;line-height: 150%;'>
+                        <span style='font-family:helvetica neue,helvetica,arial,verdana,sans-serif'>
+                          <strong>SUMMARY&nbsp;</strong>
+                          <br>
+                          <br>
+                          Order: {{ order.number }}
+                          <br>
+                          Date:&nbsp; {{ completed_date }}
+                          {{#if gift_card_total}}
+                            <br>
+                            Gift Total:&nbsp; {{ gift_card_total }}
+                          {{/if}}
+                          <br>
+                          Total:&nbsp; {{order_total}}
+                        </span>
+                  <br>
+                  <br>
+                  <br>
+                  &nbsp;
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <table align='left' border='0' cellpadding='0' cellspacing='0' width='300' class='mcnBoxedTextContentContainer' style='border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;'>
+        <tbody>
+        <tr>
+          <td class='mcnBoxedTextContentColumn' style='padding-top: 9px;padding-right: 18px;padding-bottom: 9px;padding-left: 18px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;'>
+            <table border='0' cellspacing='0' class='mcnTextContentContainer' width='100%' style='min-width: 100% !important;background-color: #EDEDED;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;'>
+              <tbody>
+              <tr>
+                <td valign='top' class='mcnTextContent' style='padding: 18px;color: #4A4A4A;font-family: &quot;Open Sans&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;font-size: 14px;font-weight: normal;text-align: left;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;word-break: break-word;line-height: 150%;'>
+                <span style='font-family:helvetica neue,helvetica,arial,verdana,sans-serif'>
+                  <strong>SHIPPING DETAILS&nbsp;</strong>
+                </span>
+                  <br>
+                  <br>
+                  <span style='font-family:helvetica neue,helvetica,arial,verdana,sans-serif'>
+                  {{#if ship_address.email}}
+                    <br>
+                    {{ ship_address.email }}
+                    <br>
+                  {{/if}}
+                  {{ship_address.firstname}} {{ship_address.lastname}}
+                    &nbsp;
+                  <br>
+                    {{ ship_address.address1 }}
+                    &nbsp;&nbsp;
+                  <br>
+                  {{#if ship_address.address2}}
+                    {{ ship_address.address2 }}
+                    <br>
+                  {{/if}}
+                  {{#if ship_address.apartment_no}}
+                    {{ ship_address.apartment_no }}
+                    <br>
+                  {{/if}}
+                  {{#if ship_address.estate_name}}
+                    {{ ship_address.estate_name }}
+                    <br>
+                  {{/if}}
+                  {{#if ship_address.district}}
+                    {{ ship_address.district }}
+                    <br>
+                  {{/if}}
+                  {{#if ship_address.city}}
+                    {{ ship_address.city }}
+                    <br>
+                  {{/if}}
+                  {{#if ship_address.state_name}}
+                    {{ ship_address.state_name }}
+                    <br>
+                  {{/if}}
+                  {{#if ship_address_country}}
+                    {{ ship_address_country }}
+                    <br>
+                  {{/if}}
+                  {{#if ship_address.region}}
+                    {{ ship_address.region }}
+                    <br>
+                  {{/if}}
+                  {{#if ship_address.zipcode}}
+                    {{ ship_address.zipcode }}
+                    <br>
+                  {{/if}}
+                  {{#if ship_address.phone}}
+                    {{ ship_address.phone }}
+                    <br>
+                  {{/if}}
+                </span>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </td>
+  </tr>
+  </tbody>
+</table>
+<table border='0' cellpadding='0' cellspacing='0' width='100%' class='mcnBoxedTextBlock' style='min-width: 100%;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;'>
+  <tbody class='mcnBoxedTextBlockOuter'>
+  <tr>
+    <td valign='top' class='mcnBoxedTextBlockInner' style='mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;'>
+      <table align='left' border='0' cellpadding='0' cellspacing='0' width='100%' style='min-width: 100%;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;' class='mcnBoxedTextContentContainer'>
+        <tbody>
+        <tr>
+          <td style='padding-top: 9px;padding-left: 18px;padding-bottom: 9px;padding-right: 18px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;'>
+            <table border='0' cellspacing='0' class='mcnTextContentContainer' width='100%' style='min-width: 100% !important;background-color: #EDEDED;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;'>
+              <tbody>
+              <tr>
+                <td valign='top' class='mcnTextContent' style='padding: 18px;color: #4A4A4A;font-family: &quot;Open Sans&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;font-size: 14px;font-weight: normal;text-align: left;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;word-break: break-word;line-height: 150%;'>
+                  <span style='font-family:helvetica neue,helvetica,arial,verdana,sans-serif'>
+                      <strong>ORDER DETAILS&nbsp;</strong>
+                    <br>
+                    <br>
+
+                    {{#each line_items}}
+                       <strong>{{name}}&nbsp;</strong>
+                      <br>
+                      Quantity: {{quantity}}
+                      {{#each option_values}}
+                        <br>
+                        • {{value}}
+                      {{/each}}
+                      <br>
+                      {{#each customizations}}
+                        • {{value}}
+                        <br>
+                      {{/each}}
+                      {{#if shipment_name}}
+                        {{ shipment_name }}
+                      {{/if}}
+                      :
+                      {{#if shipment_cost}}
+                        {{ shipment_cost }}
+                      {{/if}}
+                      <br>
+                      SubTotal:  {{sub_total}}&nbsp;
+                      <br>
+                      <br>
+                    {{/each}}
+                    {{#if show_discount}}
+                      <strong>
+                        Discount
+                        {{discount}}
+                      </strong>
+                      <br>
+                    {{/if}}
+
+                    {{#if show_gifttotal}}
+                      <strong>
+                        Gift
+                        {{gift_card_total}}
+                      </strong>
+                      <br>
+                    {{/if}}
+
+                    {{#if show_inclusive_tax}}
+                      <strong>
+                        Inclusive tax
+                        {{inclusive_tax}}
+                      </strong>
+                      <br>
+                    {{/if}}
+
+                    {{#if show_exclusive_tax}}
+                      <strong>
+                        Exclusive tax
+                        {{ exclusive_tax }}
+                      </strong>
+                      <br>
+                    {{/if}}
+
+                    <strong>
+                      Total
+                      {{order_total}}
+                    </strong>
+                  </span>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<table border='0' cellpadding='0' cellspacing='0' width='100%' class='mcnBoxedTextBlock' style='min-width: 100%;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;'>
+  <tbody class='mcnBoxedTextBlockOuter'>
+  <tr>
+    <td valign='top' class='mcnBoxedTextBlockInner' style='mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;'>
+      <table align='left' border='0' cellpadding='0' cellspacing='0' width='100%' style='min-width: 100%;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;' class='mcnBoxedTextContentContainer'>
+        <tbody>
+        <tr>
+          <td style='padding-top: 9px;padding-left: 18px;padding-bottom: 9px;padding-right: 18px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;'>
+            <table border='0' cellspacing='0' class='mcnTextContentContainer' width='100%' style='min-width: 100% !important;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;'>
+              <tbody>
+              <tr>
+                <td valign='top' class='mcnTextContent' style='padding: 18px;color: #4A4A4A;font-family: &quot;Open Sans&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif;font-size: 14px;font-weight: normal;text-align: left;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;word-break: break-word;line-height: 150%;'>
+                  <div style='text-align: center;'>
+                    {{ contact_us }}
+                    {{#if contact_us_blank}}
+                      <span style='font-family:helvetica neue,helvetica,arial,verdana,sans-serif'>
+                        <span style='color:#4a4a4a'>
+                          Items in your order may ship separately.&nbsp;
+                        </span>
+                        <br>
+                        <a href='https://{{ store_url }}/user/account' target='_blank' style='mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #007C89;font-weight: normal;text-decoration: underline;'>
+                          <span style='color:#4a4a4a'>
+                            Contact the Seller
+                          </span>
+                        </a>
+                        <span style='color:#4a4a4a'>
+                          for shipping updates.
+                        </span>
+                      </span>
+                    {{/if}}
+                  </div>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </td>
+  </tr>
+  </tbody>
+</table>

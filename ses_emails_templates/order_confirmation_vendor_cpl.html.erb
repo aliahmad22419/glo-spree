@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <meta name="x-apple-disable-message-reformatting">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta content="telephone=no" name="format-detection">
+  <title>Vendors Notification</title>
+  <style media="screen" type="text/css">
+    #outlook a {
+      padding:0;
+    }
+    .es-button {
+      mso-style-priority:100!important;
+      text-decoration:none!important;
+    }
+    a[x-apple-data-detectors] {
+      color:inherit!important;
+      text-decoration:none!important;
+      font-size:inherit!important;
+      font-family:inherit!important;
+      font-weight:inherit!important;
+      line-height:inherit!important;
+    }
+    [data-ogsb] .es-button {
+      border-width:0!important;
+      padding:10px 20px 10px 20px!important;
+    }
+    body {
+      background-color: #EDEDED;
+      color: #000000;
+      font-family: 'helvetica', sans-serif;
+      font-size: 0.875rem;
+      line-height: 1rem;
+      -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+      padding: 0;
+      margin: 0;
+    }
+    .wrapper {
+      background-color: #FFFFFF;
+      max-width: 640px;
+      padding: 32px;
+      Margin: 0 auto;
+    }
+    img {
+      max-width: 100%;
+    }
+    .heading-text-main {
+      color: #000000;
+      font-weight: bold;
+      font-size: 14px;
+      line-height: 16px;
+    }
+    .heading-text {
+      color: #000000;
+      font-weight: bold;
+      font-size: 12px;
+      line-height: 14px;
+    }
+    .sub-text {
+      font-weight: normal;
+      font-size: 10px;
+      line-height: 11px;
+      color: #000000;
+    }
+    .count-border {
+      border: 1px solid #D9D9D9;
+      padding: 6px 8px;
+    }
+    .small-text {
+      font-weight: normal;
+      font-size: 8px;
+      line-height: 9px;
+    }
+    .lebel-text {
+      font-weight: normal;
+      font-size: 10px;
+      line-height: 11px;
+    }
+    /* css start for multi vendors*/
+    .email-header {
+      padding-top: 20px;
+      text-align: center;
+      width: 100%;
+    }
+    .email-header .email-logo {
+      width: 172px;
+    }
+    .email-header .email-heading {
+      color: #000;
+      font-size: 24px;
+      font-weight: 400;
+      line-height: 28px;
+      letter-spacing: 0.01em;
+      margin-bottom: 20px;
+    }
+    .msg-wrapper {
+      padding: 1.5rem;
+    }
+    p {
+      margin-top: 0;
+      margin-bottom: 1rem;
+    }
+    .btns-wrapper {
+      display: flex;
+      align-items: flex-start;
+      padding-top: 0.5rem;
+      padding-bottom: 1.5rem;
+    }
+    .btns-wrapper .btn {
+      padding: 17px 20px 13px;
+      height: auto;
+      font-size: 0.75rem;
+      line-height: 0.875rem;
+      letter-spacing: 1.25px;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+    .btns-wrapper .btn:hover,
+    .btns-wrapper .btn:focus {
+      text-decoration: underline;
+    }
+    .btns-wrapper .btn.btn-view-order {
+      margin-right: 1rem;
+    }
+    .btns-wrapper .btn.btn-primary {
+      background-color: #212322;
+      color: #fff;
+    }
+    .btns-wrapper .btn.btn-transparent {
+      background-color: transparent;
+      color: #212322;
+    }
+    .border-bottom-grey {
+      border-bottom: 0.5px solid #D9D9D9;
+    }
+    .table-container {
+      padding-top: 1.5rem;
+      overflow-x: auto;
+    }
+    .section-heading {
+      color: #212322;
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.125rem;
+      margin: auto;
+    }
+    .table-container table td {
+      border-bottom: 0.5px solid #e0e0e0;
+      color: #374151;
+      padding-top: 1rem;
+      padding-bottom: 0.75rem;
+      vertical-align: middle;
+    }
+    .table-container .pro-name-cont {
+      padding-left: 29px;
+    }
+    .table-container tbody .sub-desc {
+      color: #6B7280;
+      font-size: 0.75rem;
+      line-height: 0.875rem;
+      padding-top: 0.375rem;
+    }
+    .totals-wrapper {
+      display: flex;
+      justify-content: flex-end;
+      padding-top: 1rem;
+    }
+    .totals-wrapper .totals-inner-cont {
+      color: #455263;
+      width: 70%;
+      max-width: 305px;
+    }
+    .totals-wrapper .totals-inner-cont td {
+      padding-bottom: 0.8125rem;
+    }
+    .totals-wrapper .totals-inner-cont .bordered-col {
+      border-bottom: 1px solid #e9e7e7;
+    }
+    .totals-wrapper .totals-inner-cont .grand-total {
+      font-size: 1.5rem;
+    }
+    .address-wrapper {
+      background: #FCFCFC;
+      border: 0.5px solid #D9D9D9;
+      border-radius: 4px;
+      color: #6d6d6d;
+      padding: 1rem;
+      margin-top: 0.75rem;
+    }
+    .address-title {
+      color: #000;
+    }
+    .notes {
+      color: #999;
+      font-size: 0.75rem;
+      line-height: 0.875rem;
+    }
+    .sys-gen-note {
+      border-bottom: 0.5px solid #e0e0e0;
+      color: #757575;
+    }
+    .social-links-cont {
+      padding-top: 27px;
+      padding-bottom: 19px;
+    }
+    .social-links-cont a:not(:last-child) {
+      margin-right: 30px;
+    }
+    .email-footer-copyright {
+      color: #6d6d6d;
+      font-size: 0.75rem;
+      line-height: 1.125rem;
+    }
+    .color-black {
+      color: #000 !important;
+    }
+    .pt-2 {
+      padding-top: 0.5rem !important;
+    }
+    .pt-3 {
+      padding-top: 1rem !important;
+    }
+    .pt-4 {
+      padding-top: 1.5rem !important;
+    }
+    .py-4 {
+      padding-top: 1.5rem !important;
+      padding-bottom: 1.5rem !important;
+    }
+    .pr-3 {
+      padding-right: 1rem !important;
+    }
+    .pt-13 {
+      padding-top: 0.8125rem !important;
+    }
+    .pb-0 {
+      padding-bottom: 0 !important;
+    }
+    .pb-3 {
+      padding-bottom: 1rem !important;
+    }
+    .pb-4 {
+      padding-bottom: 1.5rem !important;
+    }
+    .text-center {
+      text-align: center !important;
+    }
+    .text-right {
+      text-align: right !important;
+    }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+  <div class="email-header">
+    <img src="https://static.techsembly.com/ZAi3VLPw1yHGxEnQpX6TXJ1p" class="email-logo" alt="logo" width="172" height="100"/>
+    <h2 class="email-heading">You Received an order {{ order.number }}</h2>
+  </div>
+  <div class="msg-wrapper">
+    <div class="msg-top border-bottom-grey">
+      <p>Dear {{vendor_name}},</p>
+      <p>You Have A New Order!</p>
+      <p>Once you have dispatched the order, please log in to your dashboard to input the tracking URL and ID so your customers can track their shipment.</p>
+      <div class="btns-wrapper">
+        <a class="btn btn-primary btn-view-order" href="https://accounts.techsembly.com/vendor-management/orders/{{order.id}}">View Order</a>
+      </div>
+    </div>
+    <div class="table-container">
+      <h4 class="section-heading">Order Details</h4>
+      <table width="100%" cellspacing="0" cellpadding="0">
+        <thead>
+        <tr>
+          <th id="pro-img" width="83"></th>
+          <th id="pro-name" width="187"></th>
+          <th id="qty-ship" width="100"></th>
+          <th id="price" width="182"></th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#each line_items}}
+          <tr>
+            <td class="pro-img-cont">
+              <img src="{{image_url}}" alt="pro-img" width="83"/>
+            </td>
+            <td class="pro-name-cont">
+              <div class="col-head">{{product_name}}</div>
+              <div class="sub-desc">Sold by {{vendor_name}}</div>
+            </td>
+            <td class="pro-qty-cont text-center">
+              <div class="col-head">Qty:{{quantity}}</div>
+              {{#each option_values}}
+              <div class="sub-desc pt-2">{{value}}</div>
+              {{/each}}
+              <div class="sub-desc ship-desc pt-2">
+                {{#if shipment_name}}
+                {{ shipment_name }}
+                {{/if}}
+              </div>
+            </td>
+            <td class="pro-price-cont text-right">
+              {{sub_total}}
+            </td>
+          </tr>
+        {{/each}}
+        </tbody>
+      </table>
+    </div>
+    <div class="totals-wrapper">
+      <div class="totals-inner-cont">
+        <table width="100%" cellspacing="0" cellpadding="0">
+          <thead>
+          <tr>
+            <th id="price-desc" width="60%"></th>
+            <th id="price-amt" width="40%"></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td class="pr-3">Item(s) Subtotal:</td>
+            <td class="text-right">{{item_total}}</td>
+          </tr>
+          <tr>
+            <td class="pr-3">Shipping & Handling:</td>
+            <td class="text-right">{{ship_total}}</td>
+          </tr>
+          {{#if show_inclusive_tax}}
+          <tr>
+            <td class="pr-3 bordered-col">Estimated Inclusive Sales Tax:</td>
+            <td class="text-right bordered-col">{{inclusive_tax}}</td>
+          </tr>
+          {{/if}}
+          {{#if show_exclusive_tax}}
+          <tr>
+            <td class="pr-3 bordered-col">Estimated Exclusive Sales Tax:</td>
+            <td class="text-right bordered-col">{{exclusive_tax}}</td>
+          </tr>
+          {{/if}}
+          <tr>
+            <td class="pt-13 pr-3 pb-0">Grand Total:</td>
+            <td class="pt-13 text-right pb-0 grand-total">{{order_total}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="delivery-section pt-4">
+      <h4 class="section-heading color-black">Delivery Address</h4>
+      <div class="address-wrapper">
+        <div class="address-title">{{ship_address.firstname}} {{ship_address.lastname}}</div>
+        <div class="address-desc">{{ ship_address.address1 }},
+          {{#if ship_address.address2}}
+          {{ ship_address.address2 }},
+          {{/if}}
+          {{#if ship_address.apartment_no}}
+          {{ ship_address.apartment_no }},
+          {{/if}}
+          {{#if ship_address.city}}
+          {{ ship_address.city }},
+          {{/if}}
+          {{#if ship_address.state_name}}
+          {{ ship_address.state_name }},
+          {{/if}}
+          {{#if ship_address_country}}
+          {{ ship_address_country }},
+          {{/if}}
+          {{#if ship_address.region}}
+          {{ ship_address.region }},
+          {{/if}}
+          {{#if ship_address.zipcode}}
+          {{ ship_address.zipcode }},
+          {{/if}}
+        </div>
+      </div>
+    </div>
+    <div class="billing-section pt-4">
+      <h4 class="section-heading color-black">Billing Address</h4>
+      <div class="address-wrapper">
+        <div class="address-title">{{bill_address.firstname}} {{bill_address.lastname}}</div>
+        <div class="address-desc">{{ bill_address.address1 }},
+          {{#if bill_address.address2}}
+          {{ bill_address.address2 }},
+          {{/if}}
+          {{#if bill_address.apartment_no}}
+          {{ bill_address.apartment_no }},
+          {{/if}}
+          {{#if bill_address.city}}
+          {{ bill_address.city }},
+          {{/if}}
+          {{#if bill_address.state_name}}
+          {{ bill_address.state_name }},
+          {{/if}}
+          {{#if bill_address_country}}
+          {{ bill_address_country }},
+          {{/if}}
+          {{#if bill_address.region}}
+          {{ bill_address.region }},
+          {{/if}}
+          {{#if bill_address.zipcode}}
+          {{ bill_address.zipcode }},
+          {{/if}}
+        </div>
+      </div>
+    </div>
+    <div class="py-4">
+    </div>
+    <div class="pb-3">
+    </div>
+    <div class="sys-gen-note pb-4">
+      This is a system generated message. Please do not reply.
+    </div>
+  </div>
+  <div class="email-footer">
+    <div class="social-links-cont text-center">
+      <a href="https://www.instagram.com/capellabangkok/" target="_blank"><img src="https://static.techsembly.com/y9GmmRooddrjN2GGuJR6mM3E" width="17" alt="instagram"/></a>
+      <a href="https://www.facebook.com/CapellaBangkok" target="_blank"><img src="https://static.techsembly.com/EmUTgngqVeGmqHoXTSvgcRYa" width="17" alt="fb"/></a>
+      <a href="https://page.line.me/capellabangkok" target="_blank"><img src="https://static.techsembly.com/neeimCVGBZEBdV8tLSSDLQse" width="17" alt="line"/></a>
+    </div>
+    <div class="footer-logo-cont text-center">
+      <a href="#"><img src="https://static.techsembly.com/VCANzXL6tkpsHBg172e8t8rd" width="123" alt=""></a>
+    </div>
+    <div class="email-footer-copyright text-center pt-3 pb-4">
+      Copyright © 2021<br>
+      Capella Hotel Group.<br>
+      South of some city, Road 57, Bangkok.
+    </div>
+  </div>
+</div>
+</body>
+</html>
