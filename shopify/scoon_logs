@@ -1,0 +1,28 @@
+imported_ids.select{|i|i[:vendor].present? && i[:vendor].split('not ')[1].eql?('specified')}.count
+301 not specified
+
+imported_ids.select{|i|i[:vendor].present? && i[:vendor].split('not ')[1].eql?('found')}.count
+1118 not found
+
+var_imports.count => 11237
+vars imported => 5121 (including 845 master)
+not found => 6363
+[{:id=>73144, :shopify_id=>nil, :shopify_product_id=>nil, :errors=>["SKU has already been taken"]}]
+
+var_import.reject{ |vi| vi[:errors].present?}.count
+var_import.select{ |vi| vi[:errors].present?}.count
+var_import.select{ |vi| vi[:errors].present? && vi[:errors].split('Product not found:').length > 1}.count
+var_import.select{ |vi| vi[:errors].present? && vi[:errors].split('Product not found:').length > 1}.map{|v| v[:errors].split(' - ')[1]}
+
+# client.products.where('shopify_id IS NOT NULL').sum { |p| p.variants_including_master.count }
+
+ALREADY EXISTING
+Scoon (7)
+AS
+Cannot delete products / variants once they are attached to line items.
+
+Scoon Import Summary
+932(specific vendors')/2351 products
+8 Properties
+8 Option Types
+5320/12633 variants excluding master variants (count: 932 )
