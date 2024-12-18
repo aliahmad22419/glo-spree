@@ -2,7 +2,7 @@ module Spree
   module Api
     module V2
       module BaseControllerDecorator
-        def self.included(base)
+        def self.prepended(base)
           # before_action :set_entity
           # before_action :not_found
           base.prepend Spree::ServiceModule::Base
@@ -14,11 +14,11 @@ module Spree
         end
 
         def store_or_client_not_found
-          render :json => {:error => "The resource you are looking for not found"}.to_json, :status => 404 if current_client.blank? && storefront_current_client.blank?
+          render json: { error: "The resource you are looking for not found" }.to_json, status: 404 if current_client.blank? && storefront_current_client.blank?
         end
 
         def storefront_client_not_found
-          render :json => {:error => "The resource you are looking for not found"}.to_json, :status => 404 if storefront_current_client.blank?
+          render json: { error: "The resource you are looking for not found" }.to_json, status: 404 if storefront_current_client.blank?
         end
 
         def current_vendor
@@ -33,26 +33,26 @@ module Spree
 
           doorkeeper_authorize!
 
-          @spree_current_user ||= Spree.user_class.find_by('spree_users.id = ?', doorkeeper_token.resource_owner_id)
+          @spree_current_user ||= Spree.user_class.find_by("spree_users.id = ?", doorkeeper_token.resource_owner_id)
         end
 
         def spree_current_store
-          if request.headers['X-Store-Id'].present?
-            @spree_current_store = Spree::Store.find_by('spree_stores.id = ?', request.headers['X-Store-Id'])
+          if request.headers["X-Store-Id"].present?
+            @spree_current_store = Spree::Store.find_by("spree_stores.id = ?", request.headers["X-Store-Id"])
           else
             store_domain = request.domain
             subdomain = request.subdomain
             store_domain = "#{subdomain}.#{store_domain}" if subdomain.present? && subdomain != "www"
             store_domain = store_domain + "/" + params[:slug] if params[:slug]
             store_domain = store_domain + "/" + params[:lang] if params[:lang]
-            @spree_current_store = Spree::Store.find_by('url = ? OR default_url = ?', store_domain, store_domain)
+            @spree_current_store = Spree::Store.find_by("url = ? OR default_url = ?", store_domain, store_domain)
           end
           @spree_current_store
         end
         alias try_spree_current_user spree_current_user
 
         def current_currency
-          currency = request.headers['X-Currency']
+          currency = request.headers["X-Currency"]
           @currency = currency if currency.present? && storefront_current_client.present? && storefront_current_client.supported_currencies.include?(currency)
           @currency ||= spree_current_store&.default_currency || Spree::Config[:currency]
           @currency
@@ -61,9 +61,9 @@ module Spree
         def current_client
           if @spree_current_user.present?
             roles = @spree_current_user.spree_roles.map(&:name)
-            if ((roles.include?"client") || (roles.include?"sub_client"))
+            if (roles.include? "client") || (roles.include? "sub_client")
               @client = @spree_current_user&.client
-            elsif (roles.include?"vendor")
+            elsif roles.include? "vendor"
               @client = @spree_current_user&.vendors&.first&.client
             end
           end
@@ -79,7 +79,7 @@ module Spree
         end
 
         def set_entity
-          return unless ["stores", "vendors"].include?(controller_name)
+          return unless [ "stores", "vendors" ].include?(controller_name)
           records = storefront_current_client.send(controller_name)
           instance_variable_set("@#{controller_name}", records)
         end
@@ -96,13 +96,13 @@ module Spree
         def valid_json?(json)
           begin
             JSON.parse(json)
-            return true
+            true
           rescue Exception => e
-            return false
+            false
           end
         end
 
-        def serialize_resource(resource,serializer=Spree::V2::Storefront::PageSerializer)
+        def serialize_resource(resource, serializer = Spree::V2::Storefront::PageSerializer)
           serializer.new(
             resource,
             include: resource_includes,
@@ -116,7 +116,7 @@ module Spree
           ).serializable_hash
         end
 
-        def serialize_collection(collection,serializer=Spree::V2::Storefront::GivexCardSerializer)
+        def serialize_collection(collection, serializer = Spree::V2::Storefront::GivexCardSerializer)
           serializer.new(
             collection,
             collection_options(collection)
