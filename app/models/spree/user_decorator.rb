@@ -8,6 +8,7 @@ module Spree
     def self.prepended(base)
 
       base.include UserEmailValidations
+      base.include MenuItemPermissions
 
       base.validate :password_requirements_are_met
       base.whitelisted_ransackable_attributes = %w[email name]
@@ -38,6 +39,41 @@ module Spree
       base.has_one :front_desk_credential, class_name: 'Spree::FrontDeskCredential'
       base.has_many :bulk_orders, class_name: 'Spree::BulkOrder'
       base.has_and_belongs_to_many :fulfilment_teams, class_name: 'Spree::FulfilmentTeam'
+
+      def base.custom_response_variables(token)
+        user = Spree.user_class.find(token.resource_owner_id)
+        roles = user.spree_roles.map(&:name).join(',')
+        is_single_vendor  = user.user_with_role("client") && !user&.client&.multi_vendor_store
+        store_type = user&.client&.stores&.last&.present? ? user&.client&.stores&.last&.preferences[:store_type] : ""
+        state = (store_type && store_type.eql?("fast_track") && user.state == "createpayment") ? "createcurrency" : user.state
+        email = user.email
+        created_at = user.created_at.to_i
+        is_v2_flow_enabled = user.is_v2_flow_enabled
+        if (user.has_spree_role? :client or user.has_spree_role? :sub_client)
+          name = user.client.name
+        elsif user.has_spree_role? :vendor
+          name = user.vendors.first.name
+        else
+          name = user.name
+        end
+        {
+            status_code: 200,
+            roles: roles,
+            is_single_vendor: is_single_vendor,
+            recent_item_ids: user.recent_product_ids,
+            menu_item_permissions: user.menu_items.map{|mi| user.menu_item_url(mi)}, # only for subclients
+            state: state,
+            store_type: store_type,
+            name: name,
+            email: email,
+            created_at: created_at,
+            is_v2_flow_enabled: is_v2_flow_enabled,
+            timezone: user&.client&.timezone,
+            is_grouped_vendor: user&.vendors.last&.vendor_group.present?,
+            show_full_card_number: user.show_full_card_number,
+            is_iframe_user: user.is_iframe_user
+        }
+      end
     end
 
     #

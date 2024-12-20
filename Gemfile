@@ -46,7 +46,7 @@ gem 'spree_multi_vendor', '0.3.0', github: 'spree-contrib/spree_multi_vendor', b
 
 gem "spree_multi_domain", "~>3.3.2", github: "zainrafique/spree-multi-domain"
 gem "spree_sitemap", github: "spree-contrib/spree_sitemap"
-gem "ransack", "4.1.1"
+gem "ransack", "4.2.1"
 gem "rack-cors", require: "rack/cors"
 gem "dotenv-rails"
 gem "aasm"
@@ -58,14 +58,14 @@ gem "spree_related_products", path: "../spree_related_products"  #stack level to
 # gem 'spree_gift_card', '3.2.1', github: 'zaintechsembly/spree_gift_card'  #stack level too deep
 gem "spree_gift_card",  path: "../spree_gift_card"  #stack level too deep
 # gem 'spree_multi_client', '~>0.1.7.alpha', github: 'zaintechsembly/spree_multi_client'
-# gem "spree_multi_client",  path: "../spree_multi_client"
+gem "spree_multi_client",  path: "../spree_multi_client"
 gem "spree_api_v1"
 
 gem "spree_print_invoice", github: "aliahmad22419/spree_print_invoice", branch: "master"
 gem "spree_mailchimp_ecommerce", "~>1.5.1", github: "zaintechsembly/spree_mailchimp_ecommerce"
 gem "aws-sdk-s3", require: false
 gem "searchkick", "5.3.1"
-gem 'doorkeeper'
+gem 'doorkeeper', '5.4.0'
 gem "stripe"
 gem "adyen-ruby-api-library", "4.2"
 gem "active_model_otp"

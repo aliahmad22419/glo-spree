@@ -6,14 +6,13 @@ module Spree
       base.extend FriendlyId
       base.friendly_id :friendly_url, slug_column: :landing_page_url, use: [:history, :scoped], scope: :id
 
-      base.belongs_to :bill_address, foreign_key: :bill_address_id, class_name: 'Spree::Address',
-                optional: true
-      base.alias_attribute :billing_address, :bill_address
+      base.belongs_to :bill_address, foreign_key: :bill_address_id, class_name: 'Spree::Address', optional: true
+      base.alias_method :billing_address, :bill_address
 
       base.belongs_to :ship_address, foreign_key: :ship_address_id, class_name: 'Spree::Address',
                 optional: true
       base.belongs_to :vendor_group
-      base.alias_attribute :shipping_address, :ship_address
+      base.alias_method :shipping_address, :ship_address
 
       base.has_many :notifications_vendors, dependent: :destroy, :class_name => 'Spree::NotificationsVendor'
       base.has_many :notifications, dependent: :destroy, :through => :notifications_vendors

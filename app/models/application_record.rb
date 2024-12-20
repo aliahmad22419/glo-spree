@@ -4,7 +4,7 @@ class ApplicationRecord < ActiveRecord::Base
 
   def active_storge_url(file)
     return "" unless file.attached?
-    return Rails.application.routes.url_helpers.rails_public_blob_url(file)
+    return Rails.application.routes.url_helpers.url_for(file)
   end
 
   def unzip_gz file_path, file_name
